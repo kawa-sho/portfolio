@@ -33,6 +33,7 @@
 
 https://drive.google.com/file/d/1Ve4rim8bIub_Urs4IhFFqFUJ2ztedmsw/view?usp=sharing   ER図
 https://docs.google.com/spreadsheets/d/12dlRBuKwstsQ6GCVXKy70QCsDmIXZj2YcSpwJb-mvsU/edit?usp=sharing   テーブル定義書
+https://docs.google.com/spreadsheets/d/1ReMFsKIYWXcGn8HCrOsuooU3GiwrkAxlcd5otCIJjVY/edit#gid=2133469642   アプリケーション詳細設計
 
 ## 開発環境
 
