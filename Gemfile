@@ -66,3 +66,10 @@ group :production do
   #MySQLを利用するために必要なgem
   gem 'mysql2'
 end
+
+
+#ページネーションのため
+gem 'kaminari','~> 1.2.1'
+
+#ユーザー認証機能のため
+gem 'devise'
