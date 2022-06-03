@@ -13,3 +13,9 @@
  *= require_tree .
  *= require_self
  */
+
+/* バックグラウンドイメージのデプロイのため記述 */
+body {
+  background-image: image-url("hoge.jpg");
+
+}

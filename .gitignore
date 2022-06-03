@@ -38,3 +38,9 @@
 /yarn-error.log
 yarn-debug.log*
 .yarn-integrity
+
+# envファイル
+/.env
+
+#管理者のアカウント
+/db/seeds.rb
