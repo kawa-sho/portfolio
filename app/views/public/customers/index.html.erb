@@ -1,0 +1,23 @@
+<div class='container px-5 px-sm-0'>
+  <div class='row'>
+    <table class='table'>
+      <thead>
+        <tr>
+          <th>プロフィール画像</th>
+          <th>ニックネーム</th>
+          <th colspan="1"></th>
+        </tr>
+      </thead>
+      <tbody>
+        <% @customers.each do |customer| %>
+          <tr>
+            <td><%= image_tag customer.get_profile_image, size: '50x50' %></td>
+            <td><%= customer.name %></td>
+            <td><%= link_to 'Show', customer %></td>
+          </tr>
+        <% end %>
+        <%= paginate @customers %>
+      </tbody>
+    </table>
+  </div>
+</div>

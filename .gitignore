@@ -42,5 +42,3 @@ yarn-debug.log*
 # envファイル
 /.env
 
-#管理者のアカウント
-/db/seeds.rb

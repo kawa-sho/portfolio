@@ -1,6 +1,8 @@
 # frozen_string_literal: true
 
 class Public::RegistrationsController < Devise::RegistrationsController
+  # デバイスコントローラー関連の場合はこのアクションをします
+  before_action :configure_permitted_parameters, if: :devise_controller?
   # before_action :configure_sign_up_params, only: [:create]
   # before_action :configure_account_update_params, only: [:update]
 
@@ -59,4 +61,15 @@ class Public::RegistrationsController < Devise::RegistrationsController
   # def after_inactive_sign_up_path_for(resource)
   #   super(resource)
   # end
+
+  # サインインした際の偏移先を登録
+  #def after_sign_in_path_for(resource)
+  #  my_page_customers_path
+  #end
+
+# 新規登録の際名前のパラメーターを受け取る
+   protected
+  def configure_permitted_parameters
+    devise_parameter_sanitizer.permit(:sign_up, keys: [:name])
+  end
 end
