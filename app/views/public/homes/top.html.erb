@@ -8,10 +8,13 @@
       <p><i class="fas fa-feather"></i>同じ趣味同士でグループチャットしたり</p>
       <p><i class="fas fa-feather"></i>ぜひこのサイトをご活用ください。</p>
         <div class="row">
-          <%= link_to 'Log in',new_customer_session_path, class: "btn btn-info btn-sm btn-block mb-3 sign_in" %>
+          <%= link_to 'ゲストログイン（閲覧用）', customers_guest_sign_in_path, class: "btn btn-secondary btn-sm btn-block mb-3 sign_in", method: :post %>
         </div>
         <div class="row">
-          <%= link_to 'Sign Up',new_customer_registration_path, class: "btn btn-success btn-sm btn-block sign_up" %>
+          <%= link_to 'ログイン',new_customer_session_path, class: "btn btn-info btn-sm btn-block mb-3 sign_in" %>
+        </div>
+        <div class="row">
+          <%= link_to '新規登録',new_customer_registration_path, class: "btn btn-success btn-sm btn-block sign_up" %>
         </div>
       </div>
     </div>

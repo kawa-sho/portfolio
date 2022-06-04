@@ -11,6 +11,13 @@
   </head>
 
   <body>
+    <%= render 'layouts/header' %>
+    <mein>
+      <p id="notice"><%= notice %></p>
+      <div class="d-flex justify-content-center mb-2">
+      </div>
     <%= yield %>
+    </mein>
+    <%= render 'layouts/footer' %>
   </body>
 </html>

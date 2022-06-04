@@ -12,6 +12,12 @@ Rails.application.routes.draw do
     sessions: "admin/sessions"
   }
 
+  # ゲストログイン用
+  devise_scope :customer do
+    post 'customers/guest_sign_in', to: 'guest/sessions#guest_sign_in'
+  end
+
+
   ## 管理者側
   namespace :admin do
     # トップページ
