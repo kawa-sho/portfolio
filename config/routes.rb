@@ -17,7 +17,7 @@ Rails.application.routes.draw do
     # トップページ
     root :to => 'homes#top'
     #会員関連ページ
-    resources :customers, only: [:index, :show, :edit, :update]
+    resources :customers, only: [:show, :edit, :update]
   end
 
   ## 会員側
