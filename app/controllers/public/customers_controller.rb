@@ -47,6 +47,13 @@ class Public::CustomersController < Public::ApplicationController
     end
   end
 
+  def search
+    # 検索情報抜き出し
+    @customers = Customer.search(params[:keyword]).page(params[:page])
+    @keyword = params[:keyword]
+    render "index"
+  end
+
 
 
   # 会員パラメーターの許可
@@ -74,14 +81,14 @@ class Public::CustomersController < Public::ApplicationController
 
   def ensure_guest_customer
     @customer = Customer.find(params[:id])
-    if @customer.name == "guestuser"
+    if @customer.name == "guestcustomer"
       redirect_to customer_path(current_customer) , notice: 'ゲストユーザーはプロフィール編集画面へ遷移できません'
     end
   end
 
   def ensure_guest_customer2
     @customer = Customer.find(params[:customer_id])
-    if @customer.name == "guestuser"
+    if @customer.name == "guestcustomer"
       redirect_to customer_path(current_customer) , notice: 'ゲストユーザーは退会ページへ遷移できません'
     end
   end

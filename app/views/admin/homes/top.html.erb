@@ -1,4 +1,16 @@
 <div class='container px-5 px-sm-0'>
+  <h2>会員一覧ページ</h2>
+  <div class="row search-form">
+    <%= form_with url: admin_customer_search_path, method: :get do |f| %>
+      <%= f.text_field :keyword, value: @keyword %>
+      <%= f.submit "検索" %>
+    <% end %>
+  </div>
+  <div class='row'>
+    <% if @keyword %>
+      <h5><%= @keyword %>で検索中</h5>
+    <% end %>
+  </div>
   <div class='row'>
     <table class='table'>
       <thead>

@@ -3,6 +3,8 @@ class Admin::PostsController < ApplicationController
   def show
     # そのページの投稿
     @post = Post.find(params[:id])
+    # 投稿に対してのタグ
+    @post_tags = @post.tags
   end
 
   def destroy

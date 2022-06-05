@@ -7,7 +7,8 @@
           <tr>
             <th></th>
             <th>投稿</th>
-            <th colspan="3"></th>
+            <th>タグ</th>
+            <th colspan="2"></th>
           </tr>
         </thead>
   		  <tbody>
@@ -19,7 +20,11 @@
               <% end %>
             </td>
             <td><%= @post.post %></td>
-            <td></td>
+            <td>
+              <% @post_tags.each do |tag| %>
+                <%= tag.name %><%="(#{tag.posts.count})" %>
+              <% end %>
+            </td>
               <td><%= link_to '削除', admin_post_path, method: :delete, data: { confirm: '本当に消しますか？' }, class: "btn btn-sm btn-danger"%></td>
           </tr>
         </tbody>

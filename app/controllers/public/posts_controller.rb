@@ -5,11 +5,15 @@ class Public::PostsController < Public::ApplicationController
   def index
     # 全投稿情報
     @posts = Post.page(params[:page])
+    # 全タグ
+    @tags=TagPost.all
   end
 
   def show
     # そのページの投稿
     @post = Post.find(params[:id])
+    # 投稿に対してのタグ
+    @post_tags = @post.tag_posts
   end
 
   def edit
@@ -49,11 +53,23 @@ class Public::PostsController < Public::ApplicationController
     # 新規投稿作成
     @post = Post.new(post_params)
     @post.customer_id = current_customer.id
+    # 受け取った値を,で区切って配列にする
+    tag_list=params[:post][:name].split(',')
     if @post.save
+      #メソッドを利用してのタグの保存
+      @post.save_tag(tag_list)
       redirect_to post_path(@post),notice: "投稿しました"
     else
       render :new
     end
+  end
+
+  def search
+    # 検索情報抜き出し
+    @posts = Post.search(params[:keyword]).page(params[:page])
+    @keyword = params[:keyword]
+    @tags = TagPost.all
+    render "index"
   end
 
 

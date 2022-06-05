@@ -1,21 +1,23 @@
 <table class='table'>
-      <thead>
-        <tr>
-          <th>プロフィール画像</th>
-          <th>ニックネーム</th>
-          <th>投稿</th>
-          <th colspan="1"></th>
-        </tr>
-      </thead>
-      <tbody>
-        <% posts.each do |post| %>
-          <tr>
-            <td><%= image_tag post.customer.get_profile_image, size: '50x50' %></td>
-            <td><%= post.customer.name %></td>
-            <td><%= post.post %></td>
-            <td><%= link_to '詳細', post_path(post), class: "btn btn-sm btn-success" %></td>
-          </tr>
-        <% end %>
-        <%= paginate posts %>
-      </tbody>
-    </table>
+  <thead>
+    <tr>
+      <th>プロフィール画像</th>
+      <th>ニックネーム</th>
+      <th>投稿</th>
+      <th>タグ</th>
+      <th colspan="1"></th>
+    </tr>
+  </thead>
+  <tbody>
+    <% posts.each do |post| %>
+      <tr>
+        <td><%= image_tag post.customer.get_profile_image, size: '50x50' %></td>
+        <td><%= post.customer.name %></td>
+        <td><%= post.post %></td>
+        <td><%= post.tag_posts.map(&:name).join(', ') %></td>
+        <td><%= link_to '詳細', post_path(post), class: "btn btn-sm btn-success" %></td>
+      </tr>
+    <% end %>
+    <%= paginate posts %>
+  </tbody>
+</table>
