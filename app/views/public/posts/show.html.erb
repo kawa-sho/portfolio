@@ -1,0 +1,32 @@
+<div class='container'>
+  <div class='row'>
+    <div class='col-md-8 offset-md-1'>
+  		<h2>投稿詳細</h2>
+  		<table class='table'>
+  		  <thead>
+          <tr>
+            <th></th>
+            <th>投稿</th>
+            <th colspan="3"></th>
+          </tr>
+        </thead>
+  		  <tbody>
+      		<tr>
+            <td>
+              <%= link_to(@post.customer) do %>
+                <%= image_tag @post.customer.get_profile_image, size:"50x50" %><br>
+                <%= @post.customer.name %>
+              <% end %>
+            </td>
+            <td><%= @post.post %></td>
+            <td></td>
+            <% if @post.customer == current_customer %>
+              <td><%= link_to '編集', edit_post_path(@post), class: "btn btn-sm btn-success" %></td>
+              <td><%= link_to '削除', @post, method: :delete, data: { confirm: '本当に消しますか？' }, class: "btn btn-sm btn-danger"%></td>
+            <% end %>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</div>

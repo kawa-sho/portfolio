@@ -23,7 +23,11 @@ Rails.application.routes.draw do
     # トップページ
     root :to => 'homes#top'
     #会員関連ページ
-    resources :customers, only: [:show, :edit, :update]
+    resources :customers, only: [:show, :edit, :update] do
+        delete '/posts/destroy_all' => 'posts#destroy_all', as: 'destroy_all'
+    end
+    # 投稿関連ページ
+    resources :posts, only: [:show,:destroy]
   end
 
   ## 会員側
@@ -39,7 +43,7 @@ Rails.application.routes.draw do
     end
     # 投稿関連ページ
     delete '/posts/destroy_all' => 'posts#destroy_all'
-    resources :posts, only: [:index,:show,:destroy,:new,:create] do
+    resources :posts, only: [:index,:show,:edit,:update,:destroy,:new,:create] do
       # 投稿ごとのいいね一覧ページといいね関連
       resource :post_favorites, only: [:index,:destroy,:create]
       # コメント関連

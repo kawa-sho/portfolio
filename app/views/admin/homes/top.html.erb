@@ -1,0 +1,31 @@
+<div class='container px-5 px-sm-0'>
+  <div class='row'>
+    <table class='table'>
+      <thead>
+        <tr>
+          <th>プロフィール画像</th>
+          <th>ニックネーム</th>
+          <th>会員ステータス</th>
+          <th colspan="1"></th>
+        </tr>
+      </thead>
+      <tbody>
+        <% @customers.each do |customer| %>
+          <tr>
+            <td><%= image_tag customer.get_profile_image, size: '50x50' %></td>
+            <td><%= customer.name %></td>
+            <td>
+              <% if customer.is_active == true %>
+                <p>有効</p>
+              <% else %>
+                <p>無効</p>
+              <% end %>
+            </td>
+            <td><%= link_to 'Show', admin_customer_path(customer) %></td>
+          </tr>
+        <% end %>
+        <%= paginate @customers %>
+      </tbody>
+    </table>
+  </div>
+</div>
