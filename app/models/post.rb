@@ -1,4 +1,36 @@
 class Post < ApplicationRecord
   # アソシエーション
   belongs_to :customer
+  has_many :post_tag_posts,dependent: :destroy
+  has_many :tag_posts,through: :post_tag_posts
+
+  # バリデーション
+  validates :post, length: {minimum: 2 }
+
+
+  # 検索機能メソッド
+  def self.search(keyword)
+    where(["post like?", "%#{keyword}%"])
+  end
+
+  # タグセーブメソッド
+  def save_tag(sent_tag_posts)
+  # タグが存在していれば、タグの名前を配列として全て取得
+    current_tag_posts = self.tag_posts.pluck(:name) unless self.tag_posts.nil?
+    # 現在取得したタグから送られてきたタグを除いてoldtagとする
+    old_tag_posts = current_tag_posts - sent_tag_posts
+    # 送信されてきたタグから現在存在するタグを除いたタグをnewとする
+    new_tag_posts = sent_tag_posts - current_tag_posts
+
+    # 古いタグを消す
+    old_tag_posts.each do |old|
+      self.tag_posts.delete TagPost.find_by(name: old)
+    end
+
+    # 新しいタグを保存
+    new_tag_posts.each do |new|
+      new_tag_posts = TagPost.find_or_create_by(name: new)
+      self.tag_posts << new_tag_posts
+   end
+  end
 end

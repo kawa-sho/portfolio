@@ -1,0 +1,44 @@
+<div class='container px-5 px-sm-0'>
+  <div class='row'>
+    <div>
+      <h4><%= @customer.name %>のページ</h4>
+    </div>
+  </div>
+  <div class="row">
+    <div>
+      <table class="table">
+        <tbody>
+          <tr>
+            <td>ニックネーム</td>
+            <td><%= @customer.name %></td>
+          </tr>
+          <tr>
+            <td>プロフィール画像</td>
+            <td><%= image_tag @customer.get_profile_image, size: '50x50' %></td>
+          </tr>
+          <tr>
+            <td>自己紹介</td>
+            <td><%= @customer.introduction %></td>
+          </tr>
+          <tr>
+            <td>会員ステータス</td>
+            <td>
+              <% if @customer.is_active == true %>
+                <p>有効</p>
+              <% else %>
+                <p>無効</p>
+              <% end %>
+            </td>
+          </tr>
+          <tr>
+            <td><%= link_to "編集する", edit_admin_customer_path(@customer), class: "btn btn-block btn-success" %></td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+
+  <div class='row'>
+    <%= render 'admin/posts/index', posts: @posts %>
+  </div>
+</div>

@@ -22,8 +22,13 @@ Rails.application.routes.draw do
   namespace :admin do
     # トップページ
     root :to => 'homes#top'
-    #会員関連ページ
-    resources :customers, only: [:show, :edit, :update]
+    # 会員関連ページ
+    get 'customer_search' => 'homes#search'
+    resources :customers, only: [:show, :edit, :update] do
+        delete '/posts/destroy_all' => 'posts#destroy_all', as: 'destroy_all'
+    end
+    # 投稿関連ページ
+    resources :posts, only: [:show,:destroy]
   end
 
   ## 会員側
@@ -31,6 +36,7 @@ Rails.application.routes.draw do
     # トップページ
     root :to => 'homes#top'
     # 会員関連ページ
+    get 'customer_search' => 'customers#search'
     resources :customers, only: [:index,:show,:edit,:update] do
       get '/quit_check' => 'customers#quit_check', as: 'quit_check'
       patch '/withdraw' => 'customers#withdraw', as: 'withdraw'
@@ -38,8 +44,9 @@ Rails.application.routes.draw do
       get '/post_favorites' => 'post_favorites#index_customer'
     end
     # 投稿関連ページ
+    get 'post_search' => 'posts#search'
     delete '/posts/destroy_all' => 'posts#destroy_all'
-    resources :posts, only: [:index,:show,:destroy,:new,:create] do
+    resources :posts, only: [:index,:show,:edit,:update,:destroy,:new,:create] do
       # 投稿ごとのいいね一覧ページといいね関連
       resource :post_favorites, only: [:index,:destroy,:create]
       # コメント関連

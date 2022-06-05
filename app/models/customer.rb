@@ -26,6 +26,11 @@ class Customer < ApplicationRecord
     super && (is_active == true)
   end
 
+  # 検索機能メソッド
+  def self.search(keyword)
+    where(["name like?", "%#{keyword}%"])
+  end
+
 
   # ゲストログイン用メソッド
   def self.guest
