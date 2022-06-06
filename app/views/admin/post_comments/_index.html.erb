@@ -1,0 +1,16 @@
+<% comments.each do |comment| %>
+  <tr>
+    <td>
+      <%= link_to(comment.customer) do %>
+        <%= image_tag comment.customer.get_profile_image, size:"50x50" %><br>
+        <%= comment.customer.name %>
+      <% end %>
+    </td>
+    <td>
+      <%= comment.comment %>
+    </td>
+    <td>
+        <%= link_to "Destoroy", admin_post_post_comment_path(comment.post, comment), method: :delete, data: { confirm: '本当に消しますか？' }, class: "btn btn-sm btn-danger" %>
+    </td>
+  </tr>
+<% end %>

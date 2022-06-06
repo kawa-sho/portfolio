@@ -5,7 +5,7 @@
       <th>ニックネーム</th>
       <th>投稿</th>
       <th>タグ</th>
-      <th colspan="1"></th>
+      <th colspan="2"></th>
     </tr>
   </thead>
   <tbody>
@@ -14,7 +14,16 @@
         <td><%= image_tag post.customer.get_profile_image, size: '50x50' %></td>
         <td><%= post.customer.name %></td>
         <td><%= post.post %></td>
-        <td><%= post.tag_posts.map(&:name).join(', ') %></td>
+        <td>
+          <% post.tag_posts.each do |tag| %>
+            <%= link_to tag_search_path(tag_post_id: tag.id) do%>
+              <%= tag.name %>
+              <%="(#{tag.posts.count})" %>
+            <% end %>
+          <% end %>
+        </td>
+        <td><%= render 'public/post_favorites/favorite', post: post %></td>
+        <td><%= render 'public/post_comments/count', post: post %></td>
         <td><%= link_to '詳細', post_path(post), class: "btn btn-sm btn-success" %></td>
       </tr>
     <% end %>

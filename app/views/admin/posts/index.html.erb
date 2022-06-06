@@ -1,7 +1,7 @@
 <div class='container px-5 px-sm-0'>
   <h2>投稿一覧ページ</h2>
   <div class="row search-form">
-    <%= form_with url: post_search_path, method: :get do |f| %>
+    <%= form_with url: admin_post_search_path, method: :get do |f| %>
       <%= f.text_field :keyword, value: @keyword %>
       <%= f.submit "検索" %>
     <% end %>
@@ -13,7 +13,7 @@
   </div>
   <div class='row'>
     <% @tags.each do |tag|%>
-      <%= link_to tag_search_path(tag_post_id: tag.id) do %>
+      <%= link_to admin_tag_search_path(tag_post_id: tag.id) do %>
         <%= tag.name %>
         <%= "(#{tag.posts.count})" %>
       <% end %>
@@ -25,6 +25,6 @@
     <% end %>
   </div>
   <div class='row'>
-    <%= render 'public/posts/index', posts: @posts %>
+    <%= render 'admin/posts/index', posts: @posts %>
   </div>
 </div>

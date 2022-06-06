@@ -1,10 +1,8 @@
 class Public::CustomersController < Public::ApplicationController
-  # ログインしてるアカウントと同じアカウントかどうかの確認
+  # ログインしてるアカウントと同じアカウントかどうかの確認とゲストログインかどうかの確認
   before_action :correct_customer, only: [:edit, :update]
   before_action :correct_customer2, only: [:quit_check, :withdraw]
-  # ゲストログインかどうかの確認
-  before_action :ensure_guest_customer, only: [:edit]
-  before_action :ensure_guest_customer2, only: [:quit_check]
+
 
   def index
     #全会員情報
@@ -15,12 +13,10 @@ class Public::CustomersController < Public::ApplicationController
     #そのページの会員情報
     @customer = Customer.find(params[:id])
     #会員の全投稿
-    @posts = @customer.posts.page(params[:page])
+    @posts = @customer.posts.latest.page(params[:page])
   end
 
   def edit
-    #そのページの会員情報
-    @customer = Customer.find(params[:id])
   end
 
   def update
@@ -34,12 +30,12 @@ class Public::CustomersController < Public::ApplicationController
 
   # 退会ページ
   def quit_check
-    @customer = current_customer
   end
 
   # 退会にステータスを更新
   def withdraw
     if @customer.update(is_active: false)
+      # ログアウトさせる
       reset_session
       redirect_to root_path, notice: "退会しました"
     else
@@ -57,8 +53,7 @@ class Public::CustomersController < Public::ApplicationController
 
 
   # 会員パラメーターの許可
-  # ログインしてるアカウントと同じアカウントかどうかの確認
-  # ゲストログインかどうかの確認
+  # ログインしてるアカウントと同じアカウントかどうかの確認とゲストログインかどうかの確認
   private
 
   def customer_params
@@ -68,26 +63,18 @@ class Public::CustomersController < Public::ApplicationController
   def correct_customer
     @customer = Customer.find(params[:id])
     unless @customer == current_customer
-      redirect_to customer_path(current_user)
+      redirect_to customer_path(current_customer)
+    end
+    if @customer.name == "guestcustomer"
+      redirect_to customer_path(current_customer) , notice: 'ゲストユーザーはプロフィール編集画面へ遷移できません'
     end
   end
 
   def correct_customer2
     @customer = Customer.find(params[:customer_id])
     unless @customer == current_customer
-      redirect_to customer_path(current_user)
+      redirect_to customer_path(current_customer)
     end
-  end
-
-  def ensure_guest_customer
-    @customer = Customer.find(params[:id])
-    if @customer.name == "guestcustomer"
-      redirect_to customer_path(current_customer) , notice: 'ゲストユーザーはプロフィール編集画面へ遷移できません'
-    end
-  end
-
-  def ensure_guest_customer2
-    @customer = Customer.find(params[:customer_id])
     if @customer.name == "guestcustomer"
       redirect_to customer_path(current_customer) , notice: 'ゲストユーザーは退会ページへ遷移できません'
     end

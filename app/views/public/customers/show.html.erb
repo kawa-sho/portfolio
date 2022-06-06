@@ -28,6 +28,12 @@
                 </tr>
               <% end %>
             <% end %>
+            <tr>
+              <td><%= link_to "いいね一覧を見る", customer_post_favorites_path(@customer), class: "btn btn-block btn-success" %></td>
+            </tr>
+            <tr>
+              <td><%= link_to "コメント一覧を見る", customer_post_comments_path(@customer), class: "btn btn-block btn-success" %></td>
+            </tr>
           </tbody>
         </table>
       </div>
