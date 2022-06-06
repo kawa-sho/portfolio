@@ -52,5 +52,7 @@ Rails.application.routes.draw do
       # コメント関連
       resources :post_comments, only: [:destroy,:create]
     end
+    # タグ検索機能
+    get "tag_search"=>"posts#tag_search"
   end
 end

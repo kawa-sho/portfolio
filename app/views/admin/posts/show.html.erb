@@ -22,7 +22,8 @@
             <td><%= @post.post %></td>
             <td>
               <% @post_tags.each do |tag| %>
-                <%= tag.name %><%="(#{tag.posts.count})" %>
+                <%= tag.name %>
+                <%="(#{tag.posts.count})" %>
               <% end %>
             </td>
               <td><%= link_to '削除', admin_post_path, method: :delete, data: { confirm: '本当に消しますか？' }, class: "btn btn-sm btn-danger"%></td>

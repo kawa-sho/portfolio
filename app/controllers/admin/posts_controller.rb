@@ -4,7 +4,7 @@ class Admin::PostsController < ApplicationController
     # そのページの投稿
     @post = Post.find(params[:id])
     # 投稿に対してのタグ
-    @post_tags = @post.tags
+    @post_tags = @post.tag_posts
   end
 
   def destroy

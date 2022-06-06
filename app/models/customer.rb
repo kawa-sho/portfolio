@@ -6,7 +6,8 @@ class Customer < ApplicationRecord
 
   # アソシエーション
   has_many :posts, dependent: :destroy
-
+  has_many :post_comments, dependent: :destroy
+  has_many :post_favorites, dependent: :destroy
 
   # active storageでの画像追加
   has_one_attached :profile_image

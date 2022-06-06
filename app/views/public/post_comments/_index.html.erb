@@ -1,0 +1,18 @@
+<% post.post_comments.each do |post_comment| %>
+  <tr>
+    <td>
+      <%= link_to(post_comment.customer) do %>
+        <%= image_tag post_comment.customer.get_profile_image, size:"50x50" %><br>
+        <%= post_comment.customer.name %>
+      <% end %>
+    </td>
+    <td>
+      <%= post_comment.comment %>
+    </td>
+    <td>
+      <% if current_customer == post_comment.customer %>
+        <%= link_to "Destoroy", post_post_comment_path(post_comment.post, post_comment), method: :delete, class: "btn btn-sm btn-danger" %>
+      <% end %>
+    </td>
+  </tr>
+<% end %>

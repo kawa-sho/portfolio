@@ -13,8 +13,15 @@
   </div>
   <div class='row'>
     <% @tags.each do |tag|%>
-      <%= tag.name %>
-      <%="(#{tag.posts.count})" %>
+      <%= link_to tag_search_path(tag_post_id: tag.id) do %>
+        <%= tag.name %>
+        <%= "(#{tag.posts.count})" %>
+      <% end %>
+    <% end %>
+  </div>
+  <div class='row'>
+    <% if @tag_keyword %>
+      <h5><%= @tag_keyword %>で検索中</h5>
     <% end %>
   </div>
   <div class='row'>

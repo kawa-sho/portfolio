@@ -5,4 +5,9 @@ class TagPost < ApplicationRecord
 
   # バリデーション
   validates :name, uniqueness: true, presence: true
+
+
+  # 並べ替え投稿多い順
+  scope :post_count, -> {sort_by {|x| x.posts.count}.reverse}
+
 end
