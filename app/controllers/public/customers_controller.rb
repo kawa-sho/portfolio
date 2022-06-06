@@ -13,7 +13,7 @@ class Public::CustomersController < Public::ApplicationController
     #そのページの会員情報
     @customer = Customer.find(params[:id])
     #会員の全投稿
-    @posts = @customer.posts.page(params[:page])
+    @posts = @customer.posts.latest.page(params[:page])
   end
 
   def edit

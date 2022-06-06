@@ -16,6 +16,8 @@ class Public::PostsController < Public::ApplicationController
     @post_tags = @post.tag_posts
     # 新しいコメント
     @post_comment = PostComment.new
+    # コメント一覧
+    @comments = @post.post_comments
   end
 
   def edit

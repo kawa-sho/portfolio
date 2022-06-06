@@ -16,10 +16,14 @@
             <td><%= post.post %></td>
             <td>
               <% post.tag_posts.each do |tag| %>
-                <%= tag.name %>
-                <%="(#{tag.posts.count})" %>
+                <%= link_to admin_tag_search_path(tag_post_id: tag.id) do%>
+                  <%= tag.name %>
+                  <%="(#{tag.posts.count})" %>
+                <% end %>
               <% end %>
             </td>
+            <td>♥<%= post.post_favorites.count %></td>
+            <td><%= render 'public/post_comments/count', post: post %></td>
             <td><%= link_to '詳細', admin_post_path(post), class: "btn btn-sm btn-success" %></td>
             <td><%= link_to '削除', admin_post_path(post), method: :delete, data: { confirm: '本当に消しますか？' }, class: "btn btn-sm btn-danger"%></td>
           </tr>

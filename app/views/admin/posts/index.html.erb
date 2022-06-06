@@ -1,0 +1,30 @@
+<div class='container px-5 px-sm-0'>
+  <h2>投稿一覧ページ</h2>
+  <div class="row search-form">
+    <%= form_with url: admin_post_search_path, method: :get do |f| %>
+      <%= f.text_field :keyword, value: @keyword %>
+      <%= f.submit "検索" %>
+    <% end %>
+  </div>
+  <div class='row'>
+    <% if @keyword %>
+      <h5><%= @keyword %>で検索中</h5>
+    <% end %>
+  </div>
+  <div class='row'>
+    <% @tags.each do |tag|%>
+      <%= link_to admin_tag_search_path(tag_post_id: tag.id) do %>
+        <%= tag.name %>
+        <%= "(#{tag.posts.count})" %>
+      <% end %>
+    <% end %>
+  </div>
+  <div class='row'>
+    <% if @tag_keyword %>
+      <h5><%= @tag_keyword %>で検索中</h5>
+    <% end %>
+  </div>
+  <div class='row'>
+    <%= render 'admin/posts/index', posts: @posts %>
+  </div>
+</div>

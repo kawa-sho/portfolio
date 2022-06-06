@@ -10,9 +10,7 @@
       <%= comment.comment %>
     </td>
     <td>
-      <% if current_customer == comment.customer %>
-        <%= link_to "Destoroy", post_post_comment_path(comment.post, comment), method: :delete, data: { confirm: '本当に消しますか？' }, class: "btn btn-sm btn-danger" %>
-      <% end %>
+        <%= link_to "Destoroy", admin_post_post_comment_path(comment.post, comment), method: :delete, data: { confirm: '本当に消しますか？' }, class: "btn btn-sm btn-danger" %>
     </td>
   </tr>
 <% end %>
