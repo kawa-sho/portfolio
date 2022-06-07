@@ -1,22 +1,29 @@
 <div class="container">
   <div class="row">
     <div class='mx-auto col-11 col-sm-10 col-lg-8 col-xl-6'>
-      <h1>ようこそ<i class="fas fa-frog"></i><strong>集いの広場</strong>へ!!</h1>
-      <h5 class="mb-5 mt-3"><i class="fas fa-feather"></i>総合的なコミュニティサイトとなっています<i class="fas fa-feather"></i></h5>
-      <p><i class="fas fa-feather"></i>どうでもいい事を発信したり</p>
-      <p><i class="fas fa-feather"></i>どうでもいいことに絡んでいったり</p>
-      <p><i class="fas fa-feather"></i>同じ趣味同士でグループチャットしたり</p>
-      <p><i class="fas fa-feather"></i>ぜひこのサイトをご活用ください。</p>
-        <div class="row">
-          <%= link_to 'ゲストログイン（閲覧用）', customers_guest_sign_in_path, class: "btn btn-secondary btn-sm btn-block mb-3 sign_in", method: :post %>
+
+      <div class="mt-5 mb-5 text-center"><%= image_tag "logo.jpg", size: "200x150" %></div>
+      <h2 class="mb-4 mt-3 text-center">総合的なコミュニティサイトです</h2>
+      <h5 class="text-center mb-3">どうでもいい事を発信したり</h5>
+      <h5 class="text-center mb-3">どうでもいいことに絡んでいったり</h5>
+      <h5 class="text-center mb-3">同じ趣味同士でグループチャットしたり</h5>
+      <h5 class="text-center mb-3">ぜひこのサイトをご活用ください。</h5>
+
+        <div class="text-center mb-3">
+          <%= link_to 'ゲストログイン（閲覧用）', customers_guest_sign_in_path, class: "btn btn-secondary py-3 mt-4", method: :post %>
         </div>
-        <div class="row">
-          <%= link_to 'ログイン',new_customer_session_path, class: "btn btn-info btn-sm btn-block mb-3 sign_in" %>
+
+        <div class="row text-center">
+          <div class="col-1"></div>
+          <div class="col-5">
+            <%= link_to 'ログイン',new_customer_session_path, class: "btn btn-info py-3 px-5" %>
+          </div>
+          <div class="col-5">
+            <%= link_to '新規登録',new_customer_registration_path, class: "btn btn-success py-3 px-5" %>
+          </div>
+          <div class="col-1"></div>
         </div>
-        <div class="row">
-          <%= link_to '新規登録',new_customer_registration_path, class: "btn btn-success btn-sm btn-block sign_up" %>
-        </div>
-      </div>
+
     </div>
   </div>
 </div>

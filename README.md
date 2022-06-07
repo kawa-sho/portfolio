@@ -44,4 +44,4 @@ https://docs.google.com/spreadsheets/d/1ReMFsKIYWXcGn8HCrOsuooU3GiwrkAxlcd5otCIJ
 
 ## 使用素材
 
-使用検討中
+https://hatchful.shopify.com/ja/　　ロゴの作成

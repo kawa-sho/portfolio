@@ -14,8 +14,102 @@
  *= require_self
  */
 
-/* バックグラウンドイメージのデプロイのため記述 */
-body {
-  background-image: image-url("hoge.jpg");
+ #alert{
+  color: red;
+  margin: 10px;
+ }
 
+ #notice{
+  color: green;
+  margin: 10px;
+ }
+
+ body{
+   font-family: "メイリオ";
+   background-color: #f0fcff;
+ }
+
+ .btn {
+   color: #f0fcff;
+ }
+
+ .font-coror {
+   color: #1214aa;
+ }
+
+ .btn-header {
+   color: #1214aa;
+   background-color: #5cc3f2;
+   border-color: #5cc3f2;
+ }
+
+ .btn-header:hover{
+   background-color: #0099cc;
+   color: #1214aa;
+ }
+
+ footer{
+   color: #1214aa;
+   border-top: solid #5cc3f2;
+   background-color: #c2ebf2;
+ }
+
+ .midashi {
+  background-color: #c2ebf2;
+  color: #1214aa;
+ }
+
+ .field_with_errors {
+  display: contents;
+ }
+
+ #error_explanation {
+  color: red;
+  margin: 30px 30px 0 30px;
+ }
+
+ .thead-bg {
+  background-color: #aadbf2;
+ }
+
+
+
+ .pagination {
+  margin-top: 20px;
+  justify-content: center;
+ }
+
+ .pagination>li>a {
+  color: #1214aa;
+  background-color:#aadbf2;
 }
+
+
+ .pagination>.active>.page-link{
+  background-color: #5cc3f2;
+  color: #c2ebf2;
+ }
+
+ .pagination>li>a:hover {
+  background-color: #5cc3f2;
+  color: #c2ebf2;
+ }
+
+ .navbar-toggler {
+  background-color: #5cc3f2;
+ }
+
+
+
+ /*レスポンシブ対応*/
+ @media screen and (max-width: 460px){
+  .none {
+   display:none
+  }
+
+  .midashi{
+    margin: 0 auto;
+    margin-bottom: 10px;
+  }
+ }
+

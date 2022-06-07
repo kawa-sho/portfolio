@@ -1,72 +1,74 @@
-<header>
-  <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+<header style='background-color: #c2ebf2;'>
+  <nav class="navbar navbar-expand-lg navbar-dark">
     <div class="container">
-      <a class="navbar-brand" href="/"><span>集いの広場</span></a>
+      <div class="navbar-brand">
+        <div>
+          <%= link_to root_path do %>
+            <%= image_tag "logo.jpg", size: "125x100" %>
+          <% end %>
+        </div>
+      </div>
+
       <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavDropdown" aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
         <span class="navbar-toggler-icon"></span>
       </button>
       <div class="collapse navbar-collapse" id="navbarNavDropdown">
         <ul class="navbar-nav ml-auto">
         <% if customer_signed_in? %>
-          <li>
-            <%= link_to new_post_path,class: 'nav-link text-light' do %>
-              <i class="fas fa-home"></i> 投稿作成
+          <li class="nav-link">
+            <%= link_to new_post_path, class: "btn btn-header" do %>
+              <i class="fas fa-plus"></i> 投稿作成
             <% end %>
           </li>
-          <li>
-            <%= link_to customer_path(current_customer),class: 'nav-link text-light' do %>
-              <i class="fas fa-home"></i> マイページ
+          <li class="nav-link">
+            <%= link_to customer_path(current_customer),class: 'btn btn-header' do %>
+              <i class="fas fa-user"></i> マイページ
             <% end %>
           </li>
-          <li>
-            <%= link_to customers_path,class: 'nav-link text-light' do %>
-              <i class="fas fa-home"></i> 会員一覧
+          <li class="nav-link">
+            <%= link_to customers_path,class: 'btn btn-header' do %>
+              <i class="fas fa-users"></i> 会員一覧
             <% end %>
           </li>
-          <li>
-            <%=  link_to posts_path ,class: 'nav-link text-light' do %>
-              <i class="fas fa-book-open"></i> 投稿一覧
+          <li class="nav-link">
+            <%=  link_to posts_path ,class: 'btn btn-header' do %>
+              <i class="fas fa-mail-bulk"></i> 投稿一覧
             <% end %>
           </li>
-          <li>
-            <%= link_to destroy_customer_session_path, method: :delete,class: 'nav-link text-light' do %>
+          <li class="nav-link">
+            <%= link_to destroy_customer_session_path, method: :delete,class: 'btn btn-header' do %>
               <i class="fas fa-sign-out-alt"></i> ログアウト
             <% end %>
           </li>
         <% elsif admin_signed_in? %>
-          <li>
-            <%= link_to admin_posts_path,class: 'nav-link text-light' do %>
-              <i class="fas fa-home"></i> 投稿一覧
+          <li class="nav-link">
+            <%= link_to admin_posts_path,class: 'btn btn-header' do %>
+              <i class="fas fa-mail-bulk"></i> 投稿一覧
             <% end %>
           </li>
-          <li>
-            <%= link_to admin_root_path,class: 'nav-link text-light' do %>
-              <i class="fas fa-home"></i> 会員一覧
+          <li class="nav-link">
+            <%= link_to admin_root_path,class: 'btn btn-header' do %>
+              <i class="fas fa-users"></i> 会員一覧
             <% end %>
           </li>
-          <li>
-            <%= link_to destroy_admin_session_path, method: :delete,class: 'nav-link text-light' do %>
+          <li class="nav-link">
+            <%= link_to destroy_admin_session_path, method: :delete,class: 'btn btn-header' do %>
               <i class="fas fa-sign-out-alt"></i> ログアウト
             <% end %>
           </li>
         <% else %>
-          <li>
-            <%= link_to root_path,class: 'nav-link text-light' do %>
-              <i class="fas fa-home"></i> トップページ
-            <% end %>
-          </li>
-          <li>
-            <%= link_to new_customer_registration_path,class: 'nav-link text-light' do %>
+          <li class="nav-link">
+            <%= link_to new_customer_registration_path,class: 'btn btn-header' do %>
               <i class="fas fa-user-plus"></i> 新規登録
             <% end %>
           </li>
-          <li>
-            <%= link_to new_customer_session_path ,class: 'nav-link text-light' do %>
+          <li class="nav-link">
+            <%= link_to new_customer_session_path ,class: 'btn btn-header' do %>
               <i class="fas fa-sign-in-alt"></i> ログイン
             <% end %>
           </li>
-          <li>
-            <%= link_to new_admin_session_path,class: 'nav-link text-light' do %>
+          <li class="nav-link">
+            <%= link_to new_admin_session_path,class: 'btn btn-header' do %>
               <i class="fas fa-sign-in-alt"></i> 管理者ログイン
             <% end %>
           </li>
@@ -75,5 +77,10 @@
       </div>
     </div>
   </nav>
+  <% if customer_signed_in? %>
+    <div class="text-right mr-5 pb-1">
+      <p class="font-coror none"><%= current_customer.name %>でログインしています</p>
+    </div>
+  <% end %>
 
 </header>

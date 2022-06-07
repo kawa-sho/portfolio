@@ -1,6 +1,10 @@
 class Customer < ApplicationRecord
   # Include default devise modules. Others available are:
   # :confirmable, :lockable, :timeoutable, :trackable and :omniauthable
+
+  # ニックネームのバリデーションを一番上にするためにここに記述
+  validates :name, length: { minimum: 1, maximum: 20 }, uniqueness: true
+
   devise :database_authenticatable, :registerable,
          :recoverable, :rememberable, :validatable
 
@@ -14,8 +18,7 @@ class Customer < ApplicationRecord
 
 
   # バリデーション
-  validates :name, length: { minimum: 1, maximum: 20 }, uniqueness: true
-  validates :introduction, length: { maximum: 50 }
+  validates :introduction, length: { maximum: 100 }
 
   # プロフィール画像のある場合ない場合のメソッド
   def get_profile_image
