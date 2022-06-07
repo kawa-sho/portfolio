@@ -11,10 +11,14 @@
     <%= stylesheet_link_tag 'application', media: 'all', 'data-turbolinks-track': 'reload' %>
   </head>
 
-  <body class="mb-4">
+  <body class="mb-5">
     <%= render 'layouts/header' %>
     <mein>
-      <p id="notice"><%= notice %></p>
+      <% if notice %>
+        <p id="notice"><%= notice %></p>
+      <% elsif alert %>
+        <p id="alert"><%= alert %></p>
+      <% end %>
       <div class="d-flex justify-content-center mb-2">
       </div>
     <%= yield %>

@@ -14,6 +14,16 @@
  *= require_self
  */
 
+ #alert{
+  color: red;
+  margin: 10px;
+ }
+
+ #notice{
+  color: green;
+  margin: 10px;
+ }
+
  body{
    font-family: "メイリオ";
    background-color: #f0fcff;
@@ -33,9 +43,21 @@
    border-color: #5cc3f2;
  }
 
-
  footer{
    color: #1214aa;
    border-top: solid #5cc3f2;
    background-color: #c2ebf2;
-}
+ }
+
+ .midashi {
+  background-color: #c2ebf2;
+ }
+
+ .field_with_errors {
+  display: contents;
+ }
+
+ #error_explanation {
+  color: red;
+  margin: 30px 0 0 30px;
+ }

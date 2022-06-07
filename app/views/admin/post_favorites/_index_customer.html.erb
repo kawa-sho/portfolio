@@ -10,20 +10,24 @@
   </thead>
   <tbody>
     <% favorites.each do |favorite| %>
+      <!-- 投稿と会員に変数を渡す -->
+      <% post = favorite.post %>
+      <% customer = post.customer %>
+
       <tr>
-        <td><%= image_tag favorite.post.customer.get_profile_image, size: '50x50' %></td>
-        <td><%= favorite.post.customer.name %></td>
-        <td><%= favorite.post.post %></td>
+        <td><%= image_tag customer.get_profile_image, size: '50x50' %></td>
+        <td><%= customer.name %></td>
+        <td><%= post.post %></td>
         <td>
-          <% favorite.post.tag_posts.each do |tag| %>
+          <% post.tag_posts.each do |tag| %>
             <%= link_to admin_tag_search_path(tag_post_id: tag.id) do%>
               <%= tag.name %>
               <%="(#{tag.posts.count})" %>
             <% end %>
           <% end %>
         </td>
-        <td>♥<%= favorite.post.post_favorites.count %></td>
-        <td><%= render 'public/post_comments/count', post: favorite.post %></td>
+        <td>♥<%= post.post_favorites.count %></td>
+        <td><%= render 'public/post_comments/count', post: post %></td>
         <td><%= link_to '詳細', admin_post_path(favorite.post), class: "btn btn-sm btn-success" %></td>
       </tr>
     <% end %>
