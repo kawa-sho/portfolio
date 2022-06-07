@@ -1,0 +1,21 @@
+<div class='row'>
+    <table class='table'>
+      <thead>
+        <tr>
+          <th>プロフィール画像</th>
+          <th>ニックネーム</th>
+          <th colspan="1"></th>
+        </tr>
+      </thead>
+      <tbody>
+        <% favorites.each do |favorite| %>
+          <tr>
+            <td><%= image_tag favorite.customer.get_profile_image, size: '50x50' %></td>
+            <td><%= favorite.customer.name %></td>
+            <td><%= link_to 'Show', admin_customer_path(favorite.customer) %></td>
+          </tr>
+        <% end %>
+        <%= paginate favorites %>
+      </tbody>
+    </table>
+  </div>

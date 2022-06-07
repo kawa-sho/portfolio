@@ -1,0 +1,10 @@
+<% if @favorites.exists? %>
+  <div class='container px-5 px-sm-0'>
+    <h2>いいねしたアカウント一覧</h2>
+    <div class='row'>
+      <%= render 'admin/post_favorites/index', favorites: @favorites %>
+    </div>
+  </div>
+<% else %>
+  <h2>いいねをしているアカウントがいません</h2>
+<% end %>

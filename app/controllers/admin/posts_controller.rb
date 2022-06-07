@@ -1,4 +1,5 @@
-class Admin::PostsController < ApplicationController
+class Admin::PostsController < Admin::ApplicationController
+  before_action :authenticate_admin!
 
   def index
     # 全投稿情報
