@@ -18,7 +18,7 @@ class Customer < ApplicationRecord
 
 
   # バリデーション
-  validates :introduction, length: { maximum: 50 }
+  validates :introduction, length: { maximum: 100 }
 
   # プロフィール画像のある場合ない場合のメソッド
   def get_profile_image
