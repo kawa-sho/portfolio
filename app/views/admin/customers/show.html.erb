@@ -33,6 +33,12 @@
           <tr>
             <td><%= link_to "編集する", edit_admin_customer_path(@customer), class: "btn btn-block btn-success" %></td>
           </tr>
+          <tr>
+            <td><%= link_to "いいね一覧を見る", admin_customer_post_favorites_path(@customer), class: "btn btn-block btn-success" %></td>
+          </tr>
+          <tr>
+            <td><%= link_to "コメント一覧を見る", admin_customer_post_comments_path(@customer), class: "btn btn-block btn-success" %></td>
+          </tr>
         </tbody>
       </table>
     </div>

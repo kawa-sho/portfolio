@@ -1,4 +1,5 @@
 class Public::CustomersController < Public::ApplicationController
+  before_action :authenticate_customer!
   # ログインしてるアカウントと同じアカウントかどうかの確認とゲストログインかどうかの確認
   before_action :correct_customer, only: [:edit, :update]
   before_action :correct_customer2, only: [:quit_check, :withdraw]
@@ -63,7 +64,7 @@ class Public::CustomersController < Public::ApplicationController
   def correct_customer
     @customer = Customer.find(params[:id])
     unless @customer == current_customer
-      redirect_to customer_path(current_customer)
+      redirect_to customer_path(current_customer), notice: '違う会員のプロフィール編集画面へ遷移できません'
     end
     if @customer.name == "guestcustomer"
       redirect_to customer_path(current_customer) , notice: 'ゲストユーザーはプロフィール編集画面へ遷移できません'
@@ -73,7 +74,7 @@ class Public::CustomersController < Public::ApplicationController
   def correct_customer2
     @customer = Customer.find(params[:customer_id])
     unless @customer == current_customer
-      redirect_to customer_path(current_customer)
+      redirect_to customer_path(current_customer), notice: '違う会員の退会ページへ遷移できません'
     end
     if @customer.name == "guestcustomer"
       redirect_to customer_path(current_customer) , notice: 'ゲストユーザーは退会ページへ遷移できません'

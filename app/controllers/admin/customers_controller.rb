@@ -1,4 +1,5 @@
 class Admin::CustomersController < Admin::ApplicationController
+  before_action :authenticate_admin!
 
   def show
     # そのページの会員情報

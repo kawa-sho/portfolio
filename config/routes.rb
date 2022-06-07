@@ -25,11 +25,17 @@ Rails.application.routes.draw do
     # 会員関連ページ
     get 'customer_search' => 'homes#search'
     resources :customers, only: [:show, :edit, :update] do
-        delete '/posts/destroy_all' => 'posts#destroy_all', as: 'destroy_all'
+      delete '/posts/destroy_all' => 'posts#destroy_all', as: 'destroy_all'
+      # 会員ごとのいいね一覧ページ
+      get '/post_favorites' => 'post_favorites#index_customer'
+      # 会員ごとのコメント関連
+      get '/post_comments' => 'post_comments#index'
+      delete '/post_comments' => 'post_comments#destroy_all'
     end
     # 投稿関連ページ
     get 'post_search' => 'posts#search'
     resources :posts, only: [:index,:show,:destroy] do
+      get 'post_favorites' => 'post_favorites#index'
       resources :post_comments, only: [:destroy]
     end
     # タグ検索機能
@@ -47,6 +53,7 @@ Rails.application.routes.draw do
       patch '/withdraw' => 'customers#withdraw', as: 'withdraw'
       # 会員ごとのいいね一覧ページ
       get '/post_favorites' => 'post_favorites#index_customer'
+      # 会員ごとのコメント関連
       get '/post_comments' => 'post_comments#index'
       delete '/post_comments' => 'post_comments#destroy_all'
     end

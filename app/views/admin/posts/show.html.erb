@@ -26,7 +26,9 @@
                 <%="(#{tag.posts.count})" %>
               <% end %>
             </td>
-              <td><%= link_to '削除', admin_post_path, method: :delete, data: { confirm: '本当に消しますか？' }, class: "btn btn-sm btn-danger"%></td>
+            <td>♥<%= @post.post_favorites.count %></td>
+            <td><%= link_to "いいね", admin_post_post_favorites_path(@post) %></td>
+            <td><%= link_to '削除', admin_post_path, method: :delete, data: { confirm: '本当に消しますか？' }, class: "btn btn-sm btn-danger"%></td>
           </tr>
         </tbody>
       </table>

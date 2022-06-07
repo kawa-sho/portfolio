@@ -1,0 +1,9 @@
+<% if @comments.exists? %>
+  <%= link_to "コメントを全部削除する", customer_post_comments_path, method: :delete, data: { confirm: '本当に消しますか？' }, class: 'btn btn-danger' %>
+  <table>
+    <%= render 'admin/post_comments/index', comments: @comments %>
+  </table>
+  <%= paginate @comments %>
+<% else %>
+  <h2>コメントをしている投稿がありません</h2>
+<% end %>

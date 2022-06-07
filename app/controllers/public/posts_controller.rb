@@ -1,6 +1,8 @@
 class Public::PostsController < Public::ApplicationController
+  before_action :authenticate_customer!
+
   # ログインしてるアカウントと同じアカウントかどうかの確認
-  before_action :correct_customer, only: [:edit, :update]
+  before_action :correct_customer, only: [:edit, :update, :destroy]
 
   def index
     # 全投稿情報
@@ -106,7 +108,7 @@ class Public::PostsController < Public::ApplicationController
   def correct_customer
     @post= Post.find(params[:id])
     unless @post.customer == current_customer
-      redirect_to post_path(@post)
+      redirect_to post_path(@post), notice: '違う会員の投稿は編集できません'
     end
   end
 end
