@@ -4,15 +4,13 @@
   </div>
   <%= form_with url: customer_search_path, method: :get do |f| %>
     <div class="row mb-2 mx-auto">
-      <div class="col-md-7 col-1"></div>
-      <%= f.text_field :keyword, value: @keyword, class: "form-control col-md-3 col-7", placeholder: "会員を検索" %>
+      <%= f.text_field :keyword, value: @keyword, class: "form-control offset-md-7 offset-1 col-md-3 col-7", placeholder: "会員を検索" %>
       <%= f.submit "検索", class: "ml-1" %>
     </div>
   <% end %>
   <% if @keyword %>
     <div class='row'>
-      <div class="col-8"></div>
-      <h5 class="text-center col-4"><%= @keyword %>で検索中</h5>
+      <h5 class="text-center offset-8 col-4"><%= @keyword %>で検索中</h5>
     </div>
   <% end %>
   <div class='row m-auto'>

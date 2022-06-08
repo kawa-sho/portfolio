@@ -1,9 +1,6 @@
 <% if post.post_favorited_by?(current_customer) %>
-    <%= link_to post_post_favorites_path(post), method: :delete do %>
-      ♥<%= post.post_favorites.count %>
-    <% end %>
+    <%= link_to "♥",post_post_favorites_path(post), method: :delete, class: "favorite-red" %>
 <% else %>
-    <%= link_to post_post_favorites_path(post), method: :post do %>
-      ♥<%= post.post_favorites.count %>
-    <% end %>
+    <%= link_to "♥", post_post_favorites_path(post), method: :post, class: "favorite-black" %>
 <% end %>
+<%= link_to "#{post.post_favorites.count}いいね", post_post_favorites_path(post), class: "btn btn-favorite" %>

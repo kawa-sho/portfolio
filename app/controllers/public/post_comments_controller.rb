@@ -28,10 +28,13 @@ class Public::PostCommentsController < Public::ApplicationController
     # 一つの投稿データ
     @post = Post.find(params[:post_id])
     # コメントcustomer_idを渡して、パラメータの受け取り
-    comment = current_customer.post_comments.new(post_comment_params)
-    comment.post_id = @post.id
-    comment.save
-    redirect_to request.referer,notice: "コメントをしました"
+    @post_comment = current_customer.post_comments.new(post_comment_params)
+    @post_comment.post_id = @post.id
+    if @post_comment.save
+      redirect_to request.referer,notice: "コメントをしました"
+    else
+      redirect_to request.referer,alert: "コメント数は2~200文字までです"
+    end
   end
 
 

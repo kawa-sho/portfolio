@@ -1,44 +1,39 @@
-<div class='container'>
-  <div class='row'>
-    <div class='col-md-8 offset-md-1'>
-  		<h2>投稿詳細</h2>
-  		<table class='table'>
-  		  <thead>
-          <tr>
-            <th></th>
-            <th>投稿</th>
-            <th>タグ</th>
-            <th colspan="3"></th>
-          </tr>
-        </thead>
-  		  <tbody>
-      		<tr>
-            <td>
-              <%= link_to(@post.customer) do %>
-                <%= image_tag @post.customer.get_profile_image, size:"50x50" %><br>
-                <%= @post.customer.name %>
+<div class='container px-5 px-sm-0'>
+  <div class="row mt-5">
+    <h2 class="midashi">投稿詳細ページ</h2>
+  </div>
+  <table class='table mx-auto table-bordered col-10'>
+  	<tbody>
+      <tr>
+        <td class="text-center thead-bg">
+          <%= link_to customer_path(@post.customer_id), class:"py-3 link-color" do %>
+            <%= image_tag @post.customer.get_profile_image, size: '50x50' %>
+            <%= @post.customer.name %>
+          <% end %>
+        </td>
+      </tr>
+      <tr>
+        <td><%= @post.post %></td>
+      </tr>
+      <tr>
+        <% unless @post.tag_posts.count == 0 %>
+          <td>
+            <% @post.tag_posts.each do |tag| %>
+              <%= link_to tag_search_path(tag_post_id: tag.id), class: "btn btn-tag my-1" do%>
+                <%= tag.name %>
               <% end %>
-            </td>
-            <td><%= @post.post %></td>
-            <td>
-              <% @post_tags.each do |tag| %>
-                <%= link_to tag_search_path(tag_post_id: tag.id) do%>
-                  <%= tag.name %>
-                  <%="(#{tag.posts.count})" %>
-                <% end %>
-              <% end %>
-            </td>
-            <td>
-              <%= render 'public/post_favorites/favorite', post: @post %>
-            </td>
-            <td><%= link_to "いいね", post_post_favorites_path(@post) %></td>
-            <% if @post.customer == current_customer %>
-              <td><%= link_to '編集', edit_post_path(@post), class: "btn btn-sm btn-success" %></td>
-              <td><%= link_to '削除', @post, method: :delete, data: { confirm: '本当に消しますか？' }, class: "btn btn-sm btn-danger"%></td>
             <% end %>
-          </tr>
-        </tbody>
-      </table>
+          </td>
+        <% end %>
+      </tr>
+      <tr>
+        <td class="text-right">
+          <%= render 'public/post_favorites/favorite', post: @post %>
+          <%= render 'public/post_comments/count', post: @post %>
+        </td>
+      </tr>
+    </tbody>
+  </table>
 
       <table>
         <%= render 'public/post_comments/index', comments: @comments %>
@@ -47,7 +42,4 @@
       <div>
         <%= render 'public/post_comments/form', post: @post, post_comment: @post_comment %>
       </div>
-
-    </div>
-  </div>
 </div>
