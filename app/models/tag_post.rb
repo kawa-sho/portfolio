@@ -4,7 +4,7 @@ class TagPost < ApplicationRecord
   has_many :posts,through: :post_tag_posts
 
   # バリデーション
-  validates :name, uniqueness: true, presence: true
+  validates :name, uniqueness: true, length: {minimum: 1, maximum: 10}
 
 
   # 並べ替え投稿多い順

@@ -4,12 +4,14 @@ class Public::PostsController < Public::ApplicationController
   # ログインしてるアカウントと同じアカウントかどうかの確認
   before_action :correct_customer, only: [:edit, :update, :destroy]
 
+
   def index
     # 全投稿情報
     @posts = Post.latest.page(params[:page])
     # 全タグ投稿多い順で20個
     @tags=TagPost.post_count.first(20)
   end
+
 
   def show
     # そのページの投稿
@@ -22,17 +24,33 @@ class Public::PostsController < Public::ApplicationController
     @comments = @post.post_comments
   end
 
+
   def edit
     # そのページの投稿情報
     @post = Post.find(params[:id])
   end
 
+
   def update
     # 投稿情報の更新
-    # 受け取った値を,で区切って配列にする
-    tag_list=params[:post][:name].split(',')
+    # 受け取った値を,で区切って配列にし、uniqで同じものを一つにする
+    tag_lists=params[:post][:name].split(',').uniq
+    # 投稿に紐づいているすべてのタグを削除
+    @post.tag_posts.destroy_all
+    # each文で回す
+    tag_lists.each do |tag_list|
+      # TagPostのインスタンスを作る
+      new_tag = TagPost.find_or_initialize_by(name: tag_list)
+      new_tag.save
+      # バリデーションをチェックする
+      if new_tag.valid?
+        # 投稿にタグを紐づける
+        @post.tag_posts << new_tag
+      else
+        flash[:alert] = 'タグが10文字以上のものは削除しました'
+      end
+    end
     if @post.update(post_params)
-      @post.save_tag(tag_list)
       # メソッドの運用
       Post.tag_delete
       redirect_to post_path(@post),notice: "投稿情報を更新しました"
@@ -62,20 +80,30 @@ class Public::PostsController < Public::ApplicationController
     @post = Post.new
   end
 
+
   def create
+    # updateと同じ部分が多数あります
     # 新規投稿作成
     @post = Post.new(post_params)
     @post.customer_id = current_customer.id
     # 受け取った値を,で区切って配列にする
-    tag_list=params[:post][:name].split(',')
+    tag_lists=params[:post][:name].split(',').uniq
+    tag_lists.each do |tag_list|
+      new_tag = TagPost.find_or_initialize_by(name: tag_list)
+      new_tag.save
+      if new_tag.valid?
+        @post.tag_posts << new_tag
+      else
+        flash[:alert] = 'タグが10文字以上のものは削除しました'
+      end
+    end
     if @post.save
-      #メソッドを利用してのタグの保存
-      @post.save_tag(tag_list)
       redirect_to post_path(@post),notice: "投稿をしました"
     else
       render :new
     end
   end
+
 
   def search
     # 検索情報抜き出し

@@ -23,27 +23,6 @@ class Post < ApplicationRecord
     post_favorites.exists?(customer_id: customer.id)
   end
 
-  # タグセーブメソッド
-  def save_tag(sent_tag_posts)
-  # タグが存在していれば、タグの名前を配列として全て取得
-    current_tag_posts = self.tag_posts.pluck(:name) unless self.tag_posts.nil?
-    # 現在取得したタグから送られてきたタグを除いてoldtagとする
-    old_tag_posts = current_tag_posts - sent_tag_posts
-    # 送信されてきたタグから現在存在するタグを除いたタグをnewとする
-    new_tag_posts = sent_tag_posts - current_tag_posts
-
-    # 古いタグを消す
-    old_tag_posts.each do |old|
-      self.tag_posts.delete TagPost.find_by(name: old)
-    end
-
-    # 新しいタグを保存
-    new_tag_posts.each do |new|
-      new_tag_posts = TagPost.find_or_create_by(name: new)
-      self.tag_posts << new_tag_posts
-   end
-  end
-
   # 必要のないタグの削除
   def self.tag_delete
     TagPost.all.each do |tag|

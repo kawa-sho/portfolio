@@ -14,10 +14,11 @@
   <body class="mb-5">
     <%= render 'layouts/header' %>
     <mein>
+      <% if alert %>
+        <p id="alert"><%= alert %></p>
+      <% end %>
       <% if notice %>
         <p id="notice"><%= notice %></p>
-      <% elsif alert %>
-        <p id="alert"><%= alert %></p>
       <% end %>
       <div class="d-flex justify-content-center mb-2">
       </div>
