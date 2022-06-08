@@ -29,6 +29,16 @@
    background-color: #f0fcff;
  }
 
+ .favorite-red {
+  color:red;
+  font-size: 25px;
+ }
+
+ .favorite-black {
+  color: black;
+  font-size: 25px;
+ }
+
  .btn {
    color: #f0fcff;
  }
@@ -46,6 +56,36 @@
  .btn-header:hover{
    background-color: #0099cc;
    color: #1214aa;
+ }
+
+ .btn-tag {
+   color: #1214aa;
+   background-color: #5cc3f2;
+   border-color: #5cc3f2;
+ }
+
+ .btn-tag:hover{
+   background-color: #0099cc;
+   color: #1214aa;
+ }
+
+ .btn-favorite {
+   color: #1214aa;
+   background-color: #5cc3f2;
+   border-color: #5cc3f2;
+ }
+
+ .btn-favorite:hover{
+   background-color: #0099cc;
+   color: #1214aa;
+ }
+
+ .link-color{
+  color: #1214aa;
+ }
+
+ .link-color:hover{
+  color: #1214aa;
  }
 
  footer{
@@ -72,14 +112,18 @@
   background-color: #aadbf2;
  }
 
+ .navbar-toggler {
+  background-color: #5cc3f2;
+ }
 
 
  .pagination {
   margin-top: 20px;
+  margin-bottom: 100px;
   justify-content: center;
  }
 
- .pagination>li>a {
+ .page-link {
   color: #1214aa;
   background-color:#aadbf2;
 }
@@ -90,15 +134,10 @@
   color: #c2ebf2;
  }
 
- .pagination>li>a:hover {
+ .page-link:hover {
   background-color: #5cc3f2;
   color: #c2ebf2;
  }
-
- .navbar-toggler {
-  background-color: #5cc3f2;
- }
-
 
 
  /*レスポンシブ対応*/

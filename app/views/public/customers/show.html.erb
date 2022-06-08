@@ -1,47 +1,48 @@
 <div class='container px-5 px-sm-0'>
-  <div class='row'>
-    <div>
-      <h4><%= @customer.name %>のページ</h4>
-    </div>
+  <div class="row mt-5">
+    <h2 class="midashi">会員詳細ページ</h2>
   </div>
   <% if @customer.is_active == true %>
-    <div class="row">
-      <div>
-        <table class="table">
-          <tbody>
-            <tr>
-              <td>ニックネーム</td>
-              <td><%= @customer.name %></td>
-            </tr>
-            <tr>
-              <td>プロフィール画像</td>
-              <td><%= image_tag @customer.get_profile_image, size: '50x50' %></td>
-            </tr>
-            <tr>
-              <td>自己紹介</td>
-              <td><%= @customer.introduction %></td>
-            </tr>
-            <% if @customer == current_customer %>
-              <% if @customer.name != "guestcustomer" %>
-                <tr>
-                  <td><%= link_to "編集する", edit_customer_path(current_customer), class: "btn btn-block btn-success" %></td>
-                </tr>
-              <% end %>
+    <div>
+      <table class="table mt-5 mx-auto table-bordered col-8">
+        <tbody class="m-auto">
+          <tr class="thead-bg">
+            <td>会員情報</td>
+          </tr>
+          <tr>
+            <td><%= image_tag @customer.get_profile_image, size: '70x70' %><%= @customer.name %></td>
+          </tr>
+          <tr>
+            <td class="thead-bg">自己紹介</td>
+          </tr>
+          <tr>
+            <td><%= @customer.introduction %></td>
+          </tr>
+          <% if @customer == current_customer %>
+            <% if @customer.name != "guestcustomer" %>
+              <tr>
+                <td><%= link_to "編集する", edit_customer_path(current_customer), class: "btn btn-block btn-success col-md-5 col-8 m-auto" %></td>
+              </tr>
             <% end %>
-            <tr>
-              <td><%= link_to "いいね一覧を見る", customer_post_favorites_path(@customer), class: "btn btn-block btn-success" %></td>
-            </tr>
-            <tr>
-              <td><%= link_to "コメント一覧を見る", customer_post_comments_path(@customer), class: "btn btn-block btn-success" %></td>
-            </tr>
-          </tbody>
-        </table>
+          <% end %>
+        </tbody>
+      </table>
+      <div class="row col-8 mx-auto">
+        <%= link_to "いいね一覧", customer_post_favorites_path(@customer), class: "btn btn-success offset-md-1 col-md-4 my-md-3 my-3" %>
+        <%= link_to "コメント一覧", customer_post_comments_path(@customer), class: "btn btn-success offset-md-2 col-md-4 my-md-3 mb-3" %>
       </div>
     </div>
-
-    <div class='row'>
-      <%= render 'public/posts/index', posts: @posts %>
+    <div class="row col-12">
+      <h3 class="midashi my-3 mx-auto"><%= @customer.name %>の投稿一覧ページ</h3>
     </div>
+    <% if @posts.exists? %>
+      <div class='row'>
+        <%= render 'public/posts/index', posts: @posts %>
+      </div>
+      <%= paginate @posts %>
+    <% else %>
+      <h2><%= @customer.name %>の投稿が存在しません</h2>
+    <% end %>
   <% else %>
     <div class='row'>
       <h2>このアカウントは退会済みです。</h2>
