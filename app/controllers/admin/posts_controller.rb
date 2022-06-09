@@ -14,7 +14,7 @@ class Admin::PostsController < Admin::ApplicationController
     # 投稿に対してのタグ
     @post_tags = @post.tag_posts
     # コメント一覧
-    @comments = @post.post_comments
+    @comments = @post.post_comments.page(params[:page]).per(5)
   end
 
   def destroy
@@ -37,7 +37,7 @@ class Admin::PostsController < Admin::ApplicationController
     # 検索情報抜き出し
     @posts = Post.latest.search(params[:keyword]).page(params[:page])
     @keyword = params[:keyword]
-    @tags = TagPost.all
+    @tags = TagPost.post_count.first(20)
     render "index"
   end
 

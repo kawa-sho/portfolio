@@ -1,33 +1,40 @@
-<table class='table'>
-      <thead>
-        <tr>
-          <th>プロフィール画像</th>
-          <th>ニックネーム</th>
-          <th>投稿</th>
-          <th>タグ</th>
-          <th colspan="2"></th>
-        </tr>
-      </thead>
-      <tbody>
-        <% posts.each do |post| %>
-          <tr>
-            <td><%= image_tag post.customer.get_profile_image, size: '50x50' %></td>
-            <td><%= post.customer.name %></td>
-            <td><%= post.post %></td>
-            <td>
-              <% post.tag_posts.each do |tag| %>
-                <%= link_to admin_tag_search_path(tag_post_id: tag.id) do%>
-                  <%= tag.name %>
-                  <%="(#{tag.posts.count})" %>
-                <% end %>
+<% posts.each do |post| %>
+  <table class='table mx-auto table-bordered col-10'>
+    <tbody>
+      <tr>
+        <td class="text-center thead-bg">
+          <%= link_to admin_customer_path(post.customer_id), class:"py-3 link-color" do %>
+            <%= image_tag post.customer.get_profile_image, size: '50x50' %>
+            <%= post.customer.name %>
+          <% end %>
+        </td>
+      </tr>
+      <tr>
+        <td><%= post.post %></td>
+      </tr>
+      <tr>
+        <% unless post.tag_posts.count == 0 %>
+          <td>
+            <% post.tag_posts.each do |tag| %>
+              <%= link_to admin_tag_search_path(tag_post_id: tag.id), class: "btn btn-tag my-1" do%>
+                <%= tag.name %>
               <% end %>
-            </td>
-            <td>♥<%= post.post_favorites.count %></td>
-            <td><%= render 'public/post_comments/count', post: post %></td>
-            <td><%= link_to '詳細', admin_post_path(post), class: "btn btn-sm btn-success" %></td>
-            <td><%= link_to '削除', admin_post_path(post), method: :delete, data: { confirm: '本当に消しますか？' }, class: "btn btn-sm btn-danger"%></td>
-          </tr>
+            <% end %>
+          </td>
         <% end %>
-        <%= paginate posts %>
-      </tbody>
-    </table>
+      </tr>
+      <tr>
+        <td class="text-right">
+          <%= render 'admin/post_favorites/favorite', post: post %>
+          <%= render 'admin/post_comments/count', post: post %>
+          <%= link_to "削除", admin_post_path(post), method: :delete, data: { confirm: '本当に消しますか？' }, class: "btn btn-danger" %>
+        </td>
+      </tr>
+      <tr>
+        <td class="text-right">
+          <%= post.created_at.to_s(:datetime_jp) %>
+        </td>
+      </tr>
+    </tbody>
+  </table>
+<% end %>

@@ -4,7 +4,7 @@
   </div>
   <%= form_with url: customer_search_path, method: :get do |f| %>
     <div class="row mb-2 mx-auto">
-      <%= f.text_field :keyword, value: @keyword, class: "form-control offset-md-7 offset-1 col-md-3 col-7", placeholder: "会員を検索" %>
+      <%= f.text_field :keyword, class: "form-control offset-md-7 offset-1 col-md-3 col-7", placeholder: "会員を検索" %>
       <%= f.submit "検索", class: "ml-1" %>
     </div>
   <% end %>

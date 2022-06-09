@@ -110,7 +110,7 @@ class Public::PostsController < Public::ApplicationController
     # 検索情報抜き出し
     @posts = Post.latest.search(params[:keyword]).page(params[:page])
     @keyword = params[:keyword]
-    @tags = TagPost.all
+    @tags = TagPost.post_count.first(20)
     render "index"
   end
 

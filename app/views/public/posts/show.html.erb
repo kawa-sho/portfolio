@@ -35,6 +35,7 @@
         <td class="text-right">
           <%= render 'public/post_favorites/favorite', post: @post %>
           <%= render 'public/post_comments/count', post: @post %>
+          <%= link_to "削除", post_path(@post), method: :delete, data: { confirm: '本当に消しますか？' }, class: "btn btn-danger" %>
         </td>
       </tr>
       <tr>
