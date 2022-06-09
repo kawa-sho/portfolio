@@ -1,0 +1,26 @@
+<table class='table m-auto col-10'>
+      <thead>
+        <tr class="thead-bg">
+          <th class="col-1">会員</th>
+          <th class="col-4"></th>
+          <th class="col-5 none">自己紹介</th>
+        </tr>
+      </thead>
+      <tbody>
+        <% customers.each do |customer| %>
+          <tr onclick="window.location.href='<%= customer_path(customer) %>'" onmouseover="this.style.backgroundColor='#c2ebf2'" onmouseout="this.style.backgroundColor='#f0fcff'">
+            <td>
+              <%= image_tag customer.get_profile_image, size: '70x70' %>
+            </td>
+            <td>
+              <h5 class="col-9 d-flex align-items-center">
+                <%= customer.name %>
+              </h5>
+            </td>
+            <td class="none">
+              <%= customer.introduction %>
+            </td>
+          </tr>
+        <% end %>
+      </tbody>
+    </table>

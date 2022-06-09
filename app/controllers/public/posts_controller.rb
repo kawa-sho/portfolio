@@ -21,7 +21,7 @@ class Public::PostsController < Public::ApplicationController
     # 新しいコメント
     @post_comment = PostComment.new
     # コメント一覧
-    @comments = @post.post_comments
+    @comments = @post.post_comments.page(params[:page]).per(5)
   end
 
 
@@ -98,6 +98,7 @@ class Public::PostsController < Public::ApplicationController
       end
     end
     if @post.save
+      Post.tag_delete
       redirect_to post_path(@post),notice: "投稿をしました"
     else
       render :new

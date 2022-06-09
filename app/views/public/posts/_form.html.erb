@@ -1,17 +1,17 @@
 <%= form_with model:post do |f| %>
 
-  <div class="form-group">
-    <%= f.label :post,"投稿" %>
-    <%= f.text_area :post, class: 'form-control' %>
+  <div class="form-group row">
+    <%= f.label :post,"投稿", class: "col-5 my-auto" %>
   </div>
+  <%= f.text_area :post,size: "10x8", class: "form-control introduction", maxlength: '200' %>
 
-  <div class="field">
-    <%= f.label"タグ (,で区切ると複数タグ登録できます)" %>
-    <%= f.text_field :name,value: post.tag_posts.pluck(:name).join(','),class:"form-control" %>
+  <div class="field row mt-4 mb-2">
+    <%= f.label :name, "タグ (,で区切ると複数タグ登録できます)", class: "col-12 my-auto" %>
   </div>
+  <%= f.text_field :name,value: post.tag_posts.pluck(:name).join(','),class:"form-control introduction", maxlength: '100' %>
 
-  <div class="form-group">
-    <%= f.submit class: 'btn btn-success' %>
+  <div class="form-group my-4 text-right">
+    <%= f.submit class: 'btn btn-success py-2 px-3 mb-5 mt-1' %>
   </div>
 
 <% end %>

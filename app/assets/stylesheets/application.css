@@ -27,6 +27,7 @@
  body{
    font-family: "メイリオ";
    background-color: #f0fcff;
+   word-break: break-all;
  }
 
  .favorite-red {
@@ -116,10 +117,13 @@
   background-color: #5cc3f2;
  }
 
+ .deta-none {
+  color: #1214aa;
+ }
+
 
  .pagination {
   margin-top: 20px;
-  margin-bottom: 100px;
   justify-content: center;
  }
 

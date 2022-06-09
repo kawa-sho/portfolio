@@ -2,6 +2,11 @@
   <div class="row mt-5">
     <h2 class="midashi">投稿詳細ページ</h2>
   </div>
+  <div class="col-11">
+    <div class="text-md-right text-center">
+      <%=link_to "編集する", edit_post_path, class: "btn btn-success px-5 py-2 mb-1" %>
+    </div>
+  </div>
   <table class='table mx-auto table-bordered col-10'>
   	<tbody>
       <tr>
@@ -32,14 +37,27 @@
           <%= render 'public/post_comments/count', post: @post %>
         </td>
       </tr>
+      <tr>
+        <td class="text-right">
+          <%= @post.created_at.to_s(:datetime_jp) %>
+        </td>
+      </tr>
     </tbody>
   </table>
-
-      <table>
+  <div class="row col-12">
+    <h3 class="midashi my-3 mx-auto">コメント</h3>
+  </div>
+  <div>
+    <% if @comments.exists? %>
+      <div class='row'>
         <%= render 'public/post_comments/index', comments: @comments %>
-      </table>
-
-      <div>
-        <%= render 'public/post_comments/form', post: @post, post_comment: @post_comment %>
       </div>
+      <%= paginate @comments %>
+    <% else %>
+      <h2 class="deta-none mt-3 text-center">コメントが存在しません</h2>
+    <% end %>
+  </div>
+  <div>
+    <%= render 'public/post_comments/form', post: @post, post_comment: @post_comment %>
+  </div>
 </div>
