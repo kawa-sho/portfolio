@@ -1,28 +1,34 @@
 class Admin::CustomersController < Admin::ApplicationController
   before_action :authenticate_admin!
 
+  ## 会員詳細
   def show
-    # そのページの会員情報
+    # 会員を取得
     @customer = Customer.find(params[:id])
-    # その会員の全投稿
-    @posts = @customer.posts.page(params[:page])
+    # 会員の投稿を新しい順にページごとに取得
+    @posts = @customer.posts.latest.page(params[:page])
   end
 
+  ## 会員編集
   def edit
-    #そのページの会員情報
+    # 会員を取得
     @customer = Customer.find(params[:id])
   end
 
+  ## 会員更新
   def update
-    #そのページの会員情報
+    # 会員を取得
     @customer = Customer.find(params[:id])
-    #会員情報の更新
+    # 受け取ったデータで更新
     if @customer.update(customer_params)
+      # 会員詳細へ
       redirect_to admin_customer_path(@customer), notice: "会員情報を更新しました"
     else
+      # 会員編集へ
       render :edit
     end
   end
+
 
   # 会員パラメーターの許可
   private

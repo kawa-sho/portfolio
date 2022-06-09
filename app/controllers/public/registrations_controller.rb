@@ -65,6 +65,7 @@ class Public::RegistrationsController < Devise::RegistrationsController
 
   # サインインした際の偏移先を登録
   def after_sign_in_path_for(resource)
+    # 会員詳細へ
     customer_path(current_customer)
   end
 

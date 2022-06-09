@@ -28,6 +28,7 @@ class Public::SessionsController < Devise::SessionsController
 
   # サインイン後の遷移先
   def after_sign_in_path_for(resource)
+    # 会員詳細へ
     customer_path(current_customer)
   end
 
