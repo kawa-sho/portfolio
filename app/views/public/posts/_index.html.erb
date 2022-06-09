@@ -29,6 +29,11 @@
           <%= render 'public/post_comments/count', post: post %>
         </td>
       </tr>
+      <tr>
+        <td class="text-right">
+          <%= post.created_at.to_s(:datetime_jp) %>
+        </td>
+      </tr>
     </tbody>
   </table>
 <% end %>

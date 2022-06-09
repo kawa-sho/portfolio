@@ -1,33 +1,49 @@
 <div class='container'>
+  <%= render 'layouts/errors', obj: @customer %>
   <div class='row'>
     <div class="col-sm-12 col-md-8 col-lg-5 px-5 px-sm-0 mx-auto">
-    <h2>会員編集</h2>
-    <%= form_with model:@customer, url: admin_customer_path, method: :patch do |f| %>
-      <%= render 'layouts/errors', obj: @customer %>
-      <div class="form-group">
-        <%= f.label :name %>
-        <%= f.text_field :name, class: "form-control name" %>
-      </div>
-     <div class="form-group">
-        <%= f.label :image %>
-        <%= f.file_field :profile_image, class: "form-control-file", accept: 'image/*' %>
-      </div>
-      <div class="form-group">
-        <%= f.label :introduction %>
-        <%= f.text_area :introduction, class: "form-control introduction" %>
-      </div>
-      <div class="form-group">
-        <%= f.radio_button :is_active, true %>
-        <%= f.label :is_active, "有効" %>
-        <%= f.radio_button :is_active, false %>
-        <%= f.label :is_active, "無効" %>
-      </div>
-      <div class="form-group">
-        <%= f.submit class: 'btn btn-secondary' %>
-      </div>
-      <div>
-        <%= link_to "投稿を全部削除する", admin_customer_destroy_all_path(@customer), method: :delete, data: { confirm: '本当に消しますか？' }, class: 'btn btn-danger' %>
-      </div>
-    <% end %>
+      <h2 class="text-center py-2 midashi my-5">会員編集</h2>
+
+      <%= form_with model: @customer, url: admin_customer_path, method: :patch do |f| %>
+
+        <div class="form-group row mb-4">
+          <%= f.label :name, "ニックネーム", class: "col-5 my-auto" %>
+          <%= f.text_field :name, autofocus: true, autocomplete: "name", class: "col-7 form-control", placeholder: "ゴンザレス" %>
+        </div>
+
+        <div class="form-group row">
+          <%= f.label :image, "プロフィール画像", class: "col-12 my-auto" %>
+        </div>
+
+        <div class="row mb-4">
+          <%= f.file_field :profile_image, class: "form-control-file offset-5 col-8", accept: 'image/*' %>
+        </div>
+
+        <div class="form-group row">
+          <%= f.label :introduction, "自己紹介", class: "col-5 my-auto" %>
+        </div>
+        <%= f.text_area :introduction,size: "10x5", class: "form-control introduction", maxlength: '100' %>
+
+        <div class="form-group row mt-3">
+          <%= f.label "会員ステータス", class: "col-5 my-auto" %>
+          <div class="col-7 text-right">
+            <%= f.radio_button :is_active, true, class: "my-auto" %>
+            <%= f.label :is_active, "有効", class: "my-auto" %>
+            <%= f.radio_button :is_active, false, class: "my-auto" %>
+            <%= f.label :is_active, "退会", class: "my-auto", style: "color: red;" %>
+          </div>
+        </div>
+
+        <div class="form-group my-4 text-right">
+          <%= f.submit class: 'btn btn-success py-2 px-3 mb-5 mt-2' %>
+        </div>
+
+        <div class="text-center">
+          <%= link_to "投稿を全部削除する", admin_customer_destroy_all_path(@customer), method: :delete, data: { confirm: '本当に消しますか？' }, class: 'btn btn-danger py-2 px-3' %>
+        </div>
+
+      <% end %>
+
+    </div>
   </div>
 </div>
