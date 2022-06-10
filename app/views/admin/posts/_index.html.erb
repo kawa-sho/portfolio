@@ -1,0 +1,40 @@
+<% posts.each do |post| %>
+  <table class='table mx-auto table-bordered col-10'>
+    <tbody>
+      <tr>
+        <td class="text-center thead-bg">
+          <%= link_to admin_customer_path(post.customer_id), class:"py-3 link-color" do %>
+            <%= image_tag post.customer.get_profile_image, size: '50x50' %>
+            <%= post.customer.name %>
+          <% end %>
+        </td>
+      </tr>
+      <tr>
+        <td><%= post.post %></td>
+      </tr>
+      <tr>
+        <% unless post.tag_posts.count == 0 %>
+          <td>
+            <% post.tag_posts.each do |tag| %>
+              <%= link_to admin_tag_search_path(tag_post_id: tag.id), class: "btn btn-tag my-1" do%>
+                <%= tag.name %>
+              <% end %>
+            <% end %>
+          </td>
+        <% end %>
+      </tr>
+      <tr>
+        <td class="text-right">
+          <%= render 'admin/post_favorites/favorite', post: post %>
+          <%= render 'admin/post_comments/count', post: post %>
+          <%= link_to "削除", admin_post_path(post), method: :delete, data: { confirm: '本当に消しますか？' }, class: "btn btn-danger" %>
+        </td>
+      </tr>
+      <tr>
+        <td class="text-right">
+          <%= post.created_at.to_s(:datetime_jp) %>
+        </td>
+      </tr>
+    </tbody>
+  </table>
+<% end %>

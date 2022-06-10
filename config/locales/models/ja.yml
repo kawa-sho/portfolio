@@ -1,0 +1,12 @@
+ja:
+  activerecord:
+    models:
+      customer: 会員
+      admin: 管理者
+    attributes:
+      customer:
+        name: ニックネーム
+        email: メールアドレス
+        password: パスワード
+      admin:
+        email: メールアドレス

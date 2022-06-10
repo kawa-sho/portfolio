@@ -1,0 +1,13 @@
+<% unless @posts.nil? %>
+  <div class='container px-5 px-sm-0'>
+  <div class="row mt-5">
+    <h2 class="midashi"><%= @customer.name %>のいいね一覧ページ</h2>
+  </div>
+    <div class='row mt-5'>
+      <%= render 'admin/posts/index', posts: @posts %>
+    </div>
+    <%= paginate @favorites %>
+  </div>
+<% else %>
+  <h2>いいねをしている投稿がありません</h2>
+<% end %>

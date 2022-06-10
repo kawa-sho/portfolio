@@ -1,0 +1,64 @@
+<div class='container px-5 px-sm-0'>
+  <div class="row mt-5">
+    <h2 class="midashi">投稿詳細ページ</h2>
+  </div>
+  <div class="col-11">
+    <div class="text-md-right text-center">
+      <%=link_to "編集する", edit_post_path, class: "btn btn-success px-5 py-2 mb-1" %>
+    </div>
+  </div>
+  <table class='table mx-auto table-bordered col-10'>
+  	<tbody>
+      <tr>
+        <td class="text-center thead-bg">
+          <%= link_to customer_path(@post.customer_id), class:"py-3 link-color" do %>
+            <%= image_tag @post.customer.get_profile_image, size: '50x50' %>
+            <%= @post.customer.name %>
+          <% end %>
+        </td>
+      </tr>
+      <tr>
+        <td><%= @post.post %></td>
+      </tr>
+      <tr>
+        <% unless @post.tag_posts.count == 0 %>
+          <td>
+            <% @post.tag_posts.each do |tag| %>
+              <%= link_to tag_search_path(tag_post_id: tag.id), class: "btn btn-tag my-1" do%>
+                <%= tag.name %>
+              <% end %>
+            <% end %>
+          </td>
+        <% end %>
+      </tr>
+      <tr>
+        <td class="text-right">
+          <%= render 'public/post_favorites/favorite', post: @post %>
+          <%= render 'public/post_comments/count', post: @post %>
+          <%= link_to "削除", post_path(@post), method: :delete, data: { confirm: '本当に消しますか？' }, class: "btn btn-danger" %>
+        </td>
+      </tr>
+      <tr>
+        <td class="text-right">
+          <%= @post.created_at.to_s(:datetime_jp) %>
+        </td>
+      </tr>
+    </tbody>
+  </table>
+  <div class="row col-12">
+    <h3 class="midashi my-3 mx-auto">コメント</h3>
+  </div>
+  <div>
+    <% if @comments.exists? %>
+      <div class='row'>
+        <%= render 'public/post_comments/index', comments: @comments %>
+      </div>
+      <%= paginate @comments %>
+    <% else %>
+      <h2 class="deta-none mt-3 text-center">コメントが存在しません</h2>
+    <% end %>
+  </div>
+  <div>
+    <%= render 'public/post_comments/form', post: @post, post_comment: @post_comment %>
+  </div>
+</div>

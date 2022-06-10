@@ -46,6 +46,8 @@ group :development do
   gem 'listen', '~> 3.3'
   # Spring speeds up development by keeping your application running in the background. Read more: https://github.com/rails/spring
   gem 'spring'
+  # binding.pry
+  gem 'pry-rails'
 end
 
 group :test do
@@ -66,3 +68,10 @@ group :production do
   #MySQLを利用するために必要なgem
   gem 'mysql2'
 end
+
+
+#ページネーションのため
+gem 'kaminari','~> 1.2.1'
+
+#ユーザー認証機能のため
+gem 'devise'

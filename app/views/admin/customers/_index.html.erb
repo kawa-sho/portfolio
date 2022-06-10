@@ -1,0 +1,34 @@
+<table class='table m-auto col-md-10 col-12'>
+      <thead>
+        <tr class="thead-bg">
+          <th class="col-1">会員</th>
+          <th class="col-4"></th>
+          <th class="col-5 none">自己紹介</th>
+          <th class="col-2">会員ステータス</th>
+        </tr>
+      </thead>
+      <tbody>
+        <% customers.each do |customer| %>
+          <tr onclick="window.location.href='<%= admin_customer_path(customer) %>'" onmouseover="this.style.backgroundColor='#c2ebf2'" onmouseout="this.style.backgroundColor='#f0fcff'">
+            <td>
+              <%= image_tag customer.get_profile_image, size: '70x70' %>
+            </td>
+            <td>
+              <h5 class="col-9">
+                <%= customer.name %>
+              </h5>
+            </td>
+            <td class="none">
+              <%= customer.introduction %>
+            </td>
+            <td class="text-center">
+              <% if customer.is_active == true %>
+                <h3>有効</h3>
+              <% else %>
+                <h3 style="color:red;">退会</h3>
+              <% end %>
+            </td>
+          </tr>
+        <% end %>
+      </tbody>
+    </table>

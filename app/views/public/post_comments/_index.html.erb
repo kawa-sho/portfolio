@@ -1,0 +1,25 @@
+<% comments.each do |comment| %>
+  <table class='table mx-auto table-bordered col-10'>
+    <tbody>
+      <tr>
+        <td class="text-center thead-bg">
+          <%= link_to customer_path(comment.customer_id), class:"py-3 link-color" do %>
+            <%= image_tag comment.customer.get_profile_image, size: '50x50' %>
+            <%= comment.customer.name %>
+          <% end %>
+          <% if current_customer == comment.customer %>
+            <%= link_to "Destoroy", post_post_comment_path(comment.post, comment), method: :delete, data: { confirm: '本当に消しますか？' }, class: "btn btn-sm btn-danger" %>
+          <% end %>
+        </td>
+      </tr>
+      <tr>
+        <td><%= comment.comment %></td>
+      </tr>
+      <tr>
+        <td class="text-right">
+          <%= comment.created_at.to_s(:datetime_jp) %>
+        </td>
+      </tr>
+    </tbody>
+  </table>
+<% end %>
