@@ -1,5 +1,13 @@
 Rails.application.routes.draw do
 
+  namespace :admin do
+    get 'relationships/followings'
+    get 'relationships/followers'
+  end
+  namespace :public do
+    get 'relationships/followings'
+    get 'relationships/followers'
+  end
   ### デバイス関連
   ## 会員用
   devise_for :customers,skip: [:passwords], controllers: {
@@ -36,6 +44,10 @@ Rails.application.routes.draw do
       get '/post_comments' => 'post_comments#index'
       # 会員ごとのコメント全削除機能
       delete '/post_comments' => 'post_comments#destroy_all'
+      # フォロー一覧ページ
+      get 'followings' => 'relationships#followings', as: 'followings'
+      # フォロワー一覧ページ
+      get 'followers' => 'relationships#followers', as: 'followers'
     end
 
     ## 投稿関連
@@ -76,6 +88,12 @@ Rails.application.routes.draw do
       get '/post_comments' => 'post_comments#index'
       # 会員ごとのコメント全削除機能
       delete '/post_comments' => 'post_comments#destroy_all'
+      # 会員ごとのフォロー作成機能　削除機能
+      resource :relationships, only: [:create, :destroy]
+      # フォロー一覧ページ
+      get 'followings' => 'relationships#followings', as: 'followings'
+      # フォロワー一覧ページ
+      get 'followers' => 'relationships#followers', as: 'followers'
     end
 
     ## 投稿関連ページ

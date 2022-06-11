@@ -18,12 +18,29 @@
           <tr>
             <td><%= @customer.introduction %></td>
           </tr>
+          <tr class="text-right">
+            <td>
+              <%= link_to "フォロー数: #{@customer.followings.count}",customer_followings_path(@customer), class: "btn btn-favorite" %>
+              <%= link_to "フォロワー数: #{@customer.followers.count}",customer_followers_path(@customer), class: "btn btn-favorite" %>
+            </td>
+          </tr>
           <% if @customer == current_customer %>
             <% if @customer.name != "guestcustomer" %>
               <tr>
                 <td><%= link_to "編集する", edit_customer_path(current_customer), class: "btn btn-block btn-success col-md-5 col-8 m-auto" %></td>
               </tr>
             <% end %>
+          <% end %>
+          <% if @customer != current_customer %>
+            <tr>
+              <td>
+                <% if current_customer.following?(@customer) %>
+                  <%= link_to "フォロー外す", customer_relationships_path(@customer.id), method: :delete, class: "btn btn-block btn-danger col-md-5 col-8 m-auto" %>
+                <% else %>
+                  <%= link_to "フォローする", customer_relationships_path(@customer.id), method: :post, class: "btn btn-block btn-success col-md-5 col-8 m-auto" %>
+                <% end %>
+              </td>
+            </tr>
           <% end %>
         </tbody>
       </table>

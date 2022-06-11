@@ -1,13 +1,13 @@
-<% if @favorites.exists? %>
+<% if @customers.exists? %>
   <div class='container px-5 px-sm-0'>
   <div class="row mt-5">
-    <h2 class="midashi">いいねした会員一覧</h2>
+    <h2 class="midashi"><%= @customer.name %>フォロワー一覧</h2>
   </div>
     <div class='row mt-5'>
       <%= render 'public/customers/index', customers: @customers %>
     </div>
-    <%= paginate @favorites %>
+    <%= paginate @customers %>
   </div>
 <% else %>
-  <h2 class="deta-none">いいねをしている会員がいません</h2>
+  <h2 class="deta-none">フォロワーがいません</h2>
 <% end %>
