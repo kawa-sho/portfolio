@@ -1,0 +1,21 @@
+<div>
+  <% if messages.present? %>
+    <% messages.each do |message| %>
+    <hr class = "my-2">
+      <div>
+        <div class= "offset-md-2 col-md-8">
+          <strong><%= message.message %></strong><br>
+        </div>
+        <div class= "offset-md-2 col-md-8 text-right">
+          <%= link_to customer_path(message.customer) do %>
+            <%= image_tag message.customer.get_profile_image, size:"30x30" %>
+            <%= message.customer.name %>
+          <% end %>
+          <%= message.created_at.to_s(:datetime_jp) %><br>
+        </div>
+      </div>
+    <% end %>
+  <% else %>
+  <% end %>
+</div>
+<hr>
