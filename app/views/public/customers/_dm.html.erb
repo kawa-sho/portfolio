@@ -1,0 +1,23 @@
+<% if customer.id == current_customer.id %>
+  <tr>
+    <td class="text-right">
+      <%= link_to "新着メッセージへ", messages_path, class: "btn btn-primary" %>
+      <%= link_to "DMルーム一覧へ", rooms_path, class: "btn btn-primary" %>
+    </td>
+  </tr>
+<% elsif (current_customer.following?(customer)) && (customer.following?(current_customer)) %>
+  <tr>
+    <td class="text-right">
+      <% if isRoom == true %>
+        <%= link_to "チャットへ", room_path(roomId), class: "btn btn-primary" %>
+      <% else %>
+        <%= form_with model: [room] do |f| %>
+          <%= fields_for entry do |e| %>
+            <%= e.hidden_field :customer_id, value: customer.id %>
+          <% end %>
+          <%= f.submit "チャットを始める", class: "btn btn-primary" %>
+        <% end %>
+      <% end %>
+    </td>
+  </tr>
+<% end %>

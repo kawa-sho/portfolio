@@ -114,6 +114,14 @@ Rails.application.routes.draw do
     ## 投稿タグ検索機能
     get "tag_search"=>"posts#tag_search"
 
+    ## DM機能
+    # メッセージ作成
+    resources :messages, only: [:index,:create]
+    # ルーム作成
+    resources :rooms, only: [:index,:create,:show] do
+      # ルームログ
+      get 'rooms' => 'rooms#index_all'
+    end
   end
 
 
