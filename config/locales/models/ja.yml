@@ -3,6 +3,7 @@ ja:
     models:
       customer: 会員
       admin: 管理者
+      group: グループ
     attributes:
       customer:
         name: ニックネーム
@@ -10,3 +11,6 @@ ja:
         password: パスワード
       admin:
         email: メールアドレス
+      group:
+        name: 名前
+        introduction: グループ紹介

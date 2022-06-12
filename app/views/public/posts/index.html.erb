@@ -2,6 +2,11 @@
   <div class="row mt-5">
     <h2 class="midashi">投稿一覧ページ</h2>
   </div>
+  <div class="col-11 text-right mb-3">
+    <%= link_to new_post_path, class: "btn btn-success" do %>
+      <i class="fas fa-plus"></i> 新規投稿
+    <% end %>
+  </div>
   <%= form_with url: post_search_path, method: :get do |f| %>
     <div class="row mb-2 mx-auto">
       <%= f.text_field :keyword, class: "form-control offset-md-7 offset-1 col-md-3 col-7", placeholder: "投稿を検索" %>
