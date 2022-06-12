@@ -1,0 +1,21 @@
+<% messages.each do |message| %>
+  <table class='table mx-auto table-bordered col-10'>
+    <tbody>
+      <tr>
+        <td class="text-center thead-bg">
+          <%= link_to customer_path(message.customer_id), class:"py-3 link-color" do %>
+            <%= image_tag message.customer.get_profile_image, size: '50x50' %>
+            <%= message.customer.name %>
+          <% end %>
+        </td>
+      </tr>
+      <tr>
+        <td><strong><%= message.message %></strong><br>
+          <div class="text-right">
+            <%= message.created_at.to_s(:datetime_jp) %><%= link_to "チャットへ", room_path(message.room_id), class: "btn btn-primary" %>
+          </div>
+        </td>
+      </tr>
+    </tbody>
+  </table>
+<% end %>

@@ -33,7 +33,7 @@ class Public::PostsController < Public::ApplicationController
   ## 更新
   def update
     # 受け取った値を,で区切って配列にし、uniqで同じものを一つにする
-    tag_lists=params[:post][:name].split(',').uniq
+    tag_lists=params[:post][:name].delete(' ').delete('　').split(',').uniq
     # 投稿に紐づいているすべてのタグを削除
     @post.tag_posts.destroy_all
     # each文で回す
@@ -99,7 +99,7 @@ class Public::PostsController < Public::ApplicationController
     # 投稿のインスタンスにログインしている会員のidを渡す
     @post.customer_id = current_customer.id
     # 受け取った値を,で区切って配列にし、uniqで同じものを一つにする
-    tag_lists=params[:post][:name].split(',').uniq
+    tag_lists=params[:post][:name].delete(' ').delete('　').split(',').uniq
     # each文で回す
     tag_lists.each do |tag_list|
       # TagPostのインスタンスを作る

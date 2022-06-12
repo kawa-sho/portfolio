@@ -16,6 +16,32 @@ class Public::CustomersController < Public::ApplicationController
     @customer = Customer.find(params[:id])
     # 取得した会員の投稿を新しい順にページごとに取得
     @posts = @customer.posts.latest.page(params[:page])
+
+    ## DM機能の作成
+    # 自分のエントリー情報を抽出
+    current_customer_entry = Entry.where(customer_id: current_customer.id)
+    # 取得した会員のエントリー情報を抽出
+    customer_entry = Entry.where(customer_id: @customer.id)
+    # 見てるページのユーザーと自分のユーザーがおんなじかどうか
+    unless @customer == current_customer
+    # 自分の持ってるエントリー情報と見てるページのユーザーのエントリー情報をすべて抽出する
+      current_customer_entry.each do |cce|
+        customer_entry.each do |ce|
+    # 自分の持ってるroom_idと見てるページのユーザーの持ってるroom_idの中に同じroom_idがあるかどうか
+          if cce.room_id == ce.room_id
+    # roomはあるよと定義しroom_idをインスタンス変数で渡す
+            @isRoom = true
+            @roomId = cce.room_id
+          end
+        end
+      end
+    # roomがない場合
+      unless @isRoom
+    # 新しいインスタンスを制作する
+        @room = Room.new
+        @entry = Entry.new
+      end
+    end
   end
 
   ## 会員編集

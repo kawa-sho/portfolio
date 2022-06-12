@@ -13,6 +13,10 @@ class Customer < ApplicationRecord
   has_many :post_comments, dependent: :destroy
   has_many :post_favorites, dependent: :destroy
 
+  # DM機能
+  has_many :messages, dependent: :destroy
+  has_many :entries, dependent: :destroy
+
   # フォローをした、されたの関係
   has_many :relationships, class_name: "Relationship", foreign_key: "follower_id", dependent: :destroy
   has_many :reverse_of_relationships, class_name: "Relationship", foreign_key: "followed_id", dependent: :destroy
@@ -20,6 +24,9 @@ class Customer < ApplicationRecord
   # 一覧画面で使う
   has_many :followings, through: :relationships, source: :followed
   has_many :followers, through: :reverse_of_relationships, source: :follower
+
+  # グループ関連
+  has_many :group_customers
 
   # active storageでの画像追加
   has_one_attached :profile_image

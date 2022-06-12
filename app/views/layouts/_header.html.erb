@@ -16,8 +16,8 @@
         <ul class="navbar-nav ml-auto">
         <% if customer_signed_in? %>
           <li class="nav-link">
-            <%= link_to new_post_path, class: "btn btn-header" do %>
-              <i class="fas fa-plus"></i> 投稿作成
+            <%= link_to groups_path, class: "btn btn-header" do %>
+              <i class="fas fa-campground"></i> グループ一覧
             <% end %>
           </li>
           <li class="nav-link">

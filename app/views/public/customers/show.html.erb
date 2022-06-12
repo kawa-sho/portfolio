@@ -42,6 +42,7 @@
               </td>
             </tr>
           <% end %>
+          <%= render 'public/customers/dm', customer: @customer, isRoom: @isRoom, roomId: @roomId, room: @room, entry: @entry %>
         </tbody>
       </table>
       <div class="row col-8 mx-auto">

@@ -1,0 +1,42 @@
+<div class='container px-5 px-sm-0'>
+  <div class="row mt-5">
+    <h2 class="midashi">グループ詳細ページ</h2>
+  </div>
+  <div class="col-11">
+    <div class="text-md-right text-center">
+      <% if @group.owner_id == current_customer.id %>
+        <%=link_to "編集する", edit_group_path, class: "btn btn-success px-5 py-2 mb-1" %>
+      <% end %>
+    </div>
+  </div>
+  <table class='table mx-auto table-bordered col-10'>
+  	<tbody>
+      <tr>
+        <td class="text-center thead-bg">
+          <%= link_to group_path(@group.id), class:"py-3 link-color" do %>
+            <%= image_tag @group.get_group_image, size: '50x50' %>
+            <%= @group.name %>
+          <% end %>
+        </td>
+      </tr>
+      <tr>
+        <td><%= @group.introduction %></td>
+      </tr>
+      <% if @group.owner_id == current_customer.id %>
+        <tr>
+          <td class="text-right">
+            <%= link_to "削除", group_path(@group), method: :delete, data: { confirm: '本当に消しますか？' }, class: "btn btn-danger" %>
+          </td>
+        </tr>
+      <% end %>
+      <tr>
+        <td class="text-right">
+          更新日時：<%= @group.updated_at.to_s(:datetime_jp) %>
+        </td>
+      </tr>
+    </tbody>
+  </table>
+  <div class="col-10 offset-1 mt-2 text-right">
+    <%= link_to "ルームに入る", group_room_path(group_id: @group), class: "btn btn-success" %>
+  </div>
+</div>

@@ -1,0 +1,27 @@
+<div class='container px-5 px-sm-0'>
+  <div class="row mt-5">
+    <h2 class="midashi">
+      <% @entries.each do |entry| %>
+        <% unless entry.customer == current_customer %>
+          <%= link_to customer_path(entry.customer.id) do %>
+            <%= entry.customer.name %>さん
+          <% end %>
+        <% end %>
+      <% end %>とのDMページ
+    </h2>
+  </div>
+  <div class="col-11">
+    <div class="text-md-right text-center">
+      <%=link_to "DM一覧へ", rooms_path(@room), class: "btn btn-success px-5 py-2 mb-1" %>
+      <%=link_to "ログを確認する", room_rooms_path(@room), class: "btn btn-success px-5 py-2 mb-1" %>
+    </div>
+  </div>
+  <%= render "public/rooms/show", messages: @messages %>
+  <div class="offset-md-2 col-md-8 text-right">
+    <%= form_with model: @message do |f| %>
+      <%= f.text_area :message, placeholder: "メッセージを入力して下さい",size:"3x3", class:"form-control", maxlength: '100' %>
+        <%= f.hidden_field :room_id, value: @room.id %>
+        <%= f.submit "投稿",class: 'btn btn-success'%>
+    <% end %>
+  </div>
+</div>

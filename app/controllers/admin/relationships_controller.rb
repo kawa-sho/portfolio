@@ -1,4 +1,5 @@
-class Admin::RelationshipsController < ApplicationController
+class Admin::RelationshipsController < Admin::ApplicationController
+  before_action :authenticate_admin!
   ## フォロー一覧
   def followings
     # 会員の取得
