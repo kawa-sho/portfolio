@@ -4,7 +4,9 @@
   </div>
   <div class="col-11">
     <div class="text-md-right text-center">
-      <%=link_to "編集する", edit_post_path, class: "btn btn-success px-5 py-2 mb-1" %>
+      <% if @post.customer_id ==current_customer.id %>
+        <%=link_to "編集する", edit_post_path, class: "btn btn-success px-5 py-2 mb-1" %>
+      <% end %>
     </div>
   </div>
   <table class='table mx-auto table-bordered col-10'>
@@ -35,7 +37,9 @@
         <td class="text-right">
           <%= render 'public/post_favorites/favorite', post: @post %>
           <%= render 'public/post_comments/count', post: @post %>
-          <%= link_to "削除", post_path(@post), method: :delete, data: { confirm: '本当に消しますか？' }, class: "btn btn-danger" %>
+          <% if @post.customer_id == current_customer.id %>
+            <%= link_to "削除", post_path(@post), method: :delete, data: { confirm: '本当に消しますか？' }, class: "btn btn-danger" %>
+          <% end %>
         </td>
       </tr>
       <tr>

@@ -25,6 +25,9 @@ class Customer < ApplicationRecord
   has_many :followings, through: :relationships, source: :followed
   has_many :followers, through: :reverse_of_relationships, source: :follower
 
+  # グループ関連
+  has_many :group_customers
+
   # active storageでの画像追加
   has_one_attached :profile_image
 

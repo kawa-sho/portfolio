@@ -122,6 +122,13 @@ Rails.application.routes.draw do
       # ルームログ
       get 'rooms' => 'rooms#index_all'
     end
+
+    ## グループ機能
+    # グループデストロイ以外
+    resources :groups do
+      # グループチャット部屋
+      get 'room' => 'groups#room'
+    end
   end
 
 

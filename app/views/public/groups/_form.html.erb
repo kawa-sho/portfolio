@@ -1,0 +1,25 @@
+<%= form_with model: group do |f| %>
+
+  <div class="form-group row mb-4">
+    <%= f.label :name, "グループ名", class: "col-5 my-auto" %>
+    <%= f.text_field :name, autofocus: true, autocomplete: "name", class: "col-7 form-control" %>
+  </div>
+
+  <div class="form-group row">
+    <%= f.label :image, "グループ画像", class: "col-12 my-auto" %>
+  </div>
+
+  <div class="row mb-4">
+    <%= f.file_field :group_image, class: "form-control-file offset-5 col-8", accept: 'image/*' %>
+  </div>
+
+  <div class="form-group row">
+    <%= f.label :introduction, "グループ紹介", class: "col-5 my-auto" %>
+  </div>
+  <%= f.text_area :introduction,size: "10x5", class: "form-control introduction", maxlength: '100' %>
+
+  <div class="form-group my-4 text-right">
+    <%= f.submit class: 'btn btn-success py-2 px-3 mb-5 mt-2' %>
+  </div>
+
+<% end %>
