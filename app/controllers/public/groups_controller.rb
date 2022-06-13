@@ -58,7 +58,7 @@ class Public::GroupsController < Public::ApplicationController
       # メソッドの運用
       Group.tag_delete
       # グループ詳細へ
-      redirect_to group_path(@group),notice: "投稿をしました"
+      redirect_to group_path(@group),notice: "グループを作成しました"
     else
       # 新規グループ作成へ
       render :new
@@ -96,7 +96,7 @@ class Public::GroupsController < Public::ApplicationController
       # メソッドの運用
       Group.tag_delete
       # グループ詳細へ
-      redirect_to group_path(@group),notice: "投稿情報を更新しました"
+      redirect_to group_path(@group),notice: "グループ情報を更新しました"
     else
       # グループ編集へ
       render :edit
@@ -110,7 +110,7 @@ class Public::GroupsController < Public::ApplicationController
     # タグに紐づいているグループがなくなっていた場合タグの削除メソッド
     Group.tag_delete
     # グループ一覧へ
-    redirect_to groups_path,alert: "投稿情報を削除しました"
+    redirect_to groups_path,alert: "グループ情報を削除しました"
   end
 
   ## グループチャット部屋
@@ -133,7 +133,7 @@ class Public::GroupsController < Public::ApplicationController
     @message = GroupMessage.new
   end
 
-  ## 投稿検索
+  ## グループ検索
   def search
     # 送られてきた値でsearchメソッドで検索しページごとに取得
     @groups = Group.latest.search(params[:keyword]).page(params[:page])
@@ -147,11 +147,11 @@ class Public::GroupsController < Public::ApplicationController
 
   ## タグ検索
   def tag_search
-    # タグを紐づいている投稿が多い順に２０個取得
+    # タグを紐づいているグループが多い順に２０個取得
     @tags = TagGroup.group_count.first(20)
     # 検索されたタグを受け取る
     tag = TagGroup.find(params[:tag_group_id])
-    # 検索されたタグに紐づく投稿を表示
+    # 検索されたタグに紐づくグループを表示
     @groups = tag.groups.page(params[:page])
     # viewに何を検索しているのかを表示するため送られてきた値を取得
     @tag_keyword = tag.name

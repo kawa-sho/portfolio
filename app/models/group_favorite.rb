@@ -4,7 +4,7 @@ class GroupFavorite < ApplicationRecord
   belongs_to :customer
   belongs_to :group
 
-  # 一つの投稿に対して、一人につき一つしかいいねをつけられない。
+  # 一つのグループに対して、一人につき一つしかいいねをつけられない。
   validates_uniqueness_of :group_id, scope: :customer_id
 
   # いいねが作られた順

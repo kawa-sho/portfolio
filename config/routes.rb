@@ -119,9 +119,9 @@ Rails.application.routes.draw do
     get "tag_search"=>"posts#tag_search"
 
     ## DM機能
-    # メッセージ作成
+    # メッセージ一覧と作成
     resources :messages, only: [:index,:create]
-    # ルーム作成
+    # ルーム一覧とルーム作成とルーム詳細
     resources :rooms, only: [:index,:create,:show] do
       # ルームログ
       get 'rooms' => 'rooms#index_all'
