@@ -124,6 +124,8 @@ Rails.application.routes.draw do
     end
 
     ## グループ機能
+    # 投稿検索機能
+    get 'group_search' => 'groups#search'
     # グループメッセージ
     resources :group_messages, only: [:create]
     # グループデストロイ以外
@@ -132,6 +134,9 @@ Rails.application.routes.draw do
       get 'room' => 'groups#room'
       get 'room_log' => 'groups#room_log'
     end
+
+    ## グループタグ検索機能
+    get "group_tag_search"=>"groups#tag_search"
   end
 
 

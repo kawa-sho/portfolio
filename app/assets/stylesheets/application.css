@@ -110,6 +110,10 @@
  .thead-bg {
   background-color: #aadbf2;
  }
+ .group-table {
+  border-top: none;
+  border: 1px solid #dee2e6;
+ }
 
  /*ナビゲーションバー関連*/
  .navbar-toggler {

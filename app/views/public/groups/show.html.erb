@@ -22,6 +22,17 @@
       <tr>
         <td><%= @group.introduction %></td>
       </tr>
+      <tr>
+        <% unless @group.tag_groups.count == 0 %>
+          <td>
+            <% @group.tag_groups.each do |tag| %>
+              <%= link_to group_tag_search_path(tag_group_id: tag.id), class: "btn btn-tag my-1" do%>
+                <%= tag.name %>
+              <% end %>
+            <% end %>
+          </td>
+        <% end %>
+      </tr>
       <% if @group.owner_id == current_customer.id %>
         <tr>
           <td class="text-right">
