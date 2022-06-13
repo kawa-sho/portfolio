@@ -27,6 +27,7 @@ class Customer < ApplicationRecord
 
   # グループ関連
   has_many :group_customers
+  has_many :group_messages
 
   # active storageでの画像追加
   has_one_attached :profile_image

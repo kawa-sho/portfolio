@@ -3,6 +3,7 @@ class Group < ApplicationRecord
   # アソシエーション
   has_many :group_customers
   has_many :customers, through: :group_customers
+  has_many :group_messages, dependent: :destroy
 
   # バリデーション
   validates :name, length: { minimum: 1, maximum: 20 }, uniqueness: true

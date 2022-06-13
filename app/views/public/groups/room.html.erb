@@ -6,8 +6,16 @@
   </div>
   <div class="col-11">
     <div class="text-md-right text-center">
-      <%=link_to "グループ一覧へ", class: "btn btn-success px-5 py-2 mb-1" %>
-      <%=link_to "ログを確認する", class: "btn btn-success px-5 py-2 mb-1" %>
+      <%=link_to "グループ一覧へ", groups_path, class: "btn btn-success px-5 py-2 mb-1" %>
+      <%=link_to "ログを確認する", group_room_log_path(@group), class: "btn btn-success px-5 py-2 mb-1" %>
     </div>
+  </div>
+  <%= render "public/rooms/show", messages: @messages %>
+  <div class="offset-md-2 col-md-8 text-right">
+    <%= form_with model: @message do |f| %>
+      <%= f.text_area :message, placeholder: "メッセージを入力して下さい",size:"3x3", class:"form-control", maxlength: '100' %>
+      <%= f.hidden_field :group_id, value: @group.id %>
+      <%= f.submit "投稿",class: 'btn btn-success'%>
+    <% end %>
   </div>
 </div>

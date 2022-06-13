@@ -124,10 +124,13 @@ Rails.application.routes.draw do
     end
 
     ## グループ機能
+    # グループメッセージ
+    resources :group_messages, only: [:create]
     # グループデストロイ以外
     resources :groups do
       # グループチャット部屋
       get 'room' => 'groups#room'
+      get 'room_log' => 'groups#room_log'
     end
   end
 

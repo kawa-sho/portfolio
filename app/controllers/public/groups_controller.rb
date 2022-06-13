@@ -63,7 +63,22 @@ class Public::GroupsController < Public::ApplicationController
 
   ## グループチャット部屋
   def room
+    # グループの取得
     @group = Group.find(params[:group_id])
+    # メッセージの取得
+    @messages = @group.group_messages.last(10)
+    # メッセージのインスタンス作成
+    @message = GroupMessage.new
+  end
+
+  ## グループチャット部屋(ログ)
+  def room_log
+    # グループの取得
+    @group = Group.find(params[:group_id])
+    # メッセージの取得
+    @messages = @group.group_messages.page(params[:page])
+    # メッセージのインスタンス作成
+    @message = GroupMessage.new
   end
 
   # パラメーターの許可
