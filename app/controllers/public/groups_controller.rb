@@ -11,6 +11,12 @@ class Public::GroupsController < Public::ApplicationController
     @tags=TagGroup.group_count.first(20)
   end
 
+  ## グループ一覧
+  def index_customer
+    # 全グループを更新順で取得
+    @groups = Group.latest.where(customer_id: params[:customer_id]).page(params[:page])
+  end
+
   ## グループ詳細
   def show
     # グループの取得
@@ -30,7 +36,7 @@ class Public::GroupsController < Public::ApplicationController
     # パラメーターの取得
     @group = Group.new(group_params)
     # オーナーにする
-    @group.owner_id = current_customer.id
+    @group.customer_id = current_customer.id
     # 受け取った値を,で区切って配列にし、uniqで同じものを一つにする
     @tag_lists=params[:group][:tag_name].delete(' ').delete('　').split(',').uniq
     # each文で回す
@@ -163,7 +169,7 @@ class Public::GroupsController < Public::ApplicationController
 
   def ensure_correct_user
     @group = Group.find(params[:id])
-    unless @group.owner_id == current_customer.id
+    unless @group.customer_id == current_customer.id
       redirect_to groups_path, notice: 'オーナーでないと編集できません'
     end
   end

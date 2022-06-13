@@ -1,0 +1,6 @@
+<% if group.group_favorited_by?(current_customer) %>
+    <%= link_to "♥",group_group_favorites_path(group), method: :delete, class: "favorite-red" %>
+<% else %>
+    <%= link_to "♥", group_group_favorites_path(group), method: :group, class: "favorite-black" %>
+<% end %>
+<%= link_to "#{group.group_favorites.count}お気に入り", group_group_favorites_path(group), class: "btn btn-favorite" %>

@@ -12,6 +12,9 @@ class Customer < ApplicationRecord
   has_many :posts, dependent: :destroy
   has_many :post_comments, dependent: :destroy
   has_many :post_favorites, dependent: :destroy
+  has_many :groups, dependent: :destroy
+  has_many :group_favorites, dependent: :destroy
+
 
   # DM機能
   has_many :messages, dependent: :destroy
