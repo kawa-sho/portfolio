@@ -28,16 +28,18 @@ class Public::PostsController < Public::ApplicationController
   def edit
     # 投稿を取得
     @post = Post.find(params[:id])
+    # フォームに入れるため
+    @tag_lists= @post.tag_posts.pluck(:name).join(',')
   end
 
   ## 更新
   def update
     # 受け取った値を,で区切って配列にし、uniqで同じものを一つにする
-    tag_lists=params[:post][:name].delete(' ').delete('　').split(',').uniq
+    @tag_lists=params[:post][:name].delete(' ').delete('　').split(',').uniq
     # 投稿に紐づいているすべてのタグを削除
     @post.tag_posts.destroy_all
     # each文で回す
-    tag_lists.each do |tag_list|
+    @tag_lists.each do |tag_list|
       # TagPostのインスタンスを作る
       new_tag = TagPost.find_or_initialize_by(name: tag_list)
       # タグの保存
@@ -71,7 +73,7 @@ class Public::PostsController < Public::ApplicationController
     # タグに紐づいている投稿がなくなっていた場合タグの削除メソッド
     Post.tag_delete
     # 会員詳細へ
-    redirect_to customer_path(current_customer),notice: "投稿情報を削除しました"
+    redirect_to customer_path(current_customer),alert: "投稿情報を削除しました"
   end
 
   ## 全投稿削除
@@ -99,9 +101,9 @@ class Public::PostsController < Public::ApplicationController
     # 投稿のインスタンスにログインしている会員のidを渡す
     @post.customer_id = current_customer.id
     # 受け取った値を,で区切って配列にし、uniqで同じものを一つにする
-    tag_lists=params[:post][:name].delete(' ').delete('　').split(',').uniq
+    @tag_lists=params[:post][:name].delete(' ').delete('　').split(',').uniq
     # each文で回す
-    tag_lists.each do |tag_list|
+    @tag_lists.each do |tag_list|
       # TagPostのインスタンスを作る
       new_tag = TagPost.find_or_initialize_by(name: tag_list)
       # タグの保存

@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2022_06_12_050221) do
+ActiveRecord::Schema.define(version: 2022_06_13_143249) do
 
   create_table "active_storage_attachments", force: :cascade do |t|
     t.string "name", null: false
@@ -81,10 +81,32 @@ ActiveRecord::Schema.define(version: 2022_06_12_050221) do
     t.datetime "updated_at", precision: 6, null: false
   end
 
+  create_table "group_favorites", force: :cascade do |t|
+    t.integer "customer_id"
+    t.integer "group_id"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+  end
+
+  create_table "group_messages", force: :cascade do |t|
+    t.integer "customer_id"
+    t.integer "group_id"
+    t.text "message"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+  end
+
+  create_table "group_tag_groups", force: :cascade do |t|
+    t.integer "group_id"
+    t.integer "tag_group_id"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+  end
+
   create_table "groups", force: :cascade do |t|
+    t.integer "customer_id"
     t.string "name"
     t.text "introduction"
-    t.integer "owner_id"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
   end
@@ -135,6 +157,12 @@ ActiveRecord::Schema.define(version: 2022_06_12_050221) do
   end
 
   create_table "rooms", force: :cascade do |t|
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+  end
+
+  create_table "tag_groups", force: :cascade do |t|
+    t.string "name"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
   end

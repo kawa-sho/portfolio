@@ -12,6 +12,9 @@ class Customer < ApplicationRecord
   has_many :posts, dependent: :destroy
   has_many :post_comments, dependent: :destroy
   has_many :post_favorites, dependent: :destroy
+  has_many :groups, dependent: :destroy
+  has_many :group_favorites, dependent: :destroy
+
 
   # DM機能
   has_many :messages, dependent: :destroy
@@ -27,6 +30,7 @@ class Customer < ApplicationRecord
 
   # グループ関連
   has_many :group_customers
+  has_many :group_messages
 
   # active storageでの画像追加
   has_one_attached :profile_image

@@ -1,0 +1,2 @@
+module Public::GroupFavoritesHelper
+end
