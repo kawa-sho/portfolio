@@ -1,0 +1,40 @@
+<% groups.each do |group| %>
+  <table class='table m-auto col-md-10 col-12'>
+    <thead>
+      <tr class="thead-bg">
+        <th class="col-1">グループ名</th>
+        <th class="col-4"></th>
+        <th class="col-5 none">グループ紹介</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr class="group-table" onclick="window.location.href='<%= admin_group_path(group) %>'" onmouseover="this.style.backgroundColor='#c2ebf2'" onmouseout="this.style.backgroundColor='#f0fcff'">
+        <td>
+          <%= image_tag group.get_group_image, size: '70x70' %>
+        </td>
+        <td>
+          <h5 class="col-9">
+            <%= group.name %>
+          </h5>
+        </td>
+        <td class="none">
+          <%= group.introduction %>
+        </td>
+      </tr>
+      <% unless group.tag_groups.count == 0 %>
+        <tr class= "group-table">
+          <td colspan="3">
+            <% group.tag_groups.each do |tag| %>
+              <%= link_to admin_tag_search_path(tag_group_id: tag.id), class: "btn btn-tag my-1" do%>
+                <%= tag.name %>
+              <% end %>
+            <% end %>
+          </td>
+        </tr>
+      <% end %>
+      <tr class= "table-borderless">
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+<% end %>

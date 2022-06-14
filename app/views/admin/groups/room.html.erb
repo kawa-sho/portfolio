@@ -1,0 +1,14 @@
+<div class='container px-5 px-sm-0'>
+  <div class="row mt-5">
+    <h2 class="midashi">
+      <%= @group.name %>のグループ部屋
+    </h2>
+  </div>
+  <div class="col-11">
+    <div class="text-md-right text-center">
+      <%=link_to "グループ一覧へ", admin_groups_path, class: "btn btn-success px-5 py-2 mb-1" %>
+      <%=link_to "ログを確認する", admin_group_room_log_path(@group), class: "btn btn-success px-5 py-2 mb-1" %>
+    </div>
+  </div>
+  <%= render "admin/rooms/show", messages: @messages %>
+</div>

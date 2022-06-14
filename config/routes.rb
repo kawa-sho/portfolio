@@ -44,6 +44,10 @@ Rails.application.routes.draw do
       get '/post_comments' => 'post_comments#index'
       # 会員ごとのコメント全削除機能
       delete '/post_comments' => 'post_comments#destroy_all'
+      # 会員ごとのお気に入りグループ一覧ページ
+      get '/group_favorites' => 'group_favorites#index_customer'
+      # 会員ごとの作成したグループ一覧ページ
+      get '/groups' => 'groups#index_customer'
       # フォロー一覧ページ
       get 'followings' => 'relationships#followings', as: 'followings'
       # フォロワー一覧ページ
@@ -63,6 +67,21 @@ Rails.application.routes.draw do
 
     ## 投稿タグ検索機能
     get "tag_search"=>"posts#tag_search"
+
+    ## グループ機能
+    # 投稿検索機能
+    get 'group_search' => 'groups#search'
+    # グループ一覧、詳細、削除機能
+    resources :groups, only: [:index,:show,:destroy] do
+      # グループチャット部屋
+      get 'room' => 'groups#room'
+      get 'room_log' => 'groups#room_log'
+      # 投稿ごとのいいね一覧ページ
+      get 'group_favorites' => 'group_favorites#index'
+    end
+
+    ## グループタグ検索機能
+    get "group_tag_search"=>"groups#tag_search"
 
   end
 

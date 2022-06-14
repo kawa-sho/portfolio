@@ -12,5 +12,5 @@ ja:
       admin:
         email: メールアドレス
       group:
-        name: 名前
+        name: グループ名
         introduction: グループ紹介
