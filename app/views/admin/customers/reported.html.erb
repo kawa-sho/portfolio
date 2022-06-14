@@ -1,0 +1,14 @@
+<div class='container px-5 px-sm-0'>
+  <div class="row mt-5">
+    <h2 class="midashi">通報一覧ページ</h2>
+  </div>
+  <div class="col-11 text-right mb-3">
+    <%= link_to admin_customer_path(@customer), class: "btn btn-success" do %>
+      会員詳細に戻る
+    <% end %>
+  </div>
+  <div class='row'>
+    <%= render 'admin/customers/reported', reported: @reported %>
+  </div>
+  <%= paginate @reported %>
+</div>

@@ -5,4 +5,7 @@ class Report < ApplicationRecord
 
   # バリデーション
   validates :message, length: {minimum: 2, maximum: 200}
+
+  # 並べ替え
+  scope :latest, -> {order(created_at: :desc)}
 end

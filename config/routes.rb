@@ -35,7 +35,7 @@ Rails.application.routes.draw do
     # 会員検索機能
     get 'customer_search' => 'homes#search'
     # 会員詳細ページ　編集ページ　更新機能
-    resources :customers, only: [:show, :edit, :update] do
+    resources :customers, only: [:index, :show, :edit, :update] do
       # 会員ごとの投稿全削除機能
       delete '/posts/destroy_all' => 'posts#destroy_all', as: 'destroy_all'
       # 会員ごとのいいね一覧ページ
@@ -52,6 +52,8 @@ Rails.application.routes.draw do
       get 'followings' => 'relationships#followings', as: 'followings'
       # フォロワー一覧ページ
       get 'followers' => 'relationships#followers', as: 'followers'
+      # 通報一覧ページ
+      get 'reported' => 'customers#reported', as: 'reported'
     end
 
     ## 投稿関連
