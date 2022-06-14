@@ -38,7 +38,7 @@ class Admin::CustomersController < Admin::ApplicationController
     end
   end
 
-  ## 通報一覧ページ
+  ## 会員ごとの通報一覧ページ
   def reported
     # 会員を取得
     @customer = Customer.find(params[:customer_id])

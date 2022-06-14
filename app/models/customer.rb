@@ -76,7 +76,9 @@ class Customer < ApplicationRecord
   end
   # フォローを外すときの処理
   def unfollow(customer_id)
-    relationships.find_by(followed_id: customer_id).destroy
+    if follow = relationships.find_by(followed_id: customer_id)
+      follow.destroy
+    end
   end
   # フォローしているか判定
   def following?(customer)
