@@ -117,6 +117,8 @@ Rails.application.routes.draw do
       get 'followings' => 'relationships#followings', as: 'followings'
       # フォロワー一覧ページ
       get 'followers' => 'relationships#followers', as: 'followers'
+      # 通報作成
+      resource :reports, only: [:new,:create]
     end
 
     ## 投稿関連ページ

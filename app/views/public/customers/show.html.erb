@@ -53,6 +53,13 @@
         <%= link_to "いいね一覧", customer_post_favorites_path(@customer), class: "btn btn-success offset-md-1 col-md-4 my-md-3 my-3" %>
         <%= link_to "コメント一覧", customer_post_comments_path(@customer), class: "btn btn-success offset-md-2 col-md-4 my-md-3 mb-3" %>
       </div>
+      <% if @customer != current_customer %>
+        <% if @customer.name != "guestcustomer" %>
+          <div class="row col-8 mx-auto">
+            <%= link_to "通報する", new_customer_reports_path(@customer), class: "btn btn-danger col-md-4 col-8 m-auto" %>
+          </div>
+        <% end %>
+      <% end %>
     </div>
     <div class="row col-12">
       <h3 class="midashi my-3 mx-auto"><%= @customer.name %>の投稿一覧</h3>

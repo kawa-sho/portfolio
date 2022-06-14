@@ -4,6 +4,7 @@ ja:
       customer: 会員
       admin: 管理者
       group: グループ
+      report: 通報
     attributes:
       customer:
         name: ニックネーム
@@ -14,3 +15,5 @@ ja:
       group:
         name: グループ名
         introduction: グループ紹介
+      report:
+        message: 通報理由
