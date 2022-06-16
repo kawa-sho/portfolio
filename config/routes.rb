@@ -35,7 +35,7 @@ Rails.application.routes.draw do
     # 会員検索機能
     get 'customer_search' => 'homes#search'
     # 会員詳細ページ　編集ページ　更新機能
-    resources :customers, only: [:show, :edit, :update] do
+    resources :customers, only: [:index, :show, :edit, :update] do
       # 会員ごとの投稿全削除機能
       delete '/posts/destroy_all' => 'posts#destroy_all', as: 'destroy_all'
       # 会員ごとのいいね一覧ページ
@@ -44,10 +44,16 @@ Rails.application.routes.draw do
       get '/post_comments' => 'post_comments#index'
       # 会員ごとのコメント全削除機能
       delete '/post_comments' => 'post_comments#destroy_all'
+      # 会員ごとのお気に入りグループ一覧ページ
+      get '/group_favorites' => 'group_favorites#index_customer'
+      # 会員ごとの作成したグループ一覧ページ
+      get '/groups' => 'groups#index_customer'
       # フォロー一覧ページ
       get 'followings' => 'relationships#followings', as: 'followings'
       # フォロワー一覧ページ
       get 'followers' => 'relationships#followers', as: 'followers'
+      # 通報一覧ページ
+      get 'reported' => 'customers#reported', as: 'reported'
     end
 
     ## 投稿関連
@@ -63,6 +69,21 @@ Rails.application.routes.draw do
 
     ## 投稿タグ検索機能
     get "tag_search"=>"posts#tag_search"
+
+    ## グループ機能
+    # 投稿検索機能
+    get 'group_search' => 'groups#search'
+    # グループ一覧、詳細、削除機能
+    resources :groups, only: [:index,:show,:destroy] do
+      # グループチャット部屋
+      get 'room' => 'groups#room'
+      get 'room_log' => 'groups#room_log'
+      # 投稿ごとのいいね一覧ページ
+      get 'group_favorites' => 'group_favorites#index'
+    end
+
+    ## グループタグ検索機能
+    get "group_tag_search"=>"groups#tag_search"
 
   end
 
@@ -98,6 +119,8 @@ Rails.application.routes.draw do
       get 'followings' => 'relationships#followings', as: 'followings'
       # フォロワー一覧ページ
       get 'followers' => 'relationships#followers', as: 'followers'
+      # 通報作成
+      resource :reports, only: [:new,:create]
     end
 
     ## 投稿関連ページ

@@ -11,7 +11,7 @@ class Public::GroupsController < Public::ApplicationController
     @tags=TagGroup.group_count.first(20)
   end
 
-  ## グループ一覧
+  ## 会員ごとのグループ一覧
   def index_customer
     # 全グループを更新順で取得
     @groups = Group.latest.where(customer_id: params[:customer_id]).page(params[:page])
@@ -23,6 +23,8 @@ class Public::GroupsController < Public::ApplicationController
     @group = Group.find(params[:id])
     # 取得したグループに対してのタグを取得
     @group_tags = @group.tag_groups
+    # 会員の取得
+    @customers = Customer.where(id: @group.customer_id)
   end
 
   ## 新規グループ
@@ -142,7 +144,7 @@ class Public::GroupsController < Public::ApplicationController
     # タグを紐づいているグループが多い順に２０個取得
     @tags = TagGroup.group_count.first(20)
     # 会員一覧へ
-    render "index"
+    render :index
   end
 
   ## タグ検索

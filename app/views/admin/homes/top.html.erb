@@ -2,6 +2,11 @@
   <div class="row mt-5">
     <h2 class="midashi">会員一覧ページ</h2>
   </div>
+  <div class="col-11 text-right mb-3">
+    <%= link_to admin_customers_path, class: "btn btn-success" do %>
+      通報されたのが多い順で見る
+    <% end %>
+  </div>
   <%= form_with url: admin_customer_search_path, method: :get do |f| %>
     <div class="row mb-2 mx-auto">
       <%= f.text_field :keyword, class: "form-control offset-md-7 offset-1 col-md-3 col-7", placeholder: "会員を検索" %>
@@ -13,8 +18,10 @@
       <h5 class="text-center offset-8 col-4"><%= @keyword %>で検索中</h5>
     </div>
   <% end %>
-  <div class='row m-auto'>
+  <div id="customer_index_area" class='row m-auto'>
     <%= render "admin/customers/index", customers: @customers %>
   </div>
-    <%= paginate @customers %>
+  <div id="customer_index_paginate_area" class='d-inline'>
+    <%= paginate @customers, remote: true %>
+  </div>
 </div>

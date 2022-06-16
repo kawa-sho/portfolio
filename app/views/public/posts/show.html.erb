@@ -35,7 +35,9 @@
       </tr>
       <tr>
         <td class="text-right">
-          <%= render 'public/post_favorites/favorite', post: @post %>
+          <div id="favorite_buttons_<%= @post.id %>" class="d-inline">
+            <%= render 'public/post_favorites/favorite', post: @post %>
+          </div>
           <%= render 'public/post_comments/count', post: @post %>
           <% if @post.customer_id == current_customer.id %>
             <%= link_to "削除", post_path(@post), method: :delete, data: { confirm: '本当に消しますか？' }, class: "btn btn-danger" %>

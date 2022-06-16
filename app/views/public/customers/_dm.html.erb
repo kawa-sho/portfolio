@@ -1,7 +1,11 @@
 <% if customer.id == current_customer.id %>
   <tr>
     <td class="text-right">
-      <%= link_to "新着メッセージへ", messages_path, class: "btn btn-primary" %>
+      <% if messages.count == 0 %>
+        <%= link_to "新着メッセージへ", messages_path, class: "btn btn-primary" %>
+      <% else %>
+        <%= link_to "新着メッセージがあります", messages_path, class: "btn btn-danger" %>
+      <% end %>
       <%= link_to "DMルーム一覧へ", rooms_path, class: "btn btn-primary" %>
     </td>
   </tr>

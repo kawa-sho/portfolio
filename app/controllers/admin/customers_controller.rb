@@ -1,6 +1,16 @@
 class Admin::CustomersController < Admin::ApplicationController
   before_action :authenticate_admin!
 
+  ## 通報されたのが多い順
+  def index
+    # 通報されたのが多い順で取得
+     @pages = Report.group(:reported_id).order('count(reported_id) desc').page(params[:page])
+     @customers = Customer.find(@pages.pluck(:reported_id))
+     @none = true
+     @page = params[:page]
+    # @customers = Customer.sort_by{|x|x.reported.count}.reverse.page(params[:page])
+  end
+
   ## 会員詳細
   def show
     # 会員を取得
@@ -27,6 +37,14 @@ class Admin::CustomersController < Admin::ApplicationController
       # 会員編集へ
       render :edit
     end
+  end
+
+  ## 会員ごとの通報一覧ページ
+  def reported
+    # 会員を取得
+    @customer = Customer.find(params[:customer_id])
+    # 通報を取得
+    @reported = @customer.reported.latest.page(params[:page])
   end
 
 

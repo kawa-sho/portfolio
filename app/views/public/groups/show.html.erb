@@ -35,7 +35,9 @@
       </tr>
       <tr>
         <td class="text-right">
-          <%= render 'public/group_favorites/favorite', group: @group %>
+          <div id="favorite_buttons_<%= @group.id %>" class="d-inline">
+            <%= render 'public/group_favorites/favorite', group: @group %>
+          </div>
           <% if @group.customer_id == current_customer.id %>
             <%= link_to "削除", group_path(@group), method: :delete, data: { confirm: '本当に消しますか？' }, class: "btn btn-danger" %>
           <% end %>
@@ -50,5 +52,11 @@
   </table>
   <div class="col-10 offset-1 mt-2 text-right">
     <%= link_to "ルームに入る", group_room_path(group_id: @group), class: "btn btn-success" %>
+  </div>
+  <div class="row col-12">
+    <h3 class="midashi my-3 mx-auto">オーナー</h3>
+  </div>
+  <div class='row m-auto'>
+    <%= render "public/customers/index", customers: @customers %>
   </div>
 </div>

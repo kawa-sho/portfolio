@@ -1,0 +1,11 @@
+<div class='container px-5 px-sm-0'>
+  <div class="row mt-5">
+    <h2 class="midashi">通報されたのが多い順</h2>
+  </div>
+  <div id="customer_index_area" class='row m-auto'>
+    <%= render "admin/customers/index", customers: @customers, none: @none %>
+  </div>
+  <div id="customer_index_paginate_area" class='d-inline'>
+    <%= paginate @pages, remote: true %>
+  </div>
+</div>
