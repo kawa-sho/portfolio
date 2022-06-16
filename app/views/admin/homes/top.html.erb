@@ -18,8 +18,10 @@
       <h5 class="text-center offset-8 col-4"><%= @keyword %>で検索中</h5>
     </div>
   <% end %>
-  <div class='row m-auto'>
+  <div id="customer_index_area" class='row m-auto'>
     <%= render "admin/customers/index", customers: @customers %>
   </div>
-    <%= paginate @customers %>
+  <div id="customer_index_paginate_area" class='d-inline'>
+    <%= paginate @customers, remote: true %>
+  </div>
 </div>

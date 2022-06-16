@@ -35,7 +35,9 @@
       </tr>
       <tr>
         <td class="text-right">
-          <%= render 'public/group_favorites/favorite', group: @group %>
+          <div id="favorite_buttons_<%= @group.id %>" class="d-inline">
+            <%= render 'public/group_favorites/favorite', group: @group %>
+          </div>
           <% if @group.customer_id == current_customer.id %>
             <%= link_to "削除", group_path(@group), method: :delete, data: { confirm: '本当に消しますか？' }, class: "btn btn-danger" %>
           <% end %>

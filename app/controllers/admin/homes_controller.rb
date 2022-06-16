@@ -5,6 +5,8 @@ class Admin::HomesController < Admin::ApplicationController
   def top
     # 全会員情報をページで分けて取得
     @customers = Customer.page(params[:page])
+    # ページ
+    @page = params[:page]
   end
 
   ## 会員検索

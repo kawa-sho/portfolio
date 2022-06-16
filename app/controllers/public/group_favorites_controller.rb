@@ -30,8 +30,7 @@ class Public::GroupFavoritesController < Public::ApplicationController
       # お気に入りを削除
       group_favorite.destroy
     end
-    # 前のページへ
-    redirect_to request.referer, notice: "お気に入りを削除しました"
+    render :favorite
   end
 
   ## お気に入り作成
@@ -42,8 +41,7 @@ class Public::GroupFavoritesController < Public::ApplicationController
     group_favorite = current_customer.group_favorites.new(group_id: @group.id)
     # お気に入りを保存
     group_favorite.save
-    # 前のページへ
-    redirect_to request.referer, notice: "お気に入りを作成しました"
+    render :favorite
   end
 
 end
