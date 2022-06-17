@@ -1,0 +1,3 @@
+$('#post_comment_area').html("<%= j(render 'admin/post_comments/index', comments: @comments) %>");
+history.replaceState( "", "" ,"?page=<%= @page %>");
+$('#flash-message').html("<%= j(render 'layouts/flash') %>");

@@ -1,9 +1,10 @@
-<%= render 'layouts/errors', obj: @post_comment %>
+<%= render 'layouts/errors', obj: post_comment %>
 <div class='container'>
   <div class='row'>
     <div class="col-sm-12 col-md-8 col-lg-5 px-5 px-sm-0 mx-auto">
       <h2 class="text-center py-2 midashi my-5">コメント投稿</h2>
-      <%= form_with model: [post, post_comment] do |f| %>
+      <%= form_with model: [post, post_comment], local: false do |f| %>
+        <%= f.hidden_field :page, value: page %>
         <%= f.text_area :comment,size: "10x", class: "form-control introduction", maxlength: '200' %><br>
         <div class="form-group text-right">
           <%= f.submit "送信", class: 'btn btn-success py-2 px-3 mb-5 mt-2' %>
