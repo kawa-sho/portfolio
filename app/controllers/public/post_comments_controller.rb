@@ -17,8 +17,16 @@ class Public::PostCommentsController < Public::ApplicationController
   def destroy
     # コメントを取得し削除
     PostComment.find(params[:id]).destroy
-    # ページを戻す
-    redirect_to request.referer,notice: "コメントを削除しました"
+    # アラート
+    flash.now[:alert] = 'コメントを削除しました'
+    # 投稿を取得
+    @post = Post.find(params[:post_id])
+    # 取得した投稿に対しての全コメントをページごとに取得
+    @comments = @post.post_comments.page(params[:page]).per(5)
+    # フォームのため
+    @post_comment = PostComment.new
+    # ページの取得
+    @page = params[:page]
   end
 
   ## コメント全削除
@@ -34,18 +42,22 @@ class Public::PostCommentsController < Public::ApplicationController
   ## コメント作成
   def create
     # 投稿を取得
-    post = Post.find(params[:post_id])
+    @post = Post.find(params[:post_id])
     # コメントインスタンスを作成しcustomer_idを渡して、パラメータの受け取り
-    post_comment = current_customer.post_comments.new(post_comment_params)
+    @post_comment = current_customer.post_comments.new(post_comment_params)
     # コメントインスタンスにpost_idを渡す
-    post_comment.post_id = post.id
+    @post_comment.post_id = @post.id
+    # 取得した投稿に対しての全コメントをページごとに取得
+    @comments = @post.post_comments.page(params[:post_comment][:page]).per(5)
+    # ページの取得
+    @page = params[:post_comment][:page]
     # コメントを保存
-    if post_comment.save
+    if @post_comment.save
       # 前のページへ
-      redirect_to request.referer,notice: "コメントをしました"
+      flash.now[:notice] = 'コメントをしました'
+      @post_comment = PostComment.new
     else
-      # 前のページへ
-      redirect_to request.referer,alert: "コメント数は2~200文字までです"
+      render :create_none
     end
   end
 

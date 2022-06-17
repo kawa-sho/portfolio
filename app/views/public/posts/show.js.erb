@@ -1,0 +1,4 @@
+$('#post_comment_area').html("<%= j(render 'public/post_comments/index', comments: @comments) %>");
+$('#post_comment_form_area').html("<%= j(render 'public/post_comments/form', post: @post, post_comment: @post_comment, page: @page) %>");
+$('#post_comment_paginate_area').html("<%= j(paginate @comments, remote: true) %>");
+history.replaceState( "", "" ,"?page=<%= @page %>");

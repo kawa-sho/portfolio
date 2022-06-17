@@ -1,0 +1,3 @@
+$('#post_comment_area').html("<%= j(render 'admin/post_comments/index', comments: @comments) %>");
+$('#post_comment_paginate_area').html("<%= j(paginate @comments, remote: true) %>");
+history.replaceState( "", "" ,"?page=<%= @page %>");

@@ -17,6 +17,8 @@ class Admin::PostsController < Admin::ApplicationController
     @post_tags = @post.tag_posts
     # 取得した投稿に対しての全コメントをページごとに取得
     @comments = @post.post_comments.page(params[:page]).per(5)
+    # ページの取得
+    @page = params[:page]
   end
 
   ## 投稿削除
