@@ -55,16 +55,12 @@
     <h3 class="midashi my-3 mx-auto">コメント</h3>
   </div>
   <div>
-    <% if @comments.exists? %>
-      <div id="post_comment_area" class='row'>
-        <%= render 'public/post_comments/index', comments: @comments %>
-      </div>
-      <div id="post_comment_paginate_area" class='d-inline'>
-        <%= paginate @comments, remote: true %>
-      </div>
-    <% else %>
-      <h2 class="deta-none mt-3 text-center">コメントが存在しません</h2>
-    <% end %>
+    <div id="post_comment_area" class='row'>
+      <%= render 'public/post_comments/index', comments: @comments %>
+    </div>
+    <div id="post_comment_paginate_area" class='d-inline'>
+      <%= paginate @comments, remote: true %>
+    </div>
   </div>
   <div id="post_comment_form_area">
     <%= render 'public/post_comments/form', post: @post, post_comment: @post_comment, page: @page %>

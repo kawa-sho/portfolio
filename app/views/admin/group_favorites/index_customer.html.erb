@@ -1,7 +1,7 @@
 <% unless @groups.nil? %>
   <div class='container px-5 px-sm-0'>
     <div class="row mt-5">
-      <h2 class="midashi"><%= @customer.name %>のいいね一覧ページ</h2>
+      <h2 class="midashi"><%= @customer.name %>のお気に入りグループ一覧ページ</h2>
     </div>
     <div class='row mt-5'>
       <%= render 'admin/groups/index', groups: @groups %>

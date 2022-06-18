@@ -1,3 +1,4 @@
 $('#post_comment_area').html("<%= j(render 'admin/post_comments/index', comments: @comments) %>");
 history.replaceState( "", "" ,"?page=<%= @page %>");
+$('#post_comment_paginate_area').html("<%= j(paginate @comments, remote: true, params: { controller: 'admin/posts', action: 'show', id: @post}) %>");
 $('#flash-message').html("<%= j(render 'layouts/flash') %>");

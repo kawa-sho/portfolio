@@ -11,6 +11,8 @@ class Public::PostCommentsController < Public::ApplicationController
     @customer = Customer.find(params[:customer_id])
     # 取得した会員のコメントを新しい順にページに分けて取得
     @comments = @customer.post_comments.latest.page(params[:page])
+    # コメント一覧かどうかの見極め
+    @index = true
   end
 
   ## コメント削除

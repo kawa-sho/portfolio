@@ -6,6 +6,7 @@ ja:
       group: グループ
       report: 通報
       post_comment: コメント
+      post: 投稿
     attributes:
       customer:
         name: ニックネーム
@@ -20,3 +21,5 @@ ja:
         message: 通報理由
       post_comment:
         comment: コメント
+      post:
+        post: 投稿

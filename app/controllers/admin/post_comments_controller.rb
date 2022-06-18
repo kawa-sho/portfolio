@@ -7,6 +7,8 @@ class Admin::PostCommentsController < Admin::ApplicationController
     @customer = Customer.find(params[:customer_id])
     # 取得した会員のコメントを新しい順にページに分けて取得
     @comments = @customer.post_comments.latest.page(params[:page])
+    # コメント一覧かどうかの見極め
+    @index = true
   end
 
   ## コメント削除
@@ -32,7 +34,7 @@ class Admin::PostCommentsController < Admin::ApplicationController
     # 取得したコメントを削除
     comments.destroy_all
     # コメント一覧へ
-    redirect_to admin_customer_post_comments_path(customer),notice: "投稿情報をすべて削除しました"
+    redirect_to admin_customer_post_comments_path(customer),alert: "投稿情報をすべて削除しました"
   end
 
 end

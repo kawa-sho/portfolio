@@ -8,10 +8,10 @@
       <%=link_to "コメントを全部削除する", admin_customer_post_comments_path, method: :delete, data: { confirm: '本当に消しますか？' }, class: "btn btn-danger px-5 py-2 mb-1 mt-3" %>
     </div>
   </div>
-  <table>
-    <%= render 'admin/post_comments/index', comments: @comments %>
-  </table>
-  <%= paginate @comments %>
+  <div>
+    <%= render 'admin/post_comments/index', comments: @comments, index: @index %>
+  </div>
+    <%= paginate @comments %>
 <% else %>
   <h2 class="deta-none">コメントをしている投稿がありません</h2>
 <% end %>
