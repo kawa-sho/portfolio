@@ -7,7 +7,7 @@
             <%= image_tag comment.customer.get_profile_image, size: '50x50' %>
             <%= comment.customer.name %>
           <% end %>
-          <%= link_to "削除", admin_post_post_comment_path(comment.post, comment), method: :delete, remote: true, data: { confirm: '本当に消しますか？' }, class: "btn btn-sm btn-danger" %>
+          <%= link_to "削除", admin_post_post_comment_path(comment.post, comment,page: params[:page]), method: :delete, remote: true, data: { confirm: '本当に消しますか？' }, class: "btn btn-sm btn-danger" %>
         </td>
       </tr>
       <tr>

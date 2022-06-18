@@ -51,6 +51,11 @@ class Public::PostCommentsController < Public::ApplicationController
     @comments = @post.post_comments.page(params[:post_comment][:page]).per(5)
     # ページの取得
     @page = params[:post_comment][:page]
+    #paginator = view_context.paginate(
+    #  @comments,
+    #  remote: true,
+    #  url: post_path(@post) # Kaminariのリンク先を変える
+    #)
     # コメントを保存
     if @post_comment.save
       # 前のページへ
