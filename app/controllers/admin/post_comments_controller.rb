@@ -13,8 +13,14 @@ class Admin::PostCommentsController < Admin::ApplicationController
   def destroy
     # コメントを取得し削除
     PostComment.find(params[:id]).destroy
-    # ページを戻す
-    redirect_to request.referer,notice: "コメントを削除しました"
+    # アラート
+    flash.now[:alert] = 'コメントを削除しました'
+    # 投稿を取得
+    @post = Post.find(params[:post_id])
+    # 取得した投稿に対しての全コメントをページごとに取得
+    @comments = @post.post_comments.page(params[:page]).per(5)
+    # ページの取得
+    @page = params[:page]
   end
 
   ## コメント全削除

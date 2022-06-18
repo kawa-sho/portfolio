@@ -30,8 +30,8 @@ class Public::PostFavoritesController < Public::ApplicationController
       # いいねを削除
       post_favorite.destroy
     end
-    # 前のページへ
-    redirect_to request.referer, notice: "いいねを削除しました"
+    # jsファイルのよみこみ
+    render :favorite
   end
 
   ## いいね作成
@@ -42,8 +42,8 @@ class Public::PostFavoritesController < Public::ApplicationController
     post_favorite = current_customer.post_favorites.new(post_id: @post.id)
     # いいねを保存
     post_favorite.save
-    # 前のページへ
-    redirect_to request.referer, notice: "いいねを作成しました"
+    # jsファイルのよみこみ
+    render :favorite
   end
 
 end

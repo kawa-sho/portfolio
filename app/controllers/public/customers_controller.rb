@@ -8,6 +8,8 @@ class Public::CustomersController < Public::ApplicationController
   def index
     #全会員を取得
     @customers = Customer.page(params[:page])
+    #ページを取得
+    @page = params[:page]
   end
 
   ## 会員詳細
@@ -16,6 +18,14 @@ class Public::CustomersController < Public::ApplicationController
     @customer = Customer.find(params[:id])
     # 取得した会員の投稿を新しい順にページごとに取得
     @posts = @customer.posts.latest.page(params[:page])
+    @page = params[:page]
+    # 新着メッセージがあるかないか
+    # 会員の取得
+    customer = current_customer
+    # 自分のエントリーを取得しルームIDを配列化
+    entrys = Entry.where(customer_id: customer.id).pluck(:room_id)
+    # るーむIDで未読のメッセージを新着順に取得
+    @messages = Message.where(room_id: entrys, is_active: true).where.not(customer_id: @customer.id)
 
     ## DM機能の作成
     # 自分のエントリー情報を抽出

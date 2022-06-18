@@ -1,0 +1,33 @@
+<div class='container px-5 px-sm-0'>
+  <div class="row mt-5">
+    <h2 class="midashi">グループ一覧ページ</h2>
+  </div>
+  <%= form_with url: admin_group_search_path, method: :get do |f| %>
+    <div class="row mb-2 mx-auto">
+      <%= f.text_field :keyword, class: "form-control offset-md-7 offset-1 col-md-3 col-7", placeholder: "グループを検索" %>
+      <%= f.submit "検索", class: "ml-1" %>
+    </div>
+  <% end %>
+  <% if @keyword %>
+    <div class='row'>
+      <h5 class="text-center offset-8 col-4"><%= @keyword %>で検索中</h5>
+    </div>
+  <% end %>
+  <div class='row'>
+    <% @tags.each do |tag|%>
+      <%= link_to admin_group_tag_search_path(tag_group_id: tag.id), class: "btn btn-tag m-2" do %>
+        <%= tag.name %>
+        <%= "(#{tag.groups.count})" %>
+      <% end %>
+    <% end %>
+  </div>
+  <% if @tag_keyword %>
+    <div class='row'>
+      <h5 class="text-center offset-8 col-4">タグ(<%= @tag_keyword %>)で検索中</h5>
+    </div>
+  <% end %>
+  <div class='row mt-3'>
+    <%= render 'admin/groups/index', groups: @groups %>
+  </div>
+  <%= paginate @groups %>
+</div>

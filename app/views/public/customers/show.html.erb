@@ -31,32 +31,31 @@
               </tr>
             <% end %>
           <% end %>
-          <% if @customer != current_customer %>
-            <tr>
-              <td>
-                <% if current_customer.following?(@customer) %>
-                  <%= link_to "フォロー外す", customer_relationships_path(@customer.id), method: :delete, class: "btn btn-block btn-danger col-md-5 col-8 m-auto" %>
-                <% else %>
-                  <%= link_to "フォローする", customer_relationships_path(@customer.id), method: :post, class: "btn btn-block btn-success col-md-5 col-8 m-auto" %>
-                <% end %>
-              </td>
-            </tr>
-          <% end %>
-          <%= render 'public/customers/dm', customer: @customer, isRoom: @isRoom, roomId: @roomId, room: @room, entry: @entry %>
+            <%= render 'public/relationships/follow', customer: @customer %>
+            <%= render 'public/customers/dm', customer: @customer, isRoom: @isRoom, roomId: @roomId, room: @room, entry: @entry, messages: @messages %>
         </tbody>
       </table>
+      <div class="row col-8 mx-auto">
+        <%= link_to "お気に入りグループ", customer_group_favorites_path(@customer), class: "btn btn-success offset-md-1 col-md-4 my-md-3 my-3" %>
+        <%= link_to "作成したグループ", customer_groups_path(@customer), class: "btn btn-success offset-md-2 col-md-4 my-md-3 mb-3" %>
+      </div>
       <div class="row col-8 mx-auto">
         <%= link_to "いいね一覧", customer_post_favorites_path(@customer), class: "btn btn-success offset-md-1 col-md-4 my-md-3 my-3" %>
         <%= link_to "コメント一覧", customer_post_comments_path(@customer), class: "btn btn-success offset-md-2 col-md-4 my-md-3 mb-3" %>
       </div>
+      <% if @customer != current_customer %>
+        <% if @customer.name != "guestcustomer" %>
+          <div class="row col-8 mx-auto">
+            <%= link_to "通報する", new_customer_reports_path(@customer), class: "btn btn-danger col-md-4 col-8 m-auto" %>
+          </div>
+        <% end %>
+      <% end %>
     </div>
     <div class="row col-12">
       <h3 class="midashi my-3 mx-auto"><%= @customer.name %>の投稿一覧</h3>
     </div>
     <% if @posts.exists? %>
-      <div class='row'>
-        <%= render 'public/posts/index', posts: @posts %>
-      </div>
+      <%= render 'public/posts/index', posts: @posts %>
       <%= paginate @posts %>
     <% else %>
       <h2 class="deta-none text-center mt-3"><%= @customer.name %>の投稿が存在しません</h2>

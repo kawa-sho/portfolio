@@ -4,6 +4,8 @@ ja:
       customer: 会員
       admin: 管理者
       group: グループ
+      report: 通報
+      post_comment: コメント
     attributes:
       customer:
         name: ニックネーム
@@ -12,5 +14,9 @@ ja:
       admin:
         email: メールアドレス
       group:
-        name: 名前
+        name: グループ名
         introduction: グループ紹介
+      report:
+        message: 通報理由
+      post_comment:
+        comment: コメント

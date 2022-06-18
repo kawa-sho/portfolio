@@ -1,0 +1,3 @@
+$('#customer_index_area').html("<%= j(render "public/customers/index", customers: @customers) %>");
+$('#customer_index_paginate_area').html("<%= j(paginate @customers, remote: true) %>");
+history.replaceState( "", "" ,"?page=<%= @page %>");

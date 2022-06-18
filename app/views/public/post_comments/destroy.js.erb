@@ -1,0 +1,5 @@
+$('#post_comment_area').html("<%= j(render 'public/post_comments/index', comments: @comments) %>");
+$('#post_comment_form_area').html("<%= j(render 'public/post_comments/form', post: @post, post_comment: @post_comment, page: @page) %>");
+history.replaceState( "", "" ,"?page=<%= @page %>");
+$('#post_comment_paginate_area').html("<%= j(paginate @comments, remote: true, params: { controller: 'public/posts', action: 'show', id: @post}) %>");
+$('#flash-message').html("<%= j(render 'layouts/flash') %>");

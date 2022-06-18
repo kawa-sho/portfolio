@@ -29,6 +29,7 @@
           <td>
             <%= link_to "フォロー数: #{@customer.followings.count}",admin_customer_followings_path(@customer), class: "btn btn-favorite" %>
             <%= link_to "フォロワー数: #{@customer.followers.count}",admin_customer_followers_path(@customer), class: "btn btn-favorite" %>
+            <%= link_to "通報一覧: #{@customer.reported.count}",admin_customer_reported_path(@customer), class: "btn btn-favorite" %>
           </td>
         </tr>
         <% if @customer.name != "guestcustomer" %>
@@ -38,6 +39,10 @@
         <% end %>
       </tbody>
     </table>
+    <div class="row col-8 mx-auto">
+      <%= link_to "お気に入りグループ", admin_customer_group_favorites_path(@customer), class: "btn btn-success offset-md-1 col-md-4 my-md-3 my-3" %>
+      <%= link_to "作成したグループ", admin_customer_groups_path(@customer), class: "btn btn-success offset-md-2 col-md-4 my-md-3 mb-3" %>
+    </div>
     <div class="row col-8 mx-auto">
       <%= link_to "いいね一覧", admin_customer_post_favorites_path(@customer), class: "btn btn-success offset-md-1 col-md-4 my-md-3 my-3" %>
       <%= link_to "コメント一覧", admin_customer_post_comments_path(@customer), class: "btn btn-success offset-md-2 col-md-4 my-md-3 mb-3" %>

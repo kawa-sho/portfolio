@@ -1,0 +1,23 @@
+<% reported.each do |report| %>
+  <table class='table mx-auto table-bordered col-10'>
+    <tbody>
+      <tr>
+        <td class="text-center thead-bg">
+          <%= link_to admin_customer_path(report.reports_id), class:"py-3 link-color" do %>
+            通報した人
+            <%= image_tag report.reports.get_profile_image, size: '50x50' %>
+            <%= report.reports.name %>
+          <% end %>
+        </td>
+      </tr>
+      <tr>
+        <td><%= report.message %></td>
+      </tr>
+      <tr>
+        <td class="text-right">
+          <%= report.created_at.to_s(:datetime_jp) %>
+        </td>
+      </tr>
+    </tbody>
+  </table>
+<% end %>

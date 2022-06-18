@@ -12,6 +12,9 @@ class Customer < ApplicationRecord
   has_many :posts, dependent: :destroy
   has_many :post_comments, dependent: :destroy
   has_many :post_favorites, dependent: :destroy
+  has_many :groups, dependent: :destroy
+  has_many :group_favorites, dependent: :destroy
+
 
   # DM機能
   has_many :messages, dependent: :destroy
@@ -27,10 +30,17 @@ class Customer < ApplicationRecord
 
   # グループ関連
   has_many :group_customers
+  has_many :group_messages
+
+  # 通報機能
+  has_many :reports, class_name: "Report", foreign_key: "reports_id", dependent: :destroy
+  has_many :reported, class_name: "Report", foreign_key: "reported_id", dependent: :destroy
 
   # active storageでの画像追加
   has_one_attached :profile_image
 
+  # 並べ替え
+  scope :latest, -> {order(reported: :desc)}
 
   # バリデーション
   validates :introduction, length: { maximum: 100 }
@@ -66,7 +76,9 @@ class Customer < ApplicationRecord
   end
   # フォローを外すときの処理
   def unfollow(customer_id)
-    relationships.find_by(followed_id: customer_id).destroy
+    if follow = relationships.find_by(followed_id: customer_id)
+      follow.destroy
+    end
   end
   # フォローしているか判定
   def following?(customer)
