@@ -2,3 +2,4 @@ $('#post_comment_area').html("<%= j(render 'public/post_comments/index', comment
 $('#post_comment_form_area').html("<%= j(render 'public/post_comments/form', post: @post, post_comment: @post_comment, page: @page) %>");
 $('#post_comment_paginate_area').html("<%= j(paginate @comments, remote: true) %>");
 history.replaceState( "", "" ,"?page=<%= @page %>");
+$('#flash-message').html("<%= j(render 'layouts/flash') %>");
