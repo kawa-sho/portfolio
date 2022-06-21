@@ -128,10 +128,10 @@ RSpec.describe 'Customerモデルのテスト', type: :model do
     it '何も画像が登録されていない場合' do
       expect(customer.get_profile_image).to eq 'no_image.jpg'
     end
-      # it '画像が変更された場合' do
-      #   customer.profile_image = fixture_file_upload("test.jpg", content_type: 'image/*')
-      #   expect(customer.get_profile_image).to eq 'test.jpg'
-      # end
+      it '画像が変更された場合' do
+        customer.profile_image = fixture_file_upload("test.jpg", content_type: 'image/*')
+        expect(customer.get_profile_image.filename.to_s).to eq 'test.jpg'
+      end
   end
 
   describe 'メソッドのテスト' do
@@ -179,17 +179,12 @@ RSpec.describe 'Customerモデルのテスト', type: :model do
         expect(Relationship.last.followed_id).to eq second_customer.id
       end
       it 'unfollow(customer_id)' do
-        expect(Relationship.last.follower_id).to eq fast_customer.id
-        expect(Relationship.last.followed_id).to eq second_customer.id
         fast_customer.unfollow(second_customer.id)
         expect(Relationship.last).to eq nil
       end
       it 'following?(customer)' do
-        expect(Relationship.last.follower_id).to eq fast_customer.id
-        expect(Relationship.last.followed_id).to eq second_customer.id
         expect(fast_customer.following?(second_customer)).to eq true
         fast_customer.unfollow(second_customer.id)
-        expect(Relationship.last).to eq nil
         expect(fast_customer.following?(second_customer)).to eq false
       end
     end
