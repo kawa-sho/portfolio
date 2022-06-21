@@ -39,9 +39,6 @@ class Customer < ApplicationRecord
   # active storageでの画像追加
   has_one_attached :profile_image
 
-  # 並べ替え
-  scope :latest, -> {order(reported: :desc)}
-
   # バリデーション
   validates :introduction, length: { maximum: 100 }
 

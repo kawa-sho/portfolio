@@ -8,4 +8,9 @@ class Report < ApplicationRecord
 
   # 並べ替え
   scope :latest, -> {order(created_at: :desc)}
+
+  # 通報されたのが多い順
+  def self.latest
+    group(:reported_id).order('count(reported_id) desc')
+  end
 end
