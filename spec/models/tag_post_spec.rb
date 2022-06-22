@@ -1,6 +1,6 @@
 require 'rails_helper'
 
-RSpec.describe 'Postモデルのテスト', type: :model do
+RSpec.describe 'TagPostモデルのテスト', type: :model do
   describe 'バリデーションのテスト' do
     subject { tag_post.valid? }
     let(:tag_post) { create(:tag_post) }

@@ -1,6 +1,6 @@
 require 'rails_helper'
 
-RSpec.describe 'Postモデルのテスト', type: :model do
+RSpec.describe 'Entryモデルのテスト', type: :model do
 
   describe 'アソシエーションのテスト' do
     context 'customerモデルとの関係' do

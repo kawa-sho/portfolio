@@ -6,10 +6,4 @@ FactoryBot.define do
     password { 'password' }
     password_confirmation { 'password' }
   end
-
-  factory :report do
-    reports_id { 1 }
-    reported_id { 1 }
-    message { Faker::Lorem.characters(number: 10) }
-  end
 end

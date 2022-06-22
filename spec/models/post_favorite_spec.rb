@@ -1,6 +1,6 @@
 require 'rails_helper'
 
-RSpec.describe 'PostCommentモデルのテスト', type: :model do
+RSpec.describe 'PostFavoriteモデルのテスト', type: :model do
   describe 'バリデーションのテスト' do
     subject { post_favorite2.valid? }
     let(:customer) { create(:customer) }

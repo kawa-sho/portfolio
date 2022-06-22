@@ -10,7 +10,7 @@ class Report < ApplicationRecord
   scope :latest, -> {order(created_at: :desc)}
 
   # 通報されたのが多い順
-  def self.latest
+  def self.reported_count
     group(:reported_id).order('count(reported_id) desc')
   end
 end

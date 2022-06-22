@@ -1,6 +1,6 @@
 require 'rails_helper'
 
-RSpec.describe 'Postモデルのテスト', type: :model do
+RSpec.describe 'Groupモデルのテスト', type: :model do
   describe 'バリデーションのテスト' do
     subject { group.valid? }
     let(:customer) { create(:customer) }
@@ -129,15 +129,15 @@ RSpec.describe 'Postモデルのテスト', type: :model do
       end
     end
 
-    context 'post_favorited_by?(customer)' do
-    let!(:post) { create(:post, customer_id: customer.id) }
-    let(:post_favorite) {PostFavorite.create(customer_id: customer.id, post_id: post.id)}
-      it 'post_favoriteがあれば' do
-        post_favorite
-        expect(post.post_favorited_by?(customer)).to eq true
+    context 'group_favorited_by?(customer)' do
+    let!(:group) { create(:group, customer_id: customer.id) }
+    let(:group_favorite) {GroupFavorite.create(customer_id: customer.id, group_id: group.id)}
+      it 'group_favoriteがあれば' do
+        group_favorite
+        expect(group.group_favorited_by?(customer)).to eq true
       end
-      it 'post_favoriteがなければ' do
-        expect(post.post_favorited_by?(customer)).to eq false
+      it 'group_favoriteがなければ' do
+        expect(group.group_favorited_by?(customer)).to eq false
       end
     end
   end
