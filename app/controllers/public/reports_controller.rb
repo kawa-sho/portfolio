@@ -1,5 +1,4 @@
 class Public::ReportsController < Public::ApplicationController
-  before_action :authenticate_customer!
 
   ## 新規通報
   def new

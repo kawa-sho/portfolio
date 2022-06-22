@@ -1,5 +1,4 @@
 class Public::MessagesController < Public::ApplicationController
-  before_action :authenticate_customer!
 
   ## 新着メッセージ一覧
   def index

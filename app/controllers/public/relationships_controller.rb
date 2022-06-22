@@ -1,5 +1,4 @@
 class Public::RelationshipsController < Public::ApplicationController
-  before_action :authenticate_customer!
 
   ## フォローするとき
   def create

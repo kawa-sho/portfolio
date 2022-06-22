@@ -1,5 +1,4 @@
 class Public::PostsController < Public::ApplicationController
-  before_action :authenticate_customer!
 
   # ログインしてるアカウントと同じアカウントかどうかの確認
   before_action :correct_customer, only: [:edit, :update, :destroy]
@@ -57,7 +56,7 @@ class Public::PostsController < Public::ApplicationController
     # 投稿の更新
     if @post.update(post_params)
       # メソッドの運用
-      Post.tag_delete
+      TagPost.tag_delete
       # 投稿詳細へ
       redirect_to post_path(@post),notice: "投稿情報を更新しました"
     else
@@ -73,7 +72,7 @@ class Public::PostsController < Public::ApplicationController
     # 取得した投稿を削除
     post.destroy
     # タグに紐づいている投稿がなくなっていた場合タグの削除メソッド
-    Post.tag_delete
+    TagPost.tag_delete
     # 会員詳細へ
     redirect_to customer_path(current_customer),alert: "投稿情報を削除しました"
   end
@@ -85,7 +84,7 @@ class Public::PostsController < Public::ApplicationController
     # 取得した全投稿を削除
     posts.destroy_all
     # タグに紐づいている投稿がなくなっていた場合タグの削除メソッド
-    Post.tag_delete
+    TagPost.tag_delete
     # 会員詳細へ
     redirect_to customer_path(current_customer),notice: "投稿情報をすべて削除しました"
   end
@@ -121,7 +120,7 @@ class Public::PostsController < Public::ApplicationController
     # 投稿の保存
     if @post.save
       # メソッドの運用
-      Post.tag_delete
+      TagPost.tag_delete
       # 投稿詳細へ
       redirect_to post_path(@post),notice: "投稿をしました"
     else

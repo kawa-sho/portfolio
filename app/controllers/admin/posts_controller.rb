@@ -1,5 +1,4 @@
 class Admin::PostsController < Admin::ApplicationController
-  before_action :authenticate_admin!
 
   ## 投稿一覧
   def index
@@ -28,7 +27,7 @@ class Admin::PostsController < Admin::ApplicationController
     # 取得した投稿を削除
     @post.destroy
     # タグに紐づいている投稿がなくなっていた場合タグの削除メソッド
-    Post.tag_delete
+    TagGroup.tag_delete
     # 会員詳細へ
     redirect_to admin_customer_path(@post.customer_id),notice: "投稿情報を削除しました"
   end
@@ -40,7 +39,7 @@ class Admin::PostsController < Admin::ApplicationController
     # 取得した全投稿を削除
     @posts.destroy_all
     # タグに紐づいている投稿がなくなっていた場合タグの削除メソッド
-    Post.tag_delete
+    TagGroup.tag_delete
     # 会員詳細へ
     redirect_to admin_customer_path(params[:customer_id]),notice: "投稿情報をすべて削除しました"
   end

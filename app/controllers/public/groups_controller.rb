@@ -1,5 +1,4 @@
 class Public::GroupsController < Public::ApplicationController
-  before_action :authenticate_customer!
   # グループを作った人しか編集できないように
   before_action :ensure_correct_user, only: [:edit, :update, :destroy]
 
@@ -58,7 +57,7 @@ class Public::GroupsController < Public::ApplicationController
     # グループの保存
     if @group.save
       # メソッドの運用
-      Group.tag_delete
+      TagGroup.tag_delete
       # グループ詳細へ
       redirect_to group_path(@group),notice: "グループを作成しました"
     else
@@ -96,7 +95,7 @@ class Public::GroupsController < Public::ApplicationController
     # グループの更新
     if @group.update(group_params)
       # メソッドの運用
-      Group.tag_delete
+      TagGroup.tag_delete
       # グループ詳細へ
       redirect_to group_path(@group),notice: "グループ情報を更新しました"
     else
@@ -110,7 +109,7 @@ class Public::GroupsController < Public::ApplicationController
     # グループの削除
     @group.delete
     # タグに紐づいているグループがなくなっていた場合タグの削除メソッド
-    Group.tag_delete
+    TagGroup.tag_delete
     # グループ一覧へ
     redirect_to groups_path,alert: "グループ情報を削除しました"
   end

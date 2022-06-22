@@ -1,10 +1,9 @@
 class Admin::CustomersController < Admin::ApplicationController
-  before_action :authenticate_admin!
 
   ## 通報されたのが多い順
   def index
     # 通報されたのが多い順で取得
-     @pages = Report.group(:reported_id).order('count(reported_id) desc').page(params[:page])
+     @pages = Report.reported_count.page(params[:page])
      @customers = Customer.find(@pages.pluck(:reported_id))
      @none = true
      @page = params[:page]

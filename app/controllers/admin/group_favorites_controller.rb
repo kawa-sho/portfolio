@@ -1,5 +1,4 @@
 class Admin::GroupFavoritesController < Admin::ApplicationController
-  before_action :authenticate_admin!
 
   ## グループごとのお気に入り一覧
   def index
