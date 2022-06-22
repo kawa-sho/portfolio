@@ -1,5 +1,4 @@
 class Admin::PostFavoritesController < Admin::ApplicationController
-  before_action :authenticate_admin!
 
   ## 投稿ごとのいいね一覧
   def index

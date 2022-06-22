@@ -1,5 +1,4 @@
 class Admin::HomesController < Admin::ApplicationController
-  before_action :authenticate_admin!
 
   ## 会員一覧
   def top

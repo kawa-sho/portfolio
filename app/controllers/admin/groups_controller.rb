@@ -1,5 +1,4 @@
 class Admin::GroupsController < Admin::ApplicationController
-  before_action :authenticate_admin!
 
   ## グループ一覧
   def index
@@ -32,7 +31,7 @@ class Admin::GroupsController < Admin::ApplicationController
     # グループの削除
     @group.delete
     # タグに紐づいているグループがなくなっていた場合タグの削除メソッド
-    Group.tag_delete
+    TagGroup.tag_delete
     # グループ一覧へ
     redirect_to admin_groups_path,alert: "グループ情報を削除しました"
   end

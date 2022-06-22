@@ -23,13 +23,4 @@ class Post < ApplicationRecord
     post_favorites.exists?(customer_id: customer.id)
   end
 
-  # 必要のないタグの削除
-  def self.tag_delete
-    TagPost.all.each do |tag|
-      if tag.posts.count == 0
-        tag.destroy
-      end
-    end
-  end
-
 end

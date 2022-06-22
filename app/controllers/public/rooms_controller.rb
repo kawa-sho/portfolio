@@ -1,5 +1,4 @@
 class Public::RoomsController < Public::ApplicationController
-  before_action :authenticate_customer!
 
   ## ルーム一覧
   def index
