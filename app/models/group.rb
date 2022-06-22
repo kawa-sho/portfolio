@@ -34,13 +34,4 @@ class Group < ApplicationRecord
     group_favorites.exists?(customer_id: customer.id)
   end
 
-  # 必要のないタグの削除
-  def self.tag_delete
-    TagGroup.all.each do |tag|
-      if tag.groups.count == 0
-        tag.destroy
-      end
-    end
-  end
-
 end

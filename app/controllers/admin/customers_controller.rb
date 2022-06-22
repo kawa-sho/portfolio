@@ -1,5 +1,4 @@
 class Admin::CustomersController < Admin::ApplicationController
-  before_action :authenticate_admin!
 
   ## 通報されたのが多い順
   def index

@@ -1,6 +1,6 @@
 require 'rails_helper'
 
-RSpec.describe 'Posrモデルのテスト', type: :model do
+RSpec.describe 'Postモデルのテスト', type: :model do
   describe 'バリデーションのテスト' do
     subject { post.valid? }
     let(:customer) { create(:customer) }

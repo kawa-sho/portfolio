@@ -1,5 +1,4 @@
 class Public::CustomersController < Public::ApplicationController
-  before_action :authenticate_customer!
   # ログインしてるアカウントと同じアカウントかどうかの確認とゲストログインかどうかの確認
   before_action :correct_customer, only: [:edit, :update]
   before_action :correct_customer2, only: [:quit_check, :withdraw]

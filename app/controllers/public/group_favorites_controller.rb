@@ -1,5 +1,4 @@
 class Public::GroupFavoritesController < Public::ApplicationController
-  before_action :authenticate_customer!
 
   ## グループごとのお気に入り一覧
   def index

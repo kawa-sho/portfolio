@@ -1,5 +1,4 @@
 class Public::PostFavoritesController < Public::ApplicationController
-  before_action :authenticate_customer!
 
   ## 投稿ごとのいいね一覧
   def index

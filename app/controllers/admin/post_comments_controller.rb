@@ -1,5 +1,4 @@
 class Admin::PostCommentsController < Admin::ApplicationController
-  before_action :authenticate_admin!
 
   ## 会員ごとのコメント一覧
   def index

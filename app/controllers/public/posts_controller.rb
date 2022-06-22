@@ -1,5 +1,4 @@
 class Public::PostsController < Public::ApplicationController
-  before_action :authenticate_customer!
 
   # ログインしてるアカウントと同じアカウントかどうかの確認
   before_action :correct_customer, only: [:edit, :update, :destroy]

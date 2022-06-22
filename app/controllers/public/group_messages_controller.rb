@@ -1,5 +1,4 @@
 class Public::GroupMessagesController < Public::ApplicationController
-  before_action :authenticate_customer!
 
   ## メッセージ作成
   def create
