@@ -3,6 +3,8 @@ class Guest::SessionsController < Devise::SessionsController
   def guest_sign_in
     if customer_signed_in?
       redirect_to customer_path(current_customer), alert: 'すでにログインしています。'
+    elsif admin_signed_in?
+      redirect_to admin_root_path, alert: 'すでにログインしています。'
     else
     customer = Customer.guest
     # ログイン状態にする

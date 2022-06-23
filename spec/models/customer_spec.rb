@@ -33,6 +33,13 @@ RSpec.describe 'Customerモデルのテスト', type: :model do
       end
     end
 
+    context 'emailカラム' do
+      it '一意性があること' do
+        customer.email = other_customer.email
+        is_expected.to eq false
+      end
+    end
+
     context 'introductionカラム' do
       it '100文字以下であること: 100文字は〇' do
         customer.introduction = Faker::Lorem.characters(number: 100)

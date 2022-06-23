@@ -1,6 +1,7 @@
 # frozen_string_literal: true
 
 class Public::SessionsController < Devise::SessionsController
+  before_action :admin_signed_in
   before_action :customer_state, only: [:create]
   # before_action :configure_sign_in_params, only: [:create]
 
@@ -33,8 +34,16 @@ class Public::SessionsController < Devise::SessionsController
   end
 
 
-  # 退会しているかの判断のメソッド
+
+  # 管理者でログインしているかと退会しているかの判断のメソッド
   protected
+
+  def admin_signed_in
+    if admin_signed_in?
+      redirect_to admin_root_path, alert: 'すでにログインしています。'
+    end
+  end
+
   def customer_state
   @customer = Customer.find_by(email: params[:customer][:email])
     if @customer
