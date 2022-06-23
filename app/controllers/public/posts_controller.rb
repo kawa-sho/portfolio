@@ -30,7 +30,7 @@ class Public::PostsController < Public::ApplicationController
     # 投稿を取得
     @post = Post.find(params[:id])
     # フォームに入れるため
-    @tag_lists= @post.tag_posts.pluck(:name).join(',')
+    @tag_lists= @post.tag_posts.pluck(:name)
   end
 
   ## 更新
@@ -60,6 +60,7 @@ class Public::PostsController < Public::ApplicationController
       # 投稿詳細へ
       redirect_to post_path(@post),notice: "投稿情報を更新しました"
     else
+      flash[:alert] = ""
       # 投稿編集へ
       render :edit
     end
@@ -91,6 +92,7 @@ class Public::PostsController < Public::ApplicationController
 
   ## 新規投稿
   def new
+    @tag_lists = []
     # 投稿インスタンスを作成
     @post = Post.new
   end
@@ -124,6 +126,7 @@ class Public::PostsController < Public::ApplicationController
       # 投稿詳細へ
       redirect_to post_path(@post),notice: "投稿をしました"
     else
+      flash[:alert] = ""
       # 新規投稿へ
       render :new
     end
