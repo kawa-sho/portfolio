@@ -85,6 +85,9 @@ describe 'トップ画面のテスト' do
         expect(current_path).to eq (customer_path(customer))
         expect(page).to have_content('すでにログインしています。')
       end
+      it 'ログインしている表示がある' do
+        expect(page).to have_content(/#{customer.name}でログインしています/)
+      end
       it 'トップリンクが表示される: 左上から0番目のリンクが「」である' do
         top_link = find_all('a')[0].native.inner_text
         expect(top_link).to match(//)

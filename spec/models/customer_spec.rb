@@ -3,6 +3,7 @@ require 'rails_helper'
 RSpec.describe 'Customerモデルのテスト', type: :model do
   describe 'バリデーションのテスト' do
     subject { customer.valid? }
+
     let!(:other_customer) { create(:customer) }
     let(:customer) { build(:customer) }
 
@@ -135,10 +136,10 @@ RSpec.describe 'Customerモデルのテスト', type: :model do
     it '何も画像が登録されていない場合' do
       expect(customer.get_profile_image).to eq 'no_image.jpg'
     end
-      it '画像が変更された場合' do
-        customer.profile_image = fixture_file_upload("test.jpg", content_type: 'image/*')
-        expect(customer.get_profile_image.filename.to_s).to eq 'test.jpg'
-      end
+    it '画像が変更された場合' do
+      customer.profile_image = fixture_file_upload("test.jpg", content_type: 'image/*')
+      expect(customer.get_profile_image.filename.to_s).to eq 'test.jpg'
+    end
   end
 
   describe 'メソッドのテスト' do
@@ -195,8 +196,6 @@ RSpec.describe 'Customerモデルのテスト', type: :model do
         expect(fast_customer.following?(second_customer)).to eq false
       end
     end
-
   end
-
 
 end
