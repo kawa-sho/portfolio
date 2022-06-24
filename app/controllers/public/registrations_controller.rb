@@ -1,6 +1,7 @@
 # frozen_string_literal: true
 
 class Public::RegistrationsController < Devise::RegistrationsController
+  before_action :admin_signed_in
   # デバイスコントローラー関連の場合はこのアクションをします
   before_action :configure_permitted_parameters, if: :devise_controller?
 
@@ -69,8 +70,15 @@ class Public::RegistrationsController < Devise::RegistrationsController
     customer_path(current_customer)
   end
 
-# 新規登録の際名前のパラメーターを受け取る
-   protected
+# 管理者でログインしているかの判断、新規登録の際名前のパラメーターを受け取る
+  protected
+
+  def admin_signed_in
+    if admin_signed_in?
+      redirect_to admin_root_path, alert: 'すでにログインしています。'
+    end
+  end
+
   def configure_permitted_parameters
     devise_parameter_sanitizer.permit(:sign_up, keys: [:name])
   end
