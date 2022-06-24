@@ -169,10 +169,26 @@ RSpec.describe 'Customerモデルのテスト', type: :model do
     end
 
     context 'self.guest' do
-    let!(:customer) { Customer.guest }
-      it '持ってこれていれば' do
-        expect(customer.name).to eq 'guestcustomer'
-        expect(customer.email).to eq 'guest@example.com'
+      context '存在しない場合作れている' do
+        let(:customer_create) { Customer.guest }
+        it '一つ増えている' do
+          expect { customer_create }.to change(Customer.all, :count).by(1)
+        end
+        it '作られたものが正しい' do
+          expect(customer_create.name).to eq 'guestcustomer'
+          expect(customer_create.email).to eq 'guest@example.com'
+        end
+      end
+      context '持ってこれているか' do
+        let!(:customer_create) { Customer.guest }
+        let(:customer_find) { Customer.guest }
+        it '会員の数量に変更点はない' do
+          expect { customer_find }.to change(Customer.all, :count).by(0)
+        end
+        it 'もってきたものが正しいか' do
+          expect(customer_find.name).to eq 'guestcustomer'
+          expect(customer_find.email).to eq 'guest@example.com'
+        end
       end
     end
 
