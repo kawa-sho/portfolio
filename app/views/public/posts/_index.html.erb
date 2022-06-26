@@ -3,7 +3,7 @@
     <tbody>
       <tr>
         <td class="text-center thead-bg">
-          <%= link_to customer_path(post.customer_id), class:"py-3 link-color" do %>
+          <%= link_to customer_path(post.customer_id), class:"customer-test py-3 link-color" do %>
             <%= image_tag post.customer.get_profile_image, size: '50x50' %>
             <%= post.customer.name %>
           <% end %>
@@ -16,7 +16,7 @@
         <% unless post.tag_posts.count == 0 %>
           <td>
             <% post.tag_posts.each do |tag| %>
-              <%= link_to tag_search_path(tag_post_id: tag.id), class: "btn btn-tag my-1" do%>
+              <%= link_to tag_search_path(tag_post_id: tag.id), class: "tag-test btn btn-tag my-1" do%>
                 <%= tag.name %>
               <% end %>
             <% end %>
@@ -25,7 +25,7 @@
       </tr>
       <tr>
         <td class="text-right">
-          <div id="favorite_buttons_<%= post.id %>" class="d-inline">
+          <div id="favorite_buttons_<%= post.id %>" class="favorite-test d-inline">
             <%= render 'public/post_favorites/favorite', post: post %>
           </div>
           <%= render 'public/post_comments/count', post: post %>

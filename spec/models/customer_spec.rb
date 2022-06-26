@@ -193,11 +193,11 @@ RSpec.describe 'Customerモデルのテスト', type: :model do
     end
 
     context 'フォロー関連' do
-    let!(:fast_customer) { create(:customer) }
-    let!(:second_customer) { create(:customer) }
-    before do
-      fast_customer.follow(second_customer.id)
-    end
+      let!(:first_customer) { create(:customer) }
+      let!(:second_customer) { create(:customer) }
+      before do
+        first_customer.follow(second_customer.id)
+      end
       it 'follow(customer_id)' do
         expect(Relationship.last.follower_id).to eq fast_customer.id
         expect(Relationship.last.followed_id).to eq second_customer.id

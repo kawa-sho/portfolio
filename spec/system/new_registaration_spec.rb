@@ -65,16 +65,16 @@ describe '新規登録画面のテスト' do
     end
     context '新規登録失敗のテスト' do
       context 'すべて入力がない場合' do
-      before do
-        fill_in 'customer[name]', with: ''
-        fill_in 'customer[email]', with: ''
-        fill_in 'customer[password]', with: ''
-        fill_in 'customer[password_confirmation]', with: ''
-        click_button '新規登録'
-      end
-        # it '新規登録画面にいる' do
-        #   expect(current_path).to eq (new_customer_registration_path)
-        # end
+        before do
+          fill_in 'customer[name]', with: ''
+          fill_in 'customer[email]', with: ''
+          fill_in 'customer[password]', with: ''
+          fill_in 'customer[password_confirmation]', with: ''
+          click_button '新規登録'
+        end
+        it 'URLの確認' do
+          expect(current_path).to eq (customer_registration_path)
+        end
         it 'エラーが3つ表示される' do
           expect(page).to have_content('3件のエラーが発生しました')
           expect(page).to have_content('ニックネームは1文字以上で入力してください')
@@ -83,16 +83,16 @@ describe '新規登録画面のテスト' do
         end
       end
       context '名前が21文字以上でパスワードが5文字以下で入力した場合' do
-      before do
-        fill_in 'customer[name]', with: Faker::Lorem.characters(number: 21)
-        fill_in 'customer[email]', with: ''
-        fill_in 'customer[password]', with: Faker::Lorem.characters(number: 5)
-        fill_in 'customer[password_confirmation]', with: ''
-        click_button '新規登録'
-      end
-        # it '新規登録画面にいる' do
-        #   expect(current_path).to eq (new_customer_registration_path)
-        # end
+        before do
+          fill_in 'customer[name]', with: Faker::Lorem.characters(number: 21)
+          fill_in 'customer[email]', with: ''
+          fill_in 'customer[password]', with: Faker::Lorem.characters(number: 5)
+          fill_in 'customer[password_confirmation]', with: ''
+          click_button '新規登録'
+        end
+        it 'URLの確認' do
+          expect(current_path).to eq (customer_registration_path)
+        end
         it 'エラーが4つ表示される' do
           expect(page).to have_content('4件のエラーが発生しました')
           expect(page).to have_content('ニックネームは20文字以内で入力してください')
