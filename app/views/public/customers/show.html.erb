@@ -9,17 +9,17 @@
           <tr class="thead-bg">
             <td>会員情報</td>
           </tr>
-          <tr>
+          <tr class="customer-profile-test">
             <td><%= image_tag @customer.get_profile_image, size: '70x70' %><%= @customer.name %></td>
           </tr>
           <tr>
             <td class="thead-bg">自己紹介</td>
           </tr>
-          <tr>
+          <tr class="customer-introduction-test">
             <td><%= @customer.introduction %></td>
           </tr>
           <tr class="text-right">
-            <td>
+            <td class="follow-index-btn-test">
               <%= link_to "フォロー数: #{@customer.followings.count}",customer_followings_path(@customer), class: "btn btn-favorite" %>
               <%= link_to "フォロワー数: #{@customer.followers.count}",customer_followers_path(@customer), class: "btn btn-favorite" %>
             </td>
@@ -27,7 +27,7 @@
           <% if @customer == current_customer %>
             <% if @customer.name != "guestcustomer" %>
               <tr>
-                <td><%= link_to "編集する", edit_customer_path(current_customer), class: "btn btn-block btn-success col-md-5 col-8 m-auto" %></td>
+                <td class="customer-edit-btn-test"><%= link_to "編集する", edit_customer_path(current_customer), class: "btn btn-block btn-success col-md-5 col-8 m-auto" %></td>
               </tr>
             <% end %>
           <% end %>
@@ -35,11 +35,11 @@
             <%= render 'public/customers/dm', customer: @customer, isRoom: @isRoom, roomId: @roomId, room: @room, entry: @entry, messages: @messages %>
         </tbody>
       </table>
-      <div class="row col-8 mx-auto">
+      <div class="group-btn-test row col-8 mx-auto">
         <%= link_to "お気に入りグループ", customer_group_favorites_path(@customer), class: "btn btn-success offset-md-1 col-md-4 my-md-3 my-3" %>
         <%= link_to "作成したグループ", customer_groups_path(@customer), class: "btn btn-success offset-md-2 col-md-4 my-md-3 mb-3" %>
       </div>
-      <div class="row col-8 mx-auto">
+      <div class="index-btn-test favorite-comment-test row col-8 mx-auto">
         <%= link_to "いいね一覧", customer_post_favorites_path(@customer), class: "btn btn-success offset-md-1 col-md-4 my-md-3 my-3" %>
         <%= link_to "コメント一覧", customer_post_comments_path(@customer), class: "btn btn-success offset-md-2 col-md-4 my-md-3 mb-3" %>
       </div>

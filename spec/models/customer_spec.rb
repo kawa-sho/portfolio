@@ -3,6 +3,7 @@ require 'rails_helper'
 RSpec.describe 'Customerモデルのテスト', type: :model do
   describe 'バリデーションのテスト' do
     subject { customer.valid? }
+
     let!(:other_customer) { create(:customer) }
     let(:customer) { build(:customer) }
 
@@ -29,6 +30,13 @@ RSpec.describe 'Customerモデルのテスト', type: :model do
       end
       it '一意性があること' do
         customer.name = other_customer.name
+        is_expected.to eq false
+      end
+    end
+
+    context 'emailカラム' do
+      it '一意性があること' do
+        customer.email = other_customer.email
         is_expected.to eq false
       end
     end
@@ -128,10 +136,10 @@ RSpec.describe 'Customerモデルのテスト', type: :model do
     it '何も画像が登録されていない場合' do
       expect(customer.get_profile_image).to eq 'no_image.jpg'
     end
-      it '画像が変更された場合' do
-        customer.profile_image = fixture_file_upload("test.jpg", content_type: 'image/*')
-        expect(customer.get_profile_image.filename.to_s).to eq 'test.jpg'
-      end
+    it '画像が変更された場合' do
+      customer.profile_image = fixture_file_upload("test.jpg", content_type: 'image/*')
+      expect(customer.get_profile_image.filename.to_s).to eq 'test.jpg'
+    end
   end
 
   describe 'メソッドのテスト' do
@@ -161,35 +169,49 @@ RSpec.describe 'Customerモデルのテスト', type: :model do
     end
 
     context 'self.guest' do
-    let!(:customer) { Customer.guest }
-      it '持ってこれていれば' do
-        expect(customer.name).to eq 'guestcustomer'
-        expect(customer.email).to eq 'guest@example.com'
+      context '存在しない場合作れている' do
+        let(:customer_create) { Customer.guest }
+        it '一つ増えている' do
+          expect { customer_create }.to change(Customer.all, :count).by(1)
+        end
+        it '作られたものが正しい' do
+          expect(customer_create.name).to eq 'guestcustomer'
+          expect(customer_create.email).to eq 'guest@example.com'
+        end
+      end
+      context '持ってこれているか' do
+        let!(:customer_create) { Customer.guest }
+        let(:customer_find) { Customer.guest }
+        it '会員の数量に変更点はない' do
+          expect { customer_find }.to change(Customer.all, :count).by(0)
+        end
+        it 'もってきたものが正しいか' do
+          expect(customer_find.name).to eq 'guestcustomer'
+          expect(customer_find.email).to eq 'guest@example.com'
+        end
       end
     end
 
     context 'フォロー関連' do
-    let!(:fast_customer) { create(:customer) }
-    let!(:second_customer) { create(:customer) }
-    before do
-      fast_customer.follow(second_customer.id)
-    end
+      let!(:first_customer) { create(:customer) }
+      let!(:second_customer) { create(:customer) }
+      before do
+        first_customer.follow(second_customer.id)
+      end
       it 'follow(customer_id)' do
-        expect(Relationship.last.follower_id).to eq fast_customer.id
+        expect(Relationship.last.follower_id).to eq first_customer.id
         expect(Relationship.last.followed_id).to eq second_customer.id
       end
       it 'unfollow(customer_id)' do
-        fast_customer.unfollow(second_customer.id)
+        first_customer.unfollow(second_customer.id)
         expect(Relationship.last).to eq nil
       end
       it 'following?(customer)' do
-        expect(fast_customer.following?(second_customer)).to eq true
-        fast_customer.unfollow(second_customer.id)
-        expect(fast_customer.following?(second_customer)).to eq false
+        expect(first_customer.following?(second_customer)).to eq true
+        first_customer.unfollow(second_customer.id)
+        expect(first_customer.following?(second_customer)).to eq false
       end
     end
-
   end
-
 
 end
