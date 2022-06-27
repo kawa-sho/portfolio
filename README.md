@@ -45,3 +45,7 @@ https://docs.google.com/spreadsheets/d/1ReMFsKIYWXcGn8HCrOsuooU3GiwrkAxlcd5otCIJ
 ## 使用素材
 
 https://hatchful.shopify.com/ja/　　ロゴの作成
+
+## テスト仕様書
+
+https://docs.google.com/spreadsheets/d/1bJbqDVFGrmxBoyrnxSNO848sJ5qzWmYD/edit?usp=sharing&ouid=114534981049827951668&rtpof=true&sd=true
