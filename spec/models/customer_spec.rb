@@ -199,17 +199,17 @@ RSpec.describe 'Customerモデルのテスト', type: :model do
         first_customer.follow(second_customer.id)
       end
       it 'follow(customer_id)' do
-        expect(Relationship.last.follower_id).to eq fast_customer.id
+        expect(Relationship.last.follower_id).to eq first_customer.id
         expect(Relationship.last.followed_id).to eq second_customer.id
       end
       it 'unfollow(customer_id)' do
-        fast_customer.unfollow(second_customer.id)
+        first_customer.unfollow(second_customer.id)
         expect(Relationship.last).to eq nil
       end
       it 'following?(customer)' do
-        expect(fast_customer.following?(second_customer)).to eq true
-        fast_customer.unfollow(second_customer.id)
-        expect(fast_customer.following?(second_customer)).to eq false
+        expect(first_customer.following?(second_customer)).to eq true
+        first_customer.unfollow(second_customer.id)
+        expect(first_customer.following?(second_customer)).to eq false
       end
     end
   end

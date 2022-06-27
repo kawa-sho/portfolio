@@ -10,7 +10,7 @@ describe '管理者ログイン画面のテスト' do
       expect(current_path).to eq (new_admin_session_path)
     end
     it '見出しが正しい' do
-      expect(find_all('h2')[0].native.text).to match(/ログイン/)
+      expect(all(:css, '.midashi')[0].native.text).to match(/ログイン/)
     end
     it 'emailフォームは表示される' do
       expect(page).to have_field 'admin[email]'

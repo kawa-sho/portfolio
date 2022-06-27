@@ -10,7 +10,7 @@ describe '新規登録画面のテスト' do
       expect(current_path).to eq (new_customer_registration_path)
     end
     it '見出しが正しい' do
-      expect(find_all('h2')[0].native.text).to match(/新規会員登録/)
+      expect(all(:css, '.midashi')[0].native.text).to match(/新規会員登録/)
     end
     it 'nameフォームが表示される' do
       expect(page).to have_field 'customer[name]'
@@ -34,11 +34,11 @@ describe '新規登録画面のテスト' do
       expect(page).to have_button '新規登録'
     end
     it 'ログインリンクが表示される: 左上から3番目のリンクが「ログイン」である' do
-      link = find_all('a')[3].native.inner_text
+      link = all(:css, '.body-test')[0].find_all('a')[0].native.inner_text
       expect(link).to match(/ログイン/)
     end
     it 'ログインリンクの内容が正しい' do
-      find_all('a')[3].click
+      all(:css, '.body-test')[0].find_all('a')[0].click
       expect(current_path).to eq (new_customer_session_path)
     end
   end
