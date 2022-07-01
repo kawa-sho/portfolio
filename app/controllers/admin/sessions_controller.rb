@@ -26,6 +26,12 @@ class Admin::SessionsController < Devise::SessionsController
   #   devise_parameter_sanitizer.permit(:sign_in, keys: [:attribute])
   # end
 
+  # サインイン後の遷移先
+  def after_sign_in_path_for(resource)
+    # 会員詳細へ
+    admin_root_path
+  end
+
 
   # 管理者でログインしているかと退会しているかの判断のメソッド
   protected
