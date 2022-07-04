@@ -108,13 +108,13 @@ class Public::PostsController < Public::ApplicationController
     # each文で回す
     @tag_lists.each do |tag_list|
       # TagPostのインスタンスを作る
-      new_tag = TagPost.find_or_initialize_by(name: tag_list)
+      new_tag_post = TagPost.find_or_initialize_by(name: tag_list)
       # タグの保存
-      new_tag.save
+      new_tag_post.save
       # バリデーションをチェックする
-      if new_tag.valid?
+      if new_tag_post.valid?
         # 投稿にタグを紐づける
-        @post.tag_posts << new_tag
+        @post.tag_posts << new_tag_post
       else
         flash[:alert] = 'タグが10文字以上のものは削除しました'
       end
