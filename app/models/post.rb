@@ -23,4 +23,18 @@ class Post < ApplicationRecord
     post_favorites.exists?(customer_id: customer.id)
   end
 
+  # タグを作成し紐づける
+  def save_tag_post(tag_lists)
+    # each文でタグリストを回す
+    tag_lists.each do |tag_list|
+      # TagPostのインスタンスを作る
+      new_tag_post = TagPost.find_or_initialize_by(name: tag_list)
+      # タグの保存
+      if new_tag_post.save
+        # 投稿にタグを紐づける
+        self.tag_posts << new_tag_post
+      end
+    end
+  end
+
 end
