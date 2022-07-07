@@ -37,24 +37,14 @@ class Public::PostsController < Public::ApplicationController
   def update
     # 受け取った値を,で区切って配列にし、uniqで同じものを一つにする
     @tag_lists=params[:post][:name].delete(' ').delete('　').split(',').uniq
-    # 投稿に紐づいているすべてのタグを削除
-    @post.tag_posts.destroy_all
-    # each文で回す
-    @tag_lists.each do |tag_list|
-      # TagPostのインスタンスを作る
-      new_tag = TagPost.find_or_initialize_by(name: tag_list)
-      # タグの保存
-      new_tag.save
-      # バリデーションをチェックする
-      if new_tag.valid?
-        # 投稿にタグを紐づける
-        @post.tag_posts << new_tag
-      else
-        flash[:alert] = 'タグが10文字以上のものは削除しました'
-      end
-    end
     # 投稿の更新
     if @post.update(post_params)
+      # 投稿に紐づいているすべてのタグを削除
+      @post.tag_posts.destroy_all
+      # 10文字以上のものはアラートを出す
+      flash[:alert] = "タグが１０文字以上のものは削除しました" if @tag_lists.any? { |tag| tag.length >= 10 }
+      # save_tag_postはモデルにメソッド
+      @post.save_tag_post(@tag_lists)
       # メソッドの運用
       TagPost.tag_delete
       # 投稿詳細へ
@@ -105,22 +95,12 @@ class Public::PostsController < Public::ApplicationController
     @post.customer_id = current_customer.id
     # 受け取った値を,で区切って配列にし、uniqで同じものを一つにする
     @tag_lists=params[:post][:name].delete(' ').delete('　').split(',').uniq
-    # each文で回す
-    @tag_lists.each do |tag_list|
-      # TagPostのインスタンスを作る
-      new_tag_post = TagPost.find_or_initialize_by(name: tag_list)
-      # タグの保存
-      new_tag_post.save
-      # バリデーションをチェックする
-      if new_tag_post.valid?
-        # 投稿にタグを紐づける
-        @post.tag_posts << new_tag_post
-      else
-        flash[:alert] = 'タグが10文字以上のものは削除しました'
-      end
-    end
     # 投稿の保存
     if @post.save
+      # 10文字以上のものはアラートを出す
+      flash[:alert] = "タグが１０文字以上のものは削除しました" if @tag_lists.any? { |tag| tag.length >= 10 }
+      # save_tag_postはモデルにメソッド
+      @post.save_tag_post(@tag_lists)
       # メソッドの運用
       TagPost.tag_delete
       # 投稿詳細へ
