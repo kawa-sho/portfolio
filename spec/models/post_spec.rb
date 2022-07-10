@@ -84,8 +84,8 @@ RSpec.describe 'Postモデルのテスト', type: :model do
     end
 
     context 'post_favorited_by?(customer)' do
-    let!(:post) { create(:post, customer_id: customer.id) }
-    let(:post_favorite) {PostFavorite.create(customer_id: customer.id, post_id: post.id)}
+      let!(:post) { create(:post, customer_id: customer.id) }
+      let(:post_favorite) {PostFavorite.create(customer_id: customer.id, post_id: post.id)}
       it 'post_favoriteがあれば' do
         post_favorite
         expect(post.post_favorited_by?(customer)).to eq true
@@ -93,6 +93,26 @@ RSpec.describe 'Postモデルのテスト', type: :model do
       it 'post_favoriteがなければ' do
         expect(post.post_favorited_by?(customer)).to eq false
       end
+    end
+
+    context 'save_tag_post(tag_lists)' do
+      let!(:post) { create(:post, customer_id: customer.id) }
+      it 'タグを紐づけて保存できる' do
+        tag_lists = ['test','test2','test3']
+        post.save_tag_post(tag_lists)
+        expect(post.tag_posts.pluck(:name)).to eq tag_lists
+      end
+      it '10文字以下のものは保存する' do
+        tag_lists = ['test','test2',Faker::Lorem.characters(number: 10)]
+        post.save_tag_post(tag_lists)
+        expect(post.tag_posts.pluck(:name)).to eq tag_lists
+      end
+      it '10文字以上のものは保存しない' do
+        tag_lists = ['test','test2',Faker::Lorem.characters(number: 11)]
+        post.save_tag_post(tag_lists)
+        expect(post.tag_posts.pluck(:name)).to eq ['test','test2']
+      end
+
     end
   end
 
