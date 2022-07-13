@@ -189,6 +189,49 @@ describe '会員詳細画面のテスト' do
           sleep 0.5
           expect(customer.post_favorites.count).to eq 1
         end
+        it 'いいねリンクが表示される' do
+          link = all(:css, ".favorite-test")[0].find_all("a")[1].native.text
+          expect(link).to match(/0いいね/)
+        end
+        it 'いいねリンクの内容が正しい' do
+          all(:css, ".favorite-test")[0].find_all("a")[1].click
+          expect(current_path).to eq (post_post_favorites_path(posts.last))
+        end
+        it 'いいねの数が切り替わる', js: true do
+          link = all(:css, ".favorite-test")[0].native.find_element(:css, ".favorite-black")
+          link.send_keys :tab
+          link.click
+          sleep 0.5
+          expect(all(:css, ".favorite-test")[0].find_all("a")[1].native.text).to match(/1いいね/)
+        end
+        context 'コメント関連' do
+          let!(:post_comment) { create(:post_comment, customer_id: customer.id, post_id: posts.last.id) }
+          it 'コメントリンクが表示される' do
+            link = all(:css, ".comment-test")[0].native.text
+            expect(link).to match(/0コメント/)
+          end
+          it 'コメントリンクの内容が正しい' do
+            all(:css, ".comment-test")[0].click
+            expect(current_path).to eq (post_path(posts.last))
+          end
+          it 'コメントの数が切り替わる' do
+            visit customer_path(customer)
+            expect(all(:css, ".comment-test")[0].native.text).to match(/1コメント/)
+          end
+        end
+        it '日付表示の確認' do
+          link = all(:css, ".created-test")[0].native.text
+          created_at = posts.last.created_at.to_s(:datetime_jp)
+          expect(link).to match(created_at)
+        end
+        it "ページネーションが表示される" do
+          link = all(:css, ".pagination")[0].find_all("a")[1].native.text
+          expect(link).to eq ('2')
+        end
+        it "ページネーションが機能する" do
+          all(:css, ".pagination")[0].find_all("a")[1].click
+          expect(current_url).to match("page=2")
+        end
       end
     end
   end
