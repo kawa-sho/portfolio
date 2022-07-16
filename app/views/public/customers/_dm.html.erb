@@ -11,7 +11,7 @@
   </tr>
 <% elsif (current_customer.following?(customer)) && (customer.following?(current_customer)) %>
   <tr>
-    <td class="customer-dm-btn-test text-right">
+    <td class="dm-test customer-dm-btn-test text-right">
       <% if isRoom == true %>
         <%= link_to "チャットへ", room_path(roomId), class: "btn btn-primary" %>
       <% else %>
