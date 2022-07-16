@@ -107,7 +107,7 @@ class Public::GroupsController < Public::ApplicationController
   ## グループ削除
   def destroy
     # グループの削除
-    @group.delete
+    @group.destroy
     # タグに紐づいているグループがなくなっていた場合タグの削除メソッド
     TagGroup.tag_delete
     # グループ一覧へ
