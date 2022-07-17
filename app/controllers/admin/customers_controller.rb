@@ -1,4 +1,6 @@
 class Admin::CustomersController < Admin::ApplicationController
+  # とゲスト会員かどうかの確認
+  before_action :guest_customer, only: [:edit, :update]
 
   ## 通報されたのが多い順
   def index
@@ -48,10 +50,17 @@ class Admin::CustomersController < Admin::ApplicationController
 
 
   # 会員パラメーターの許可
+  # ゲスト会員かどうかの確認
   private
 
   def customer_params
     params.require(:customer).permit(:name,:introduction,:profile_image,:is_active)
   end
 
+  def guest_customer
+    @customer = Customer.find(params[:id])
+    if @customer.name == "guestcustomer"
+      redirect_to admin_root_path , notice: 'ゲストユーザーのプロフィール編集画面へ遷移できません'
+    end
+  end
 end
