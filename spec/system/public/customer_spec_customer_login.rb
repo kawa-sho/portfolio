@@ -1,6 +1,6 @@
 require 'rails_helper'
 
-describe '会員詳細画面のテスト' do
+describe '会員詳細画面のテスト(会員ログイン時)' do
   let!(:customer) { create(:customer) }
   let!(:customer2) { create(:customer) }
 
@@ -335,7 +335,6 @@ describe '会員詳細画面のテスト' do
           btn = all(:css, ".dm-test")[0].find_all('input')[0].native.values[2]
           expect(btn).to match(/チャットを始める/)
         end
-
         context "相互フォロー状態" do
           before do
             all(:css, ".follow-test")[0].find_all("a")[0].click
@@ -363,11 +362,15 @@ describe '会員詳細画面のテスト' do
             end
           end
         end
-
       end
 
       it '編集するリンクが表示されない' do
         expect(all(:css, ".customer-edit-btn-test")[0]).to eq nil
+      end
+      it "編集する画面に遷移できない" do
+        visit edit_customer_path(customer2)
+        expect(current_path).to eq (customer_path(customer))
+        expect(page).to have_content('違う会員のプロフィール編集画面へ遷移できません')
       end
       it 'お気に入りグループリンクが表示される' do
         group_favorite_btn = all(:css, ".group-btn-test")[0].find_all("a")[0].native.text
@@ -492,6 +495,7 @@ describe '会員詳細画面のテスト' do
             expect(current_path).to eq (post_path(posts.last))
           end
           it 'コメントの数が切り替わる' do
+            expect(all(:css, ".comment-test")[0].native.text).to match(/0コメント/)
             visit customer_path(customer2)
             expect(all(:css, ".comment-test")[0].native.text).to match(/1コメント/)
           end
