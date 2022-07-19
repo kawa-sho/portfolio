@@ -246,6 +246,7 @@ describe '会員詳細画面のテスト(会員ログイン時)' do
 #------------------------------------------------------------------------------------------
 
   describe '他人の会員詳細画面' do
+    let!(:customer3) { create(:customer, is_active: false) }
     before do
       visit new_customer_session_path
       fill_in 'customer[email]', with: customer.email
@@ -257,6 +258,10 @@ describe '会員詳細画面のテスト(会員ログイン時)' do
     describe '会員詳細の表示内容と遷移先確認' do
       it 'URLが正しい' do
         expect(current_path).to eq (customer_path(customer2))
+      end
+      it '退会してる場合退会していますとでる' do
+        visit customer_path(customer3)
+        expect(page).to have_content('このアカウントは退会済みです。')
       end
       it '見出しが正しい' do
         expect(all(:css, ".midashi")[0].native.text).to match(/会員詳細ページ/)

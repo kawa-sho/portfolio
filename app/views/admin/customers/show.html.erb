@@ -7,7 +7,7 @@
     <table class="table mt-5 mx-auto table-bordered col-md-8 col-12">
       <tbody class="m-auto">
         <tr class="thead-bg">
-          <td>
+          <td class="is_active-test">
             <p style="display:inline;">会員情報</p>
             <% if @customer.is_active == true %>
               <p style="display:inline; color:blue">有効</p>
@@ -16,17 +16,17 @@
             <% end %>
           </td>
         </tr>
-        <tr>
+        <tr class="customer-profile-test">
           <td><%= image_tag @customer.get_profile_image, size: '70x70' %><%= @customer.name %></td>
         </tr>
         <tr>
           <td class="thead-bg">自己紹介</td>
         </tr>
-        <tr>
+        <tr class="customer-introduction-test">
           <td><%= @customer.introduction %></td>
         </tr>
         <tr class="text-right">
-          <td>
+          <td class="follow-index-btn-test report-test">
             <%= link_to "フォロー数: #{@customer.followings.count}",admin_customer_followings_path(@customer), class: "btn btn-favorite" %>
             <%= link_to "フォロワー数: #{@customer.followers.count}",admin_customer_followers_path(@customer), class: "btn btn-favorite" %>
             <%= link_to "通報一覧: #{@customer.reported.count}",admin_customer_reported_path(@customer), class: "btn btn-favorite" %>
@@ -34,16 +34,16 @@
         </tr>
         <% if @customer.name != "guestcustomer" %>
           <tr>
-            <td><%= link_to "編集する", edit_admin_customer_path(@customer), class: "btn btn-block btn-success col-md-5 col-8 m-auto" %></td>
+            <td class="customer-edit-btn-test"><%= link_to "編集する", edit_admin_customer_path(@customer), class: "btn btn-block btn-success col-md-5 col-8 m-auto" %></td>
           </tr>
         <% end %>
       </tbody>
     </table>
-    <div class="row col-8 mx-auto">
+    <div class="group-btn-test row col-8 mx-auto">
       <%= link_to "お気に入りグループ", admin_customer_group_favorites_path(@customer), class: "btn btn-success offset-md-1 col-md-4 my-md-3 my-3" %>
       <%= link_to "作成したグループ", admin_customer_groups_path(@customer), class: "btn btn-success offset-md-2 col-md-4 my-md-3 mb-3" %>
     </div>
-    <div class="row col-8 mx-auto">
+    <div class="index-btn-test row col-8 mx-auto">
       <%= link_to "いいね一覧", admin_customer_post_favorites_path(@customer), class: "btn btn-success offset-md-1 col-md-4 my-md-3 my-3" %>
       <%= link_to "コメント一覧", admin_customer_post_comments_path(@customer), class: "btn btn-success offset-md-2 col-md-4 my-md-3 mb-3" %>
     </div>

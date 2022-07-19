@@ -5,5 +5,6 @@ FactoryBot.define do
     introduction { Faker::Lorem.characters(number: 20) }
     password { 'password' }
     password_confirmation { 'password' }
+    # is_active デフォルトtrue
   end
 end
