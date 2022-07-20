@@ -1,8 +1,8 @@
 <% if @customers.exists? %>
   <div class='container px-5 px-sm-0'>
-  <div class="row mt-5">
-    <h2 class="midashi"><%= @customer.name %>のフォロー一覧</h2>
-  </div>
+    <div class="row mt-5">
+      <h2 class="midashi"><%= @customer.name %>のフォロー一覧</h2>
+    </div>
     <div class='row mt-5'>
       <%= render 'public/customers/index', customers: @customers %>
     </div>

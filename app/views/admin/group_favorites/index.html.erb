@@ -1,8 +1,8 @@
 <% if @favorites.exists? %>
   <div class='container px-5 px-sm-0'>
-  <div class="row mt-5">
-    <h2 class="midashi">お気に入りした会員一覧</h2>
-  </div>
+    <div class="row mt-5">
+      <h2 class="midashi">お気に入りした会員一覧</h2>
+    </div>
     <div class='row mt-5'>
       <%= render 'admin/customers/index', customers: @customers %>
     </div>

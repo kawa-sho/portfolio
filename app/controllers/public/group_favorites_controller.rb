@@ -29,6 +29,7 @@ class Public::GroupFavoritesController < Public::ApplicationController
       # お気に入りを削除
       group_favorite.destroy
     end
+    # jsファイル読み込み
     render :favorite
   end
 
@@ -40,6 +41,7 @@ class Public::GroupFavoritesController < Public::ApplicationController
     group_favorite = current_customer.group_favorites.new(group_id: @group.id)
     # お気に入りを保存
     group_favorite.save
+    # jsファイル読み込み
     render :favorite
   end
 

@@ -140,6 +140,26 @@ RSpec.describe 'Groupモデルのテスト', type: :model do
         expect(group.group_favorited_by?(customer)).to eq false
       end
     end
+
+    context 'save_tag_group(tag_lists)' do
+      let!(:group) { create(:group, customer_id: customer.id) }
+      it 'タグを紐づけて保存できる' do
+        tag_lists = ['test','test2','test3']
+        group.save_tag_group(tag_lists)
+        expect(group.tag_groups.pluck(:name)).to eq tag_lists
+      end
+      it '10文字以下のものは保存する' do
+        tag_lists = ['test','test2',Faker::Lorem.characters(number: 10)]
+        group.save_tag_group(tag_lists)
+        expect(group.tag_groups.pluck(:name)).to eq tag_lists
+      end
+      it '10文字以上のものは保存しない' do
+        tag_lists = ['test','test2',Faker::Lorem.characters(number: 11)]
+        group.save_tag_group(tag_lists)
+        expect(group.tag_groups.pluck(:name)).to eq ['test','test2']
+      end
+
+    end
   end
 
 

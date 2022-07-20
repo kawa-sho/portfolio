@@ -1,32 +1,32 @@
 <table class='table m-auto col-md-10 col-12'>
-      <thead>
-        <tr class="thead-bg">
-          <th class="col-1">会員</th>
-          <th class="col-4"></th>
-          <th class="col-5 none">最終メッセージ</th>
-        </tr>
-      </thead>
-      <tbody>
-        <% rooms.each do |room| %>
-          <tr onclick="window.location.href='<%= room_path(room) %>'" onmouseover="this.style.backgroundColor='#c2ebf2'" onmouseout="this.style.backgroundColor='#f0fcff'">
-            <% room.entries.each do |entry| %>
-              <% unless entry.customer == current_customer %>
-                <td>
-                  <%= image_tag entry.customer.get_profile_image, size: '70x70' %>
-                </td>
-                <td>
-                  <h5 class="col-9">
-                    <%= entry.customer.name %>
-                  </h5>
-                </td>
-              <% end %>
-            <% end %>
-            <td class="none">
-              <% if room.messages.exists? %>
-                <%= room.messages.last.message %>
-              <% end %>
+  <thead>
+    <tr class="thead-bg">
+      <th class="col-1">会員</th>
+      <th class="col-4"></th>
+      <th class="col-5 none">最終メッセージ</th>
+    </tr>
+  </thead>
+  <tbody>
+    <% rooms.each do |room| %>
+      <tr onclick="window.location.href='<%= room_path(room) %>'" onmouseover="this.style.backgroundColor='#c2ebf2'" onmouseout="this.style.backgroundColor='#f0fcff'">
+        <% room.entries.each do |entry| %>
+          <% unless entry.customer == current_customer %>
+            <td>
+              <%= image_tag entry.customer.get_profile_image, size: '70x70' %>
             </td>
-          </tr>
+            <td>
+              <h5 class="col-9">
+                <%= entry.customer.name %>
+              </h5>
+            </td>
+          <% end %>
         <% end %>
-      </tbody>
-    </table>
+        <td class="none">
+          <% if room.messages.exists? %>
+            <%= room.messages.last.message %>
+          <% end %>
+        </td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>

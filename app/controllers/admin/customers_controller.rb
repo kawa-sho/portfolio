@@ -1,14 +1,17 @@
 class Admin::CustomersController < Admin::ApplicationController
-  # とゲスト会員かどうかの確認
+  # ゲスト会員の確認
   before_action :guest_customer, only: [:edit, :update]
 
-  ## 通報されたのが多い順
+  ## 通報されたのが多い順一覧
   def index
     # 通報されたのが多い順で取得
-     @pages = Report.reported_count.page(params[:page])
-     @customers = Customer.find(@pages.pluck(:reported_id))
-     @none = true
-     @page = params[:page]
+    @pages = Report.reported_count.page(params[:page])
+    # 通報されてる順で会員を取得
+    @customers = Customer.find(@pages.pluck(:reported_id))
+    # ビューで使う
+    @none = true
+    # ページを取得
+    @page = params[:page]
     # @customers = Customer.sort_by{|x|x.reported.count}.reverse.page(params[:page])
   end
 
@@ -50,7 +53,7 @@ class Admin::CustomersController < Admin::ApplicationController
 
 
   # 会員パラメーターの許可
-  # ゲスト会員かどうかの確認
+  # ゲスト会員だと編集できないようにする
   private
 
   def customer_params
