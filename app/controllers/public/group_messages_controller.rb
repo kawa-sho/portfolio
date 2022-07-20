@@ -4,6 +4,7 @@ class Public::GroupMessagesController < Public::ApplicationController
   def create
     ## パラメータの取得
     message = GroupMessage.new(group_message_params)
+    # メッセージに紐づける会員を定義
     message.customer_id = current_customer.id
     # 保存
     if message.save

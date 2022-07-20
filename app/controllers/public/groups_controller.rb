@@ -28,6 +28,7 @@ class Public::GroupsController < Public::ApplicationController
 
   ## 新規グループ
   def new
+    @tag_lists = []
     # グループインスタンスの作成
     @group = Group.new
   end
@@ -40,27 +41,18 @@ class Public::GroupsController < Public::ApplicationController
     @group.customer_id = current_customer.id
     # 受け取った値を,で区切って配列にし、uniqで同じものを一つにする
     @tag_lists=params[:group][:tag_name].delete(' ').delete('　').split(',').uniq
-    # each文で回す
-    @tag_lists.each do |tag_list|
-      # TagGroupのインスタンスを作る
-      new_tag = TagGroup.find_or_initialize_by(name: tag_list)
-      # タグの保存
-      new_tag.save
-      # バリデーションをチェックする
-      if new_tag.valid?
-        # グループにタグを紐づける
-        @group.tag_groups << new_tag
-      else
-        flash[:alert] = 'タグが10文字以上のものは削除しました'
-      end
-    end
     # グループの保存
     if @group.save
+      # 10文字以上のものはアラートを出す
+      flash[:alert] = 'タグが10文字以上のものは削除しました' if @tag_lists.any? { |tag| tag.length >= 10 }
+      # save_tag_groupはモデルにメソッド
+      @group.save_tag_group(@tag_lists)
       # メソッドの運用
       TagGroup.tag_delete
       # グループ詳細へ
       redirect_to group_path(@group),notice: "グループを作成しました"
     else
+      flash[:alert] = ""
       # 新規グループ作成へ
       render :new
     end
@@ -68,38 +60,31 @@ class Public::GroupsController < Public::ApplicationController
 
   ## グループ編集
   def edit
+    # グループを取得
+    @group = Group.find(params[:id])
     # フォームに入れるため
-    @tag_lists= @group.tag_groups.pluck(:name).join(',')
+    @tag_lists= @group.tag_groups.pluck(:name)
   end
 
   ## グループ更新
   def update
     # 受け取った値を,で区切って配列にし、uniqで同じものを一つにする
     @tag_lists=params[:group][:tag_name].delete(' ').delete('　').split(',').uniq
-    # グループに紐づいているすべてのタグを削除
-    @group.tag_groups.destroy_all
-    # each文で回す
-    @tag_lists.each do |tag_list|
-      # TagGroupのインスタンスを作る
-      new_tag = TagGroup.find_or_initialize_by(name: tag_list)
-      # タグの保存
-      new_tag.save
-      # バリデーションをチェックする
-      if new_tag.valid?
-        # グループにタグを紐づける
-        @group.tag_groups << new_tag
-      else
-        flash[:alert] = 'タグが10文字以上のものは削除しました'
-      end
-    end
     # グループの更新
     if @group.update(group_params)
+      # グループに紐づいているすべてのタグを削除
+      @group.tag_groups.destroy_all
+      # 10文字以上のものはアラートを出す
+      flash[:alert] = "タグが１０文字以上のものは削除しました" if @tag_lists.any? { |tag| tag.length >= 10 }
+      # save_tag_groupはモデルにメソッド
+      @group.save_tag_group(@tag_lists)
       # メソッドの運用
       TagGroup.tag_delete
       # グループ詳細へ
-      redirect_to group_path(@group),notice: "グループ情報を更新しました"
+      redirect_to group_path(@group),notice: "投稿情報を更新しました"
     else
-      # グループ編集へ
+      flash[:alert] = ""
+      # 投稿編集へ
       render :edit
     end
   end

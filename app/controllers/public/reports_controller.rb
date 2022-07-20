@@ -10,7 +10,9 @@ class Public::ReportsController < Public::ApplicationController
   def create
     # パラメーターの取得
     @report = Report.new(report_params)
+    # 通報する側を定義
     @report.reports_id = current_customer.id
+    # 通報される側を定義
     @report.reported_id = params[:customer_id]
     # 通報の保存
     if @report.save

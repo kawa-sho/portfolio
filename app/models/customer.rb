@@ -44,6 +44,7 @@ class Customer < ApplicationRecord
 
   # プロフィール画像のある場合ない場合のメソッド
   def get_profile_image
+    # 画像がない場合はno_image.jpgを使い、ある場合はそれを使う
     (profile_image.attached?) ? profile_image : 'no_image.jpg'
   end
 

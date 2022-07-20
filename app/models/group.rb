@@ -34,4 +34,18 @@ class Group < ApplicationRecord
     group_favorites.exists?(customer_id: customer.id)
   end
 
+  # タグを作成し紐づける
+  def save_tag_group(tag_lists)
+    # each文でタグリストを回す
+    tag_lists.each do |tag_list|
+      # TagGroupのインスタンスを作る
+      new_tag_group = TagGroup.find_or_initialize_by(name: tag_list)
+      # タグの保存
+      if new_tag_group.save
+        # グループにタグを紐づける
+        self.tag_groups << new_tag_group
+      end
+    end
+  end
+
 end
