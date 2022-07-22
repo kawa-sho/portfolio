@@ -45,8 +45,6 @@ class Public::PostsController < Public::ApplicationController
       flash[:alert] = "タグが１０文字以上のものは削除しました" if @tag_lists.any? { |tag| tag.length >= 10 }
       # save_tag_postはモデルにメソッド
       @post.save_tag_post(@tag_lists)
-      # メソッドの運用
-      TagPost.tag_delete
       # 投稿詳細へ
       redirect_to post_path(@post),notice: "投稿情報を更新しました"
     else
@@ -62,8 +60,6 @@ class Public::PostsController < Public::ApplicationController
     post = Post.find(params[:id])
     # 取得した投稿を削除
     post.destroy
-    # タグに紐づいている投稿がなくなっていた場合タグの削除メソッド
-    TagPost.tag_delete
     # 会員詳細へ
     redirect_to customer_path(current_customer),alert: "投稿情報を削除しました"
   end
@@ -101,8 +97,6 @@ class Public::PostsController < Public::ApplicationController
       flash[:alert] = "タグが１０文字以上のものは削除しました" if @tag_lists.any? { |tag| tag.length >= 10 }
       # save_tag_postはモデルにメソッド
       @post.save_tag_post(@tag_lists)
-      # メソッドの運用
-      TagPost.tag_delete
       # 投稿詳細へ
       redirect_to post_path(@post),notice: "投稿をしました"
     else

@@ -81,3 +81,6 @@ gem 'kaminari','~> 1.2.1'
 
 #ユーザー認証機能のため
 gem 'devise'
+
+# バッチ処理のため
+gem 'whenever', require: false
