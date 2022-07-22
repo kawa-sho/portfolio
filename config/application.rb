@@ -23,5 +23,7 @@ module PortfolioApp
     #
     # config.time_zone = "Central Time (US & Canada)"
     # config.eager_load_paths << Rails.root.join("extras")
+    # バッチ処理のファイルが読み込まれるための設定
+    config.paths.add 'lib', eager_load: true
   end
 end
