@@ -47,8 +47,6 @@ class Public::GroupsController < Public::ApplicationController
       flash[:alert] = 'タグが10文字以上のものは削除しました' if @tag_lists.any? { |tag| tag.length >= 10 }
       # save_tag_groupはモデルにメソッド
       @group.save_tag_group(@tag_lists)
-      # メソッドの運用
-      TagGroup.tag_delete
       # グループ詳細へ
       redirect_to group_path(@group),notice: "グループを作成しました"
     else
@@ -78,8 +76,6 @@ class Public::GroupsController < Public::ApplicationController
       flash[:alert] = "タグが１０文字以上のものは削除しました" if @tag_lists.any? { |tag| tag.length >= 10 }
       # save_tag_groupはモデルにメソッド
       @group.save_tag_group(@tag_lists)
-      # メソッドの運用
-      TagGroup.tag_delete
       # グループ詳細へ
       redirect_to group_path(@group),notice: "投稿情報を更新しました"
     else
@@ -93,8 +89,6 @@ class Public::GroupsController < Public::ApplicationController
   def destroy
     # グループの削除
     @group.destroy
-    # タグに紐づいているグループがなくなっていた場合タグの削除メソッド
-    TagGroup.tag_delete
     # グループ一覧へ
     redirect_to groups_path,alert: "グループ情報を削除しました"
   end
