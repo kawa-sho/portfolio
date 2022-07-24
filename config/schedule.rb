@@ -19,15 +19,23 @@
 
 # Learn more: http://github.com/javan/whenever
 
+# 最初に参照するフォルダの指定
 require File.expand_path(File.dirname(__FILE__) + "/environment")
+# 現在の環境をrails_envに変数で入れている
 rails_env = Rails.env.to_sym
+# 実行する環境の指定
 set :environment, rails_env
+# ログを残すため
 set :output, 'log/cron.log'
+# １２時間おき
 every 12.hour do
   begin
+    # ファイルの実行
     runner "Batch::DataReset.data_reset"
   rescue => e
-    Rails.logger.error("aborted rails runner")
+    # エラーが出たらログに記述
+    Rails.logger.error("runnerがエラーを起こしました")
+    # エラーの中身
     raise e
   end
 end
